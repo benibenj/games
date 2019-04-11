@@ -10,7 +10,7 @@ public class Main {
 		RenderResponder responder = new RenderResponder(new File("views"));
 		Server server = new Server(8000, new File("public"), responder);
 		server.on("GET", "/", (Request request) -> {
-			return responder.text("Hallo!"); 
+			return responder.render("index.html"); 
 		});
 	}
 }
