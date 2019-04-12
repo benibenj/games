@@ -103,13 +103,7 @@ input, select {
 
 
 :root {
-    --blue: #005b96;
-    --white: #fff;
-    --black: #111;
-
-    --orange: #C96D1C;
-    --light-white: #F4E9CD;
-    --green-blue: #097275;
-    --dark-blue: #024449;
-    --mustard: #E2AD38;
+    --orange: #F3B54A;
+    --dark: #393B45;
+    --light: #D8D9DE;
 }

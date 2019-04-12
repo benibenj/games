@@ -10,7 +10,10 @@ public class Main {
 		RenderResponder responder = new RenderResponder(new File("views"));
 		Server server = new Server(8000, new File("public"), responder);
 		server.on("GET", "/", (Request request) -> {
-			return responder.render("index.html"); 
+			return responder.render("index.html");
+		});
+		server.on("GET", "/minesweeper", (Request request) -> {
+			return responder.render("minesweeper.html");
 		});
 	}
 }
