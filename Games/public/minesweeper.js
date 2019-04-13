@@ -1,20 +1,15 @@
 
-function make2DArray(cols, rows){
-	var arr = new Array(cols);
-	for (var i = 0; i < arr.length; i++) {
-		arr[i] = new Array(rows);
-	}
-	return arr;
-}
-
 var grid;
 var size;
-var w = 60;
-var amountMines = 15;
+var w;
+var canvasSize = 551;
+var amountMines = 17;
+var flag;
 
 function setup(){
-	createCanvas(601, 601);
-	size = floor(width / w);
+	w = floor((canvasSize-1)/10);
+	createCanvas(canvasSize*1.2, canvasSize);
+	size = floor(canvasSize / w);
 	grid = make2DArray(size, size);
 
 	var options = [];
@@ -43,17 +38,68 @@ function setup(){
 			grid[i][j].countMines(size);
 		}
 	}
+
+	//Draw Flag Space and Miner space
+	flag = false;
+
+	strokeWeight(2);
+	stroke(color('#6E7889'));
+	fill(color('#D8D9DE'));
+	rect(canvasSize*1.05, canvasSize*0.35, w, w);
+	fill(200);
+	rect(canvasSize*1.05, canvasSize*0.55, w, w);
+	image(flagimg, canvasSize*1.05 + w*0.25, canvasSize*0.55 + w*0.25, w/2, w/2);
+
 }
 
 function mousePressed(){
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			if (grid[i][j].contains(mouseX, mouseY)) {
-				grid[i][j].reveal();
-				if (grid[i][j].mine) {
-					gameOver();
+				if (!flag) {
+					grid[i][j].reveal();
+					if (grid[i][j].mine) {
+						gameOver();
+					}
+				}
+				else{
+					grid[i][j].flagit();
 				}
 			}
+		}
+	}
+
+	// Miner spot
+	if (canvasSize*1.05 < mouseX && canvasSize*1.05 + w > mouseX &&
+		canvasSize*0.35 < mouseY && canvasSize*0.35 + w > mouseY ) {
+		
+		if (flag) {
+			strokeWeight(2);
+			// Miner
+			fill(color('#D8D9DE'));
+			rect(canvasSize*1.05, canvasSize*0.35, w, w);
+			// Flag
+			fill(200);
+			rect(canvasSize*1.05, canvasSize*0.55, w, w);
+			image(flagimg, canvasSize*1.05 + w*0.25, canvasSize*0.55 + w*0.25, w/2, w/2);
+			flag = false;
+		}
+	}
+
+	// Flag spot
+	if (canvasSize*1.05 < mouseX && canvasSize*1.05 + w > mouseX &&
+		canvasSize*0.55 < mouseY && canvasSize*0.55 + w > mouseY ) {
+		
+		if (!flag) {
+			strokeWeight(2);
+			// Miner
+			fill(200);
+			rect(canvasSize*1.05, canvasSize*0.35, w, w);
+			// Flag
+			fill(color('#D8D9DE'));
+			rect(canvasSize*1.05, canvasSize*0.55, w, w);
+			image(flagimg, canvasSize*1.05 + w*0.25, canvasSize*0.55 + w*0.25, w/2, w/2);
+			flag = true;
 		}
 	}
 }
@@ -69,14 +115,25 @@ function draw(){
 
 
 function preload(){
-  img = loadImage('img/bomb.svg');
+  	bomb = loadImage('img/bomb.svg');
+  	flagimg = loadImage('img/flag.svg');
 }
 
 
 function gameOver(){
+	// Display all Fields
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			grid[i][j].reveal();
 		}
 	}
+}
+
+
+function make2DArray(cols, rows){
+	var arr = new Array(cols);
+	for (var i = 0; i < arr.length; i++) {
+		arr[i] = new Array(rows);
+	}
+	return arr;
 }

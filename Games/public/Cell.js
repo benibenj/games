@@ -7,12 +7,13 @@ function Cell(i, j, w){
 	this.neighborCount = 0;
 	this.mine = false;
 	this.display = false;
+	this.flagOnMe = false;
 }
 
 
 
 Cell.prototype.show = function(){
-	strokeWeight(4);
+	strokeWeight(3);
 	stroke(color('#6E7889'));
 	fill(200);
 	rect(this.x, this.y, this.w, this.w);
@@ -22,7 +23,7 @@ Cell.prototype.show = function(){
 		rect(this.x, this.y, this.w, this.w);
 		if (this.mine) {
 			//ellipse(this.x + this.w * 0.5, this.y + this.w * 0.5, this.w*0.5);
-			image(img, this.x + this.w*0.2, this.y + this.w*0.1, 40, 40);
+			image(bomb, this.x + this.w*0.25, this.y + this.w*0.25, w/2, w/2);
 		}
 		else if (this.neighborCount == 0) {
 
@@ -31,9 +32,20 @@ Cell.prototype.show = function(){
 			textAlign(CENTER);
 			fill(color('#6E7889'));
 			strokeWeight(0);
-			textSize(30);
+			textSize(w/2);
 			text(this.neighborCount, this.x + this.w*0.5, this.y + this.w*0.65);
 		}
+	}
+	else if (this.flagOnMe) {
+		image(flagimg, this.x + this.w*0.25, this.y + this.w*0.25, w/2, w/2);
+	}
+}
+
+
+
+Cell.prototype.flagit = function(){
+	if (!this.display) {
+		this.flagOnMe = true;
 	}
 }
 
