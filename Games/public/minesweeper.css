@@ -3,6 +3,10 @@ body{
 	text-align: center;
 }
 
+body nav{
+	text-align: left;
+}
+
 canvas{
 	margin-top: 1em;
 	margin-left: 8em;
