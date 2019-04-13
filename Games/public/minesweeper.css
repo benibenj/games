@@ -21,11 +21,11 @@ canvas{
 	font-weight: bolder;
 }
 
-form{
+.newGame{
 	width: 100%;
 }
 
-form button{
+.newGame button{
 	padding: 5px 10px;
 	font-size: 1em;
 	font-family: 'Raleway', sans-serif;
@@ -34,4 +34,11 @@ form button{
 	border: 1px solid var(--dark);
 	border-radius: 2px;
 	cursor: pointer;
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+	outline: none;
+}
+
+.newGame button:hover{
+	background-color: var(--dark);
+	color: var(--light);
 }

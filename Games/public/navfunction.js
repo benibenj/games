@@ -11,3 +11,10 @@ function controllNav(){
 		open = true;
 	}
 }
+
+function closeNav(){
+	if (open) {
+		nav.style.transform = "translate(-100%)";
+	}
+	open = false;
+}

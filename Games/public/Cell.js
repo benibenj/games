@@ -44,8 +44,14 @@ Cell.prototype.show = function(){
 
 
 Cell.prototype.flagit = function(){
+	// Put a flag on this Cell if it is not displayed or take the flag away of the cell
 	if (!this.display) {
-		this.flagOnMe = true;
+		if(!this.flagOnMe){
+			this.flagOnMe = true;
+		}
+		else{
+			this.flagOnMe = false;
+		}
 	}
 }
 
@@ -78,6 +84,7 @@ Cell.prototype.reveal = function(){
 	if (this.neighborCount == 0) {
 		this.zero();
 	}
+	this.flagOnMe = false;
 }
 
 

@@ -1,19 +1,22 @@
-
+var finished;
 var grid;
 var size;
 var w;
 var canvasSize = 551;
-var amountMines = 17;
+var amountMines = 1;
 var flag;
 
 function setup(){
+	finished = false;
+	// Calculate the sizes
 	w = floor((canvasSize-1)/10);
-	createCanvas(canvasSize*1.2, canvasSize);
+	let canvas = createCanvas(canvasSize*1.2, canvasSize);
+	canvas.id("canvas");
 	size = floor(canvasSize / w);
 	grid = make2DArray(size, size);
 
-	var options = [];
 	// Creat all cells and push it on array to pick the mines later
+	var options = [];
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			grid[i][j] = new Cell(i, j, w);
@@ -53,23 +56,27 @@ function setup(){
 }
 
 function mousePressed(){
+if (!finished) {
+	//Check if you pressed on a Cell
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
-			if (grid[i][j].contains(mouseX, mouseY)) {
+			if (grid[i][j].contains(mouseX, mouseY) && !grid[i][j].display) {
 				if (!flag) {
 					grid[i][j].reveal();
+					// If you hit a mine
 					if (grid[i][j].mine) {
 						gameOver();
 					}
 				}
 				else{
 					grid[i][j].flagit();
+					checkIfFinished();
 				}
 			}
 		}
 	}
 
-	// Miner spot
+	// Check Miner spot
 	if (canvasSize*1.05 < mouseX && canvasSize*1.05 + w > mouseX &&
 		canvasSize*0.35 < mouseY && canvasSize*0.35 + w > mouseY ) {
 		
@@ -86,7 +93,7 @@ function mousePressed(){
 		}
 	}
 
-	// Flag spot
+	// Check Flag spot
 	if (canvasSize*1.05 < mouseX && canvasSize*1.05 + w > mouseX &&
 		canvasSize*0.55 < mouseY && canvasSize*0.55 + w > mouseY ) {
 		
@@ -103,12 +110,18 @@ function mousePressed(){
 		}
 	}
 }
+}
 
 
 function draw(){
-	for (var i = 0; i < size; i++) {
-		for (var j = 0; j < size; j++) {
-			grid[i][j].show();
+	if (finished) {
+
+	}
+	else{
+		for (var i = 0; i < size; i++) {
+			for (var j = 0; j < size; j++) {
+				grid[i][j].show();
+			}
 		}
 	}
 }
@@ -117,15 +130,57 @@ function draw(){
 function preload(){
   	bomb = loadImage('img/bomb.svg');
   	flagimg = loadImage('img/flag.svg');
+  	gameoverimg = loadImage('img/gameover.svg');
+  	winimg = loadImage('img/win.svg');
 }
 
 
 function gameOver(){
+	displayAll();
+	finished = true;
+	stroke(color('#D8D9DE'));
+	fill(color('#D8D9DE'));
+	rect(0, 0, canvasSize, canvasSize);
+	image(gameoverimg, canvasSize*0.25, canvasSize*0.25, canvasSize*0.5, canvasSize*0.5);
+}
+
+
+function win(){
+	displayAll();
+	finished = true;
+	stroke(color('#D8D9DE'));
+	fill(color('#D8D9DE'));
+	rect(0, 0, canvasSize, canvasSize);
+	image(winimg, canvasSize*0.25, canvasSize*0.25, canvasSize*0.5, canvasSize*0.5);
+}
+
+
+function displayAll(){
 	// Display all Fields
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			grid[i][j].reveal();
 		}
+	}
+}
+
+
+function checkIfFinished(){
+	// Check if all flags are set correct and there arent to many
+	var amountOfMinesFlagged = 0;
+	var amountOfWrongFlaggs = 0;
+	for (var i = 0; i < size; i++) {
+		for (var j = 0; j < size; j++) {
+			if(grid[i][j].mine && grid[i][j].flagOnMe){
+				amountOfMinesFlagged++;
+			}
+			else if(!grid[i][j].mine && grid[i][j].flagOnMe){
+				amountOfWrongFlaggs++;
+			}
+		}
+	}
+	if (amountOfMinesFlagged == amountMines && amountOfWrongFlaggs == 0) {
+		win();
 	}
 }
 
