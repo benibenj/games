@@ -1,13 +1,19 @@
-var finished;
 var grid;
 var size;
 var w;
 var canvasSize = 551;
 var amountMines = 1;
 var flag;
+var starttime;
+var gametime;
+var start;
+var gameover;
+var win;
 
 function setup(){
-	finished = false;
+	gameover = false;
+	win = false;
+	start = false;
 	// Calculate the sizes
 	w = floor((canvasSize-1)/10);
 	let canvas = createCanvas(canvasSize*1.2, canvasSize);
@@ -15,25 +21,7 @@ function setup(){
 	size = floor(canvasSize / w);
 	grid = make2DArray(size, size);
 
-	// Creat all cells and push it on array to pick the mines later
-	var options = [];
-	for (var i = 0; i < size; i++) {
-		for (var j = 0; j < size; j++) {
-			grid[i][j] = new Cell(i, j, w);
-			options.push([i,j]);
-		}
-	}
-
-	// Chose Mine Spots
-	for (var i = 0; i < amountMines; i++) {
-		// Get A Cell to make it a Mine
-		var index = floor(random(options.length));
-		var first = options[index][0];
-		var second = options[index][1];
-		grid[first][second].mine = true;
-		// Delete the Cell from the array
-		options.splice(index, 1)
-	}
+	choseMineSpots();
 
 	// Count Mines arround a Cell
 	for (var i = 0; i < size; i++) {
@@ -52,11 +40,10 @@ function setup(){
 	fill(200);
 	rect(canvasSize*1.05, canvasSize*0.55, w, w);
 	image(flagimg, canvasSize*1.05 + w*0.25, canvasSize*0.55 + w*0.25, w/2, w/2);
-
 }
 
 function mousePressed(){
-if (!finished) {
+if (!win && !gameover) {
 	//Check if you pressed on a Cell
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
@@ -71,6 +58,10 @@ if (!finished) {
 				else{
 					grid[i][j].flagit();
 					checkIfFinished();
+				}
+				if (!start) {
+					starttime = new Date().getTime();
+					start = true;
 				}
 			}
 		}
@@ -114,15 +105,26 @@ if (!finished) {
 
 
 function draw(){
-	if (finished) {
 
-	}
-	else{
-		for (var i = 0; i < size; i++) {
-			for (var j = 0; j < size; j++) {
-				grid[i][j].show();
-			}
+	for (var i = 0; i < size; i++) {
+		for (var j = 0; j < size; j++) {
+			grid[i][j].show();
 		}
+	}
+	// Check if game is finished
+	if (gameover) {
+		image(gameoverimg, canvasSize*0.25, canvasSize*0.25, canvasSize*0.5, canvasSize*0.5);
+	}
+	if (win) {
+		stroke(color('#D8D9DE'));
+		fill(color('#D8D9DE'));
+		rect(0, 0, canvasSize+1, canvasSize+1);
+		image(winimg, canvasSize*0.3, canvasSize*0.15, canvasSize*0.4, canvasSize*0.4);
+		textAlign(CENTER);
+		fill(color('#393B45'));
+		strokeWeight(0);
+		textSize(floor(canvasSize/7));
+		text(gametime, canvasSize*0.5, canvasSize*0.75);
 	}
 }
 
@@ -137,21 +139,24 @@ function preload(){
 
 function gameOver(){
 	displayAll();
-	finished = true;
-	stroke(color('#D8D9DE'));
-	fill(color('#D8D9DE'));
-	rect(0, 0, canvasSize, canvasSize);
-	image(gameoverimg, canvasSize*0.25, canvasSize*0.25, canvasSize*0.5, canvasSize*0.5);
+	gameover = true;
 }
 
 
-function win(){
+function gameWin(){
 	displayAll();
-	finished = true;
-	stroke(color('#D8D9DE'));
-	fill(color('#D8D9DE'));
-	rect(0, 0, canvasSize, canvasSize);
-	image(winimg, canvasSize*0.25, canvasSize*0.25, canvasSize*0.5, canvasSize*0.5);
+	win = true;
+	// calculating the game time
+	var endtime = new Date().getTime();
+	var time = floor((endtime - starttime)/1000);
+	var min = floor(time/60);
+	var sec = floor(time%60);
+	if (min == 0) {
+		gametime = sec + "s";
+	}
+	else{
+		gametime = min + "min " + sec + "s";
+	}
 }
 
 
@@ -180,7 +185,30 @@ function checkIfFinished(){
 		}
 	}
 	if (amountOfMinesFlagged == amountMines && amountOfWrongFlaggs == 0) {
-		win();
+		gameWin();
+	}
+}
+
+
+function choseMineSpots(){
+	// Creat all cells and push it on array to pick the mines later
+	var options = [];
+	for (var i = 0; i < size; i++) {
+		for (var j = 0; j < size; j++) {
+			grid[i][j] = new Cell(i, j, w);
+			options.push([i,j]);
+		}
+	}
+
+	// Chose Mine Spots
+	for (var i = 0; i < amountMines; i++) {
+		// Get A Cell to make it a Mine
+		var index = floor(random(options.length));
+		var first = options[index][0];
+		var second = options[index][1];
+		grid[first][second].mine = true;
+		// Delete the Cell from the array
+		options.splice(index, 1)
 	}
 }
 
