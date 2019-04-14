@@ -2,7 +2,7 @@ var grid;
 var size;
 var w;
 var canvasSize = 551;
-var amountMines = 1;
+var amountMines = 17;
 var flag;
 var starttime;
 var gametime;
@@ -116,10 +116,13 @@ function draw(){
 		image(gameoverimg, canvasSize*0.25, canvasSize*0.25, canvasSize*0.5, canvasSize*0.5);
 	}
 	if (win) {
+		//Light Background
 		stroke(color('#D8D9DE'));
 		fill(color('#D8D9DE'));
 		rect(0, 0, canvasSize+1, canvasSize+1);
+		// Img
 		image(winimg, canvasSize*0.3, canvasSize*0.15, canvasSize*0.4, canvasSize*0.4);
+		// Score
 		textAlign(CENTER);
 		fill(color('#393B45'));
 		strokeWeight(0);

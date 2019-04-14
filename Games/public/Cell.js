@@ -8,6 +8,7 @@ function Cell(i, j, w){
 	this.mine = false;
 	this.display = false;
 	this.flagOnMe = false;
+	memory = 0;
 }
 
 
@@ -41,18 +42,23 @@ Cell.prototype.show = function(){
 	}
 }
 
-
+var memory;
 
 Cell.prototype.flagit = function(){
-	// Put a flag on this Cell if it is not displayed or take the flag away of the cell
-	if (!this.display) {
-		if(!this.flagOnMe){
-			this.flagOnMe = true;
-		}
-		else{
-			this.flagOnMe = false;
+	//memory is prevention agains a bug that on touch screens a touch has 2 events
+	if (memory != floor(new Date().getTime()/500)) {
+
+		// Put a flag on this Cell if it is not displayed or take the flag away of the cell
+		if (!this.display) {
+			if(!this.flagOnMe){
+				this.flagOnMe = true;
+			}
+			else{
+				this.flagOnMe = false;
+			}
 		}
 	}
+	memory = floor(new Date().getTime()/500);
 }
 
 
