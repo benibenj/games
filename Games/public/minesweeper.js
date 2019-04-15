@@ -2,7 +2,7 @@ var grid;
 var size;
 var w;
 var canvasSize = 551;
-var amountMines = 1;
+var amountMines = 17;
 var flag;
 var starttime;
 var gametime;
