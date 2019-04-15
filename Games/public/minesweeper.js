@@ -2,7 +2,7 @@ var grid;
 var size;
 var w;
 var canvasSize = 551;
-var amountMines = 17;
+var amountMines = 1;
 var flag;
 var starttime;
 var gametime;
@@ -146,19 +146,22 @@ function gameOver(){
 }
 
 
-function gameWin(){
-	displayAll();
-	win = true;
-	// calculating the game time
-	var endtime = new Date().getTime();
-	var time = floor((endtime - starttime)/1000);
-	var min = floor(time/60);
-	var sec = floor(time%60);
-	if (min == 0) {
-		gametime = sec + "s";
-	}
-	else{
-		gametime = min + "min " + sec + "s";
+function gameWin(password){
+	//to prevent cheating
+	if (password = "minesweeperiscool") {
+		displayAll();
+		win = true;
+		// calculating the game time
+		var endtime = new Date().getTime();
+		var time = floor((endtime - starttime)/1000);
+		var min = floor(time/60);
+		var sec = floor(time%60);
+		if (min == 0) {
+			gametime = sec + "s";
+		}
+		else{
+			gametime = min + "min " + sec + "s";
+		}
 	}
 }
 
@@ -188,7 +191,7 @@ function checkIfFinished(){
 		}
 	}
 	if (amountOfMinesFlagged == amountMines && amountOfWrongFlaggs == 0) {
-		gameWin();
+		gameWin("minesweeperiscool");
 	}
 }
 
