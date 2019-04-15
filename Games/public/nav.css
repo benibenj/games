@@ -3,12 +3,13 @@ body{
 }
 
 nav{
-	width: 12em;
+	width: 18%;
 	height: 100%;
 	position: fixed;
 	top: 0;
 	left: 0;
 	background-color: var(--dark);
+	z-index: 100;
 }
 
 nav .controllnav{
@@ -48,3 +49,204 @@ nav a h2{
 	font-size: 1.4em;
 	padding-left: 15%;
 }
+
+nav .line{
+	height: 1px;
+	width: 70%;
+	margin: 10px 15%;
+	background-color: var(--light);
+	opacity: 0.6;
+}
+
+
+/* SignUp */
+
+.form{
+	position: absolute;
+	display: none;
+  	top: 50%;
+ 	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 40vw;
+	height: 27vw;
+	background-color: white;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 3px 3px 1px 1px rgb(0,0,0,0.2);
+	overflow: hidden;
+	text-align: center;
+	min-width: 600px;
+	min-height: 375px;
+	z-index: 80;
+}
+
+.form .pic{
+	width: 50%;
+	height: 100%;
+	position: relative;
+	float: left;
+	overflow: hidden;
+}
+
+.form .pic img{
+	position: absolute;
+  	top: 50%;
+ 	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+.form .information{
+	width: 50%;
+	height: 100%;
+	float: left;
+	border: none;
+	position: relative;
+}
+
+.form .information h2{
+	margin-top: 30px;
+	margin-bottom: 20px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+}
+
+.form .information form{
+	
+}
+
+.form .information form input{
+	width: 70%;
+	border: none;
+	border-bottom: 1px solid black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	margin: 7px 0;
+	height: 25px;
+	outline: none;
+}
+
+.form .information form button{
+	width: 70%;
+	height: 35px;
+	margin-top: 40px;
+	border: none;
+	border-bottom: 1px solid black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	background-color: white;
+	cursor: pointer;
+	outline: none;
+	position: absolute;
+	bottom: 50px;
+	left: 15%;
+}
+
+.form .information p{
+	position: absolute;
+	transform: translate(-50%, 0);
+	width: 70%;
+	bottom: 10px;
+	left: 50%;
+	margin-top: 10px;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	text-align: center;
+}
+
+.form .information a{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.form .information a:hover{
+	text-decoration: none;
+}
+
+.clicker{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #111;
+	opacity: 0.2;
+	display: none;
+	z-index: 50;
+}
+
+/* BUTTON ANIMATION */
+span{
+  display: block;
+}
+
+button::before, button::after{
+  content:"";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #111;
+}
+
+span::before, span::after{
+  content:"";
+  width:2px;
+  height:0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #111;
+}
+
+button:hover::before, button:hover::after{
+  width: 100%;
+}
+
+button:hover span::before, button:hover span::after{
+  height: 100%;
+}
+
+.form .information form button::after{
+  left: 0;
+  bottom: 0;
+  transition-delay: 0.6s;
+}
+.form .information form button span::after{
+  transition-delay: 0.4s;
+  right: 0;
+  bottom: 0
+}
+.form .information form button::before{
+  right: 0;
+  top: 0;
+  transition-delay: 0.2s;
+}
+.form .information form button span::before{
+  transition-delay: 0s;
+  left: 0;
+  top: 0;
+}
+
+.form .information form button:hover::after{
+  transition-delay: 0s;
+}
+.form .information form button:hover span::after{
+  transition-delay: 0.2s;
+}
+.form .information form button:hover::before{
+  transition-delay: 0.4s;
+}
+.form .information form button:hover span::before{
+  transition-delay: 0.6s;
+}
+
+
+@media screen and (max-width: 900px) {
+	nav{
+		width: 50%;
+	}
+	.form{
+		top: 30%;
+ 		left: 20%;
+		transform: translate(0, 0);
+	}
+}
+

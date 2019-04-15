@@ -3,6 +3,7 @@
 <head>
 	
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSS and JavaScript files -->
 	<link rel="stylesheet" type="text/css" href="resetAttributes.css">
 	<link rel="stylesheet" type="text/css" href="nav.css">
@@ -22,4 +23,45 @@
 		<!-- links -->
 		<a href="/"><h2>HOME</h2></a>
 		<a href="/minesweeper"><h2>MINE-SWEEPER</h2></a>
+		<div class="line"></div>
+		<a onclick="openlogin()"><h2>Login</h2></a>
+		<a onclick="opensignup()"><h2>Sign Up</h2></a>
 	</nav>
+
+	<!-- Sign-up Form -->
+	<div class="form" id="signup">
+		<div class="pic">
+			<img src="img/game.jpg">
+		</div>
+		<div class="information">
+			<h2>Sign-up</h2>
+			<form action="#">
+				<input type="text" name="uid" placeholder="Username" autocomplete="off">
+				<input type="text" name="mail" placeholder="E-Mail" autocomplete="off">
+				<input type="password" name="pwd" placeholder="Password" autocomplete="off">
+				<input type="password" name="rpt-pwd" placeholder="Repeat Password" autocomplete="off"><br>
+				<button type="submit"><span>Submit</span></button>
+			</form>
+			<p>Have an account? Login <a onclick="">here</a></p>
+		</div>
+	</div>
+
+
+	<!-- Login Form -->
+	<div class="form" id="login">
+		<div class="pic">
+			<img src="img/game.jpg">
+		</div>
+		<div class="information">
+			<h2>Login</h2>
+			<form action="#">
+				<input type="text" name="uid" placeholder="Username" autocomplete="off">
+				<input type="password" name="pwd" placeholder="Password" autocomplete="off"><br>
+				<button type="submit"><span>Submit</span></button>
+			</form>
+			<p>Don't have an account? <br>Sign-up <a onclick="">here</a></p>
+		</div>
+	</div>
+
+	<!-- This is a hidden background that closes the element open-->
+	<div class="clicker" id="clicker" onclick="closeform()"></div>
