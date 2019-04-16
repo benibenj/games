@@ -174,11 +174,11 @@ nav .line{
 }
 
 /* BUTTON ANIMATION */
-span{
+.form .information form span{
   display: block;
 }
 
-button::before, button::after{
+.form .information form button::before, .form .information form button::after{
   content:"";
   width: 0;
   height: 2px;
@@ -187,7 +187,7 @@ button::before, button::after{
   background: #111;
 }
 
-span::before, span::after{
+.form .information form span::before, .form .information form span::after{
   content:"";
   width:2px;
   height:0;
@@ -196,11 +196,11 @@ span::before, span::after{
   background: #111;
 }
 
-button:hover::before, button:hover::after{
+.form .information form button:hover::before, .form .information form button:hover::after{
   width: 100%;
 }
 
-button:hover span::before, button:hover span::after{
+.form .information form button:hover span::before, .form .information form button:hover span::after{
   height: 100%;
 }
 
