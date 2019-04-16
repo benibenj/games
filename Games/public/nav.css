@@ -86,6 +86,7 @@ nav .line{
 	position: relative;
 	float: left;
 	overflow: hidden;
+	z-index: 82;
 }
 
 .form .pic img{
@@ -102,6 +103,11 @@ nav .line{
 	float: left;
 	border: none;
 	position: relative;
+	z-index: 81;
+}
+
+.form .information[id="uid"], .form .information[id="mail"], .form .information[id="pwd"]{
+	display: none;
 }
 
 .form .information h2{
@@ -138,8 +144,29 @@ nav .line{
 	cursor: pointer;
 	outline: none;
 	position: absolute;
-	bottom: 50px;
+	bottom: 80px;
 	left: 15%;
+}
+
+.form[id="profile"] .information button{
+	width: 70%;
+	height: 35px;
+	margin-top: 0;
+	margin-bottom: 10px;
+	border: none;
+	border-bottom: 1px solid black;
+	font-family: 'Raleway', sans-serif;
+	font-size: 16px;
+	background-color: white;
+	cursor: pointer;
+	outline: none;
+	position: relative;
+	left: 0;
+	bottom: 0;
+}
+
+.form .information[id="uid"] button, .form .information[id="mail"] button, .form .information[id="pwd"] button{
+	margin-top: 10px;
 }
 
 .form .information p{
@@ -152,15 +179,16 @@ nav .line{
 	font-family: 'Raleway', sans-serif;
 	font-size: 16px;
 	text-align: center;
+	line-height: 20px;
 }
 
 .form .information a{
-	text-decoration: underline;
+	text-decoration: none;
 	cursor: pointer;
 }
 
 .form .information a:hover{
-	text-decoration: none;
+	text-decoration: underline;
 }
 
 .clicker{

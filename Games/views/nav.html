@@ -26,6 +26,7 @@
 		<div class="line"></div>
 		<a onclick="openlogin()"><h2>Login</h2></a>
 		<a onclick="opensignup()"><h2>Sign Up</h2></a>
+		<a onclick="openprofile()"><h2>Profile</h2></a>
 	</nav>
 
 	<!-- Sign-up Form -->
@@ -59,9 +60,59 @@
 				<input type="password" name="pwd" placeholder="Password" autocomplete="off"><br>
 				<button type="submit"><span>Submit</span></button>
 			</form>
-			<p>Don't have an account? <br>Sign up <a onclick="opensignup()">here</a></p>
+			<p><a>Forgot my password</a><br>
+			Don't have an account? <br>Sign up <a onclick="opensignup()">here</a></p>
 		</div>
 	</div>
+
+
+	<!-- Profile Form -->
+	<div class="form" id="profile">
+
+		<!-- The Image -->
+		<div class="pic">
+			<img src="img/game.jpg">
+		</div>
+
+		<!-- All Buttons to al possible Settings -->
+		<div class="information" id="overview">
+			<h2>Profile</h2>
+			<button onclick="openuid()"><span>Change Username</span></button>
+			<button onclick="openmail()"><span>Change E-mail</span></button>
+			<button onclick="openpwd()"><span>Change Password</span></button>
+			<button onclick=""><span>Log Out</span></button>
+			<button onclick=""><span>Delete Account</span></button>
+		</div>
+
+		<!-- Change Username -->
+		<div class="information" id="uid">
+			<h2>Change Username</h2>
+			<form action="#"><br>
+				<input type="text" name="uid" placeholder="new Username">
+				<button><span>Submit</span></button>
+			</form>
+		</div>
+
+		<!-- Change E-mail -->
+		<div class="information" id="mail">
+			<h2>Change E-mail</h2>
+			<form action="#"><br>
+				<input type="text" name="mail" placeholder="change E-mail">
+				<button><span>Submit</span></button>
+			</form>
+		</div>
+
+		<!-- Change E-mail -->
+		<div class="information" id="pwd">
+			<h2>Change Password</h2>
+			<form action="#"><br>
+				<input type="password" name="mail" placeholder="new Password">
+				<input type="password" name="mail" placeholder="repeat Password">
+				<button><span>Submit</span></button>
+			</form>
+		</div>
+	</div>
+
 
 	<!-- This is a hidden background that closes the element open-->
 	<div class="clicker" id="clicker" onclick="closeform()"></div>
