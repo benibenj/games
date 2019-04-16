@@ -117,3 +117,10 @@ function openpwd(){
 	document.getElementById("pwd").style.display = "block";
 	document.getElementById("overview").style.display = "none";
 }
+
+function backtoprofile(){
+	document.getElementById("uid").style.display = "none";
+	document.getElementById("mail").style.display = "none";
+	document.getElementById("pwd").style.display = "none";
+	document.getElementById("overview").style.display = "block";
+}

@@ -163,6 +163,11 @@ nav .line{
 	position: relative;
 	left: 0;
 	bottom: 0;
+	transition: 0.1s;
+}
+
+.form[id="profile"] .information button:hover{
+	background-color: rgb(240,240,240);
 }
 
 .form .information[id="uid"] button, .form .information[id="mail"] button, .form .information[id="pwd"] button{
