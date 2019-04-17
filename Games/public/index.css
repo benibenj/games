@@ -1,0 +1,39 @@
+body{
+	text-align: center;
+}
+
+body nav{
+	text-align: left;
+}
+
+h1{
+	margin-top: 50px;
+	font-size: 30px;
+	font-family: 'Railway', sans-serif;
+	color: var(--dark);
+}
+
+main{
+	width: 80%;
+	margin: 20px 10%;
+	display: flex;
+	justify-content: space-around;
+}
+
+main .container{
+	width: 250px;
+	height: 150px;
+	background-color: #fff;
+	overflow: hidden;
+	border-radius: 5px;
+}
+
+main .container .pic{
+	height: 100%;
+	width: 100%;
+}
+
+main .container .pic img{
+	transform: translate(-50%, -50%);
+	height: 100%;
+}

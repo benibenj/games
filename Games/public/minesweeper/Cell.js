@@ -34,6 +34,17 @@ Cell.prototype.show = function(){
 			fill(color('#6E7889'));
 			strokeWeight(0);
 			textSize(w/2);
+
+			switch(this.neighborCount){
+				case 1: fill(color('#228B22'));
+				break;
+				case 2: fill(color('#0000ff'));
+				break;
+				case 3: fill(color('#ff0000'));
+				break;
+				default: fill(color('#BA55D3'));
+			}
+
 			text(this.neighborCount, this.x + this.w*0.5, this.y + this.w*0.65);
 		}
 	}

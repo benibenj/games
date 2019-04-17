@@ -15,5 +15,8 @@ public class Main {
 		server.on("GET", "/minesweeper", (Request request) -> {
 			return responder.render("minesweeper.html");
 		});
+		server.on("GET", "/battleship", (Request request) -> {
+			return responder.render("battleship.html");
+		});
 	}
 }
