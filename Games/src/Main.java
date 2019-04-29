@@ -12,11 +12,29 @@ public class Main {
 		server.on("GET", "/", (Request request) -> {
 			return responder.render("index.html");
 		});
+		server.on("GET", "/signup", (Request request) -> {
+			return responder.render("signup.html");
+		});
+		server.on("GET", "/login", (Request request) -> {
+			return responder.render("login.html");
+		});
+		server.on("GET", "/profile", (Request request) -> {
+			return responder.render("profile.html");
+		});
 		server.on("GET", "/minesweeper", (Request request) -> {
 			return responder.render("minesweeper.html");
 		});
 		server.on("GET", "/battleship", (Request request) -> {
 			return responder.render("battleship.html");
+		});
+		server.on("GET", "/changeusername", (Request request) -> {
+			return responder.render("changeusername.html");
+		});
+		server.on("GET", "/changepwd", (Request request) -> {
+			return responder.render("changepassword.html");
+		});
+		server.on("GET", "/changemail", (Request request) -> {
+			return responder.render("changemail.html");
 		});
 	}
 }

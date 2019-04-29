@@ -1,6 +1,6 @@
 // Nav Controll
 
-var open = true;
+var open = false;
 function controllNav(){
 	var nav = document.getElementById('nav');
 	nav.style.transition = "all .4s ease-in-out";
