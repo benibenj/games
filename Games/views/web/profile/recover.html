@@ -1,0 +1,12 @@
+{{include "top.html"}}
+	<form action="/recover" method="POST">
+		<h1>{{print translate "recover-account"}}</h1>
+		<div>
+			<label for="username">{{print translate "username"}}</label>
+			<input type="text" name="username" id="username"/>
+		</div>
+		<input type="submit" value="{{print translate "submit"}}"/>
+		{{include "messages.html"}}
+	</form>
+{{include "bottom.html"}}
+

@@ -1,0 +1,53 @@
+Error
+Page not found
+Internal server error
+Submit
+Username
+Email Address
+Password
+Repeat Password
+Sign up
+is already in use
+is required
+is too short
+is too long
+is too small
+is too large
+contains too few elements
+contains too many elements
+contains invalid characters
+does not exist
+does not match
+Passwords do not match
+can't be deleted
+Sign in
+Sign out
+Statistics
+Get in touch
+Share
+User
+World
+You dont have an Account? Sign up <a href="/signup">here</a>.
+You already have an Account? Sign in <a href="/signin">here</a>.
+Profile
+Account
+Change Email
+Back
+Change Password
+You forgot your password? Recover your account <a href="/recover">here</a>.
+You are currently signed in as {{print htmlencode get "username" variables}}.
+You are new? Sign up <a href="/signup">here</a> to play now!
+Recover Account
+An email was sent successfully to your specified address. Please check your inbox to recover your account.
+Please click <a href="{{print get "url" variables}}/unlock?id={{print get "encrypted-username" variables}}&key={{print get "key" variables}}">here</a> to recover your account.
+The account can't be recovered as the link contains errors.
+Activate Account
+Activate your account now by clicking <a href="{{print get "url" variables}}/activate?id={{print get "encrypted-username" variables}}&key={{print get "key" variables}}">here</a>.
+Your account is not activated. Check the inbox of the email address you provided to activate your account.
+This link is outdated. Please check for a newer link or <a href="/profile/email">change your email address</a> to recieve a new activation email.
+not activated
+Delete account
+Do you really want to delete your account? The deletion of an account can't be reversed.
+Enable Notifications
+Disable Notifications
+Home

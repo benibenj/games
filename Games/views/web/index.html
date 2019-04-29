@@ -1,0 +1,13 @@
+{{include "top.html"}}
+    <h1>Index</h1>
+	<p>
+		{{
+			if equals get "username" variables null
+				print "Not Logged In"
+			end
+			if not equals get "username" variables null
+                print get "username" variables
+			end
+		}}
+	</p>
+{{include "bottom.html"}}

@@ -1,0 +1,23 @@
+{{include "top.html"}}
+    <h1>{{print translate "profile"}}</h1>
+    <p>{{print translate "signed-in-as"}}</p>
+    {{
+        if not get "activated" variables
+            print "<p>"
+            print translate "account-not-activated"
+            print "</p>"
+        end
+    }}
+    <a class="button" href="/signout">{{print translate "signout"}}</a>
+    <a class="button" href="/profile/notifications">{{
+        if get "notifications" variables
+            print translate "disable-notifications"
+        end
+        if not get "notifications" variables
+            print translate "enable-notifications"
+        end 
+    }}</a>
+    <a class="button" href="/profile/email">{{print translate "change-email"}}</a>
+    <a class="button" href="/profile/password">{{print translate "change-password"}}</a>
+    <a class="button" href="/profile/delete">{{print translate "delete-account"}}</a>
+{{include "bottom.html"}}
