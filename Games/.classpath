@@ -5,5 +5,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Renderer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/RenderResponder"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/WebServer"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Database"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DatabaseSessionManager"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Mailer"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/UserManager"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
