@@ -1,5 +1,8 @@
 # We Serve Games
 ## TODO
+* Remove Spaghetticode
+  * Move images for minesweeper
+  * Move CSS files
 * Scoreboard
 * Translations
-* New Game: Flappy Bird
+* Add Game Flappy Bird
