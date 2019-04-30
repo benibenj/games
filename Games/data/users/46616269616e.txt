@@ -1,8 +1,0 @@
-password="d404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db"
-languages=["de","en-US","en"]
-email="boesiger.fabian@outlook.com"
-key="1OQZtfgtMBUv6qVlBwKXtvE6gSkMqT8S6gvby2Vn4zRm8mAhjh5TcrvXMvrMwwTF"
-notifications=false
-username="Fabian"
-activated=false
-timestamp=1556617263191
