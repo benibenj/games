@@ -19,7 +19,7 @@ public class Main {
 		Server server = new Server(8000, new File("public"), responder, sessionManager);
 		
 		initializeRoutes(server, responder);
-		
+		 
 		new UserManager(server, responder, database, mailer);
 	}
 	
