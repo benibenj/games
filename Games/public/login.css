@@ -26,7 +26,7 @@ main .panel a .unit{
 	width: 12%;
 	min-width: 100px;
 	height: 25px;
-	background-color: var(--orange);
+	background-color: #fff;
 	display: inline-block;
 	border-radius: 0 0 10px 10px;
 	border: 2px solid var(--orange);
@@ -38,8 +38,8 @@ main .panel a .unit{
 }
 
 main .panel a .unit[id="login"]{
-	background-color: #fff;
-	color: var(--orange);
+	background-color: var(--orange);
+	color: #fff;
 }
 
 main h2{

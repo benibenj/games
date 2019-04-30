@@ -33,14 +33,6 @@ public class Main {
 		server.on("GET", "/games/battleship", (Request request) -> {
 			return responder.render("games/battleship.html");
 		});
-		server.on("GET", "/changeusername", (Request request) -> {
-			return responder.render("changeusername.html");
-		});
-		server.on("GET", "/changepwd", (Request request) -> {
-			return responder.render("changepassword.html");
-		});
-		server.on("GET", "/changemail", (Request request) -> {
-			return responder.render("changemail.html");
-		});
+
 	}
 }
