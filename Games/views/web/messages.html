@@ -1,13 +1,17 @@
-{{
-	if exists "errors" variables
-		print "<ul class=\"errors\">"
-		each "error" get "errors" variables
-			print "<li>"
-			print translate get "name" get "error" variables
-			print " "
-			print translate get "message" get "error" variables
-			print "</li>"
+<link rel="stylesheet" type="text/css" href="/messages.css">
+
+<div id="error-wrapper">
+	{{
+		if exists "errors" variables
+			print "<ul class=\"errors\">"
+			each "error" get "errors" variables
+				print "<li>"
+				print translate get "name" get "error" variables
+				print " "
+				print translate get "message" get "error" variables
+				print "</li>"
+			end
+			print "</ul>"
 		end
-		print "</ul>"
-	end
-}}
+	}}
+</div>
