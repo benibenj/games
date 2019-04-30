@@ -133,10 +133,10 @@ function draw(){
 
 
 function preload(){
-  	bomb = loadImage('img/bomb.svg');
-  	flagimg = loadImage('img/flag.svg');
-  	gameoverimg = loadImage('img/gameover.svg');
-  	winimg = loadImage('img/win.svg');
+  	bomb = loadImage('/img/bomb.svg');
+  	flagimg = loadImage('/img/flag.svg');
+  	gameoverimg = loadImage('/img/gameover.svg');
+	winimg = loadImage('/img/win.svg');
 }
 
 

@@ -1,13 +1,16 @@
 {{include "top.html"}}
-    <h1>Index</h1>
-	<p>
-		{{
-			if equals get "username" variables null
-				print "Not Logged In"
-			end
-			if not equals get "username" variables null
-                print get "username" variables
-			end
-		}}
-	</p>
+<link rel="stylesheet" type="text/css" href="index.css">
+
+<h1>We Serve Games!</h1>
+
+<main>
+	<div class="container" onclick="location.href='/minesweeper';">
+		<div class="pic">
+			<img src="img/minesweeper.jpg">
+		</div>
+		<div class="content">
+			
+		</div>
+	</div>
+</main>
 {{include "bottom.html"}}

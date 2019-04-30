@@ -1,16 +1,28 @@
 {{include "top.html"}}
-	<form action="/signin" method="POST">
-		<h1>{{print translate "signin"}}</h1>
-		<p>{{print translate "signup-here"}}<br/>{{print translate "forgot-password"}}</p>
-		<div>
-			<label for="username">{{print translate "username"}}</label>
-			<input type="text" name="username" id="username"/>
+
+	<link rel="stylesheet" type="text/css" href="login.css">
+
+		<main>
+		<div class="panel">
+			<a href="/signup">
+				<div class="unit" id="signup">
+					Sign up
+				</div>
+			</a>
+			<a>
+				<div class="unit" id="login">
+					Login
+				</div>
+			</a>	
 		</div>
-		<div>
-			<label for="password">{{print translate "password"}}</label>
-			<input type="password" name="password" id="password"/>
-		</div>
-		<input type="submit" value="{{print translate "submit"}}"/>
-		{{include "messages.html"}}
-	</form>
+
+		<h2>Login</h2>
+		<form action="/signin" method="POST">
+			<input type="text" name="username" placeholder="Username"><br>
+			<input type="password" name="password" placeholder="Password"><br>
+			<button type="submit">Login</button>
+			{{include "messages.html"}}
+		</form>
+		<p>Don't have an account? Sign up <a href="/signup">here</a></p>
+	</main>
 {{include "bottom.html"}}

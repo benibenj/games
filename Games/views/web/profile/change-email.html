@@ -1,12 +1,16 @@
 {{include "top.html"}}
-	<form action="/profile/email" method="POST">
-        <h1>{{print translate "change-email"}}</h1>
-		<div>
-			<label for="email">{{print translate "email"}}</label>
-			<input type="email" name="email" id="email" maxlength="64" value="{{print get "email" variables}}"/>
-		</div>
-        <input type="submit" value="{{print translate "submit"}}" id="submit-signup"/>
-        <a class="button" href="/profile">{{print translate "back"}}</a>
-        {{include "messages.html"}}
-    </form>
+    <link rel="stylesheet" type="text/css" href="/profile.css">
+
+    <main>
+        {{include "profile/profile-buttons.html"}}
+        <div class="change">
+            <h2>Mail</h2>
+            <form action="/profile/email" method="POST">
+                <input type="text" name="email" placeholder="New E-mail" value="{{print get "email" variables}}"><br>
+                <button>Submit</button>
+                {{include "messages.html"}}
+            </form>
+        </div>
+    </main>
 {{include "bottom.html"}}
+
