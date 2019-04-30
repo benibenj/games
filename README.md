@@ -6,3 +6,4 @@
 * Scoreboard
 * Translations
 * Add Game Flappy Bird
+* Logo and Favicon
