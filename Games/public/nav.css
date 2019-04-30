@@ -11,6 +11,7 @@ nav{
 	background-color: var(--dark);
 	z-index: 100;
 	transform: translate(-100%);
+	box-shadow: 2px 0 2px 2px rgb(0,0,0,0.1);
 }
 
 nav .controllnav{
@@ -23,6 +24,7 @@ nav .controllnav{
 	border-radius: 0 10px 10px 0;
 	text-align: center;
 	cursor: pointer;
+	box-shadow: 1px 2px 2px 1px rgb(0,0,0,0.2);
 }
 
 nav .controllnav img{
