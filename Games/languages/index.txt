@@ -51,3 +51,4 @@ delete-account-warning
 enable-notifications
 disable-notifications
 home
+hello
