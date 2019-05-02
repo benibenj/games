@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import database.Database;
 import mailer.Mailer;
@@ -12,15 +13,16 @@ import user.UserManager;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
+		HashMap <String, Object> predefined = new HashMap <String, Object> ();
 		Database database = new Database();
 		Mailer mailer = new Mailer(new File("views/mail"));
-		RenderResponder responder = new RenderResponder(new File("views/web"));
+		RenderResponder responder = new RenderResponder(new File("views/web"), predefined);
 		DatabaseSessionManager <User> sessionManager = new DatabaseSessionManager <User> (database, 7 * 24 * 60 * 60, User::new);
 		Server server = new Server(8000, new File("public"), responder, sessionManager);
 		
 		initializeRoutes(server, responder);
 		 
-		new UserManager(server, responder, database, mailer);
+		new UserManager(server, responder, database, mailer, predefined);
 	}
 	
 	private static void initializeRoutes(Server server, RenderResponder responder) {
