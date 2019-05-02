@@ -22,7 +22,18 @@ public class Main {
 		
 		initializeRoutes(server, responder);
 		 
-		new UserManager(server, responder, database, mailer, predefined);
+		new UserManager(server, responder, database, mailer, predefined, 
+			(User user) -> {
+				Player player = new Player(user.getUsername());
+				database.save(player);
+			}, 
+			(User user) -> {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					player.delete();
+				}
+			}
+		);
 	}
 	
 	private static void initializeRoutes(Server server, RenderResponder responder) {
@@ -35,6 +46,11 @@ public class Main {
 		server.on("GET", "/games/battleship", (Request request) -> {
 			return responder.render("games/battleship.html");
 		});
-
+		server.on("GET", "/scores/list", (Request request) -> {
+			String d
+		});
+		server.on("GET", "/scores/submit", (Request request) -> {
+			return responder.text("success");
+		});
 	}
 }
