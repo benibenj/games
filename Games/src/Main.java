@@ -47,7 +47,7 @@ public class Main {
 			return responder.render("games/battleship.html");
 		});
 		server.on("GET", "/scores/list", (Request request) -> {
-			String d
+			return responder.next();
 		});
 		server.on("GET", "/scores/submit", (Request request) -> {
 			return responder.text("success");
