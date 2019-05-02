@@ -1,7 +1,12 @@
 {{include "top.html"}}
-    <h1>{{print translate "delete-account"}}</h1>
-    <p>{{print translate "delete-account-warning"}}</p>
-    <a class="button" href="/profile/delete/confirm">{{print translate "delete-account"}}</a>
-    <a class="button" href="/profile">{{print translate "back"}}</a>
+	<main>
+		<link rel="stylesheet" type="text/css" href="/delete-profile.css">
+	    <h1>{{print translate "delete-account"}}</h1>
+	    <p>{{print translate "delete-account-warning"}}</p>
+	    <div class="button-placer">
+	    	<a class="button" href="/profile/delete/confirm">{{print translate "delete-account"}}</a>
+	    	<a class="button" href="/profile">{{print translate "back"}}</a>
+	    </div>
     {{include "messages.html"}}
+    </main>
 {{include "bottom.html"}}

@@ -11,6 +11,7 @@ h1{
 	font-size: 50px;
 	font-family: 'Railway', sans-serif;
 	color: var(--dark);
+	text-shadow: 2px 3px rgb(0,0,0,0.2);
 }
 
 main{

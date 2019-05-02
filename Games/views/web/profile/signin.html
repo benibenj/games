@@ -1,16 +1,16 @@
 {{include "top.html"}}
 
-	<link rel="stylesheet" type="text/css" href="login.css">
+	<link rel="stylesheet" type="text/css" href="sign-in-up.css">
 
 		<main>
 		<div class="panel">
 			<a href="/signup">
-				<div class="unit" id="signup">
+				<div class="unit" id="signup" style="background-color: #fff; color: var(--orange);">
 					Sign up
 				</div>
 			</a>
 			<a>
-				<div class="unit" id="login">
+				<div class="unit" id="login" style="background-color: var(--orange); color: #fff;">
 					Sign in
 				</div>
 			</a>	
@@ -23,6 +23,5 @@
 			<input type="password" name="password" placeholder="Password"><br>
 			<button type="submit">Login</button>
 		</form>
-		<p>Don't have an account? Sign up <a href="/signup">here</a></p>
 	</main>
 {{include "bottom.html"}}
