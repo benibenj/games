@@ -64,8 +64,12 @@ main form input{
 	margin-bottom: 130px;
 }
 
-input[id="pwd"]{
+input[id="password"]{
 	margin-bottom: 10px;
+}
+
+input[id="repeat-password"]{
+	margin-bottom: 80px;
 }
 
 button[id="pwd"]{

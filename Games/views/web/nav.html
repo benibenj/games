@@ -6,16 +6,16 @@
 	<!-- Pushes down links -->
 	<div class="nothingbox"></div>
 	<!-- links -->
-	<a href="/"><h2>HOME</h2></a>
-	<a href="/games/minesweeper"><h2>MINE-SWEEPER</h2></a>
+	<a class="nav-links" href="/"><h2>HOME</h2></a>
+	<a class="nav-links" href="/games/minesweeper"><h2>MINE-SWEEPER</h2></a>
 	<div class="line"></div>
 	{{
 		if equals get "username" variables null
-			print "<a href=\"/signin\"><h2>Login</h2></a>"
-			print "<a href=\"/signup\"><h2>Sign up</h2></a>"
+			print "<a class=\"nav-links\" href=\"/signin\"><h2>Login</h2></a>"
+			print "<a class=\"nav-links\" href=\"/signup\"><h2>Sign up</h2></a>"
 		end
 		if not equals get "username" variables null
-			print "<a href=\"/profile\"><h2>Profile</h2></a>"
+			print "<a class=\"nav-links\" href=\"/profile\"><h2>Profile</h2></a>"
 		end
 	}}
 	

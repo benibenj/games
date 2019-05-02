@@ -37,7 +37,7 @@ nav .nothingbox{
 	width: 100%;
 }
 
-nav a{
+nav a.nav-links{
 	width: 200%;
 	height: 40px;
 	vertical-align: middle;
@@ -46,11 +46,12 @@ nav a{
 	text-decoration: none;
 }
 
-nav a h2{
+nav a.nav-links h2{
 	color: var(--light);
 	font-family: arial;
 	font-size: 1.4em;
 	padding-left: 15%;
+	margin: 0;
 }
 
 nav .line{
