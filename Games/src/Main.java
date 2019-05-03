@@ -20,7 +20,7 @@ public class Main {
 		DatabaseSessionManager <User> sessionManager = new DatabaseSessionManager <User> (database, 7 * 24 * 60 * 60, User::new);
 		Server server = new Server(8000, new File("public"), responder, sessionManager);
 		
-		initializeRoutes(server, responder);
+		initializeRoutes(server, responder, database);
 		 
 		new UserManager(server, responder, database, mailer, predefined, 
 			(User user) -> {
@@ -36,7 +36,7 @@ public class Main {
 		);
 	}
 	
-	private static void initializeRoutes(Server server, RenderResponder responder) {
+	private static void initializeRoutes(Server server, RenderResponder responder, Database database) {
 		server.on("GET", "/", (Request request) -> {
 			return responder.render("index.html");
 		});
@@ -46,11 +46,24 @@ public class Main {
 		server.on("GET", "/games/battleship", (Request request) -> {
 			return responder.render("games/battleship.html");
 		});
-		server.on("GET", "/scores/list", (Request request) -> {
-			return responder.next();
+		server.on("GET", "/scoreboard/request", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					return responder.text(player.addScoreRequest().json());
+				}
+			}
+			return responder.text("error");
 		});
-		server.on("GET", "/scores/submit", (Request request) -> {
-			return responder.text("success");
+		server.on("GET", "/scoreboard/submit", (Request request) -> {
+			ScoreRequest scoreRequest = null;
+			if((scoreRequest = (ScoreRequest) database.loadId(ScoreRequest.class, request.parameters.get("key"))) != null) {
+				if(scoreRequest.verify(request.parameters.get("value"), request.parameters.get("game"))) {
+					return responder.text("valid");
+				}
+			}
+			return responder.text("invalid");
 		});
 	}
 }

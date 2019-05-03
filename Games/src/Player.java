@@ -5,7 +5,7 @@ import database.templates.ObjectTemplate;
 
 public class Player extends ObjectTemplate {
 	
-	public static final String NAME = "player";
+	public static final String NAME = "players";
 	
 	private IdentifiableStringTemplate username;
 	private IntegerTemplate fame;
@@ -31,9 +31,15 @@ public class Player extends ObjectTemplate {
 		database.delete(Player.class, username.get());
 	}
 	
-	public void addScore(int value) {
-		Score score = new Score(this, value);
+	public ScoreRequest addScoreRequest() {
+		ScoreRequest scoreRequest = new ScoreRequest(this);
+		database.save(scoreRequest);
+		return scoreRequest;
+	}
+	
+	public Score addScore(int value, String game) {
+		Score score = new Score(this, value, game);
 		database.save(score);
-		scores.add(score);
+		return score;
 	}
 }
