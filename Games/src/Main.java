@@ -1,10 +1,15 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import database.Database;
 import database.templates.ObjectTemplate;
+import jobs.PreciseIntervalJob;
 import mailer.Mailer;
 import manager.DatabaseSessionManager;
 import responder.RenderResponder;
@@ -14,16 +19,29 @@ import user.User;
 import user.UserManager;
 
 public class Main {
+	
+	private static final int REWARD_SIZE = 3;
+	private static final int MAX_SESSION_AGE = 7 * 24 * 60 * 60;
+	private static final int PORT = 8000;
+	
+	private static HashMap <String, Object> predefined;
+	private static Database database;
+	private static Mailer mailer;
+	private static RenderResponder responder;
+	private static DatabaseSessionManager <User> sessionManager;
+	private static Server server;
+	
 	public static void main(String[] args) throws IOException {
-		HashMap <String, Object> predefined = new HashMap <String, Object> ();
-		Database database = new Database();
-		Mailer mailer = new Mailer(new File("views/mail"));
-		RenderResponder responder = new RenderResponder(new File("views/web"), predefined);
-		DatabaseSessionManager <User> sessionManager = new DatabaseSessionManager <User> (database, 7 * 24 * 60 * 60, User::new);
-		Server server = new Server(8000, new File("public"), responder, sessionManager);
+		
+		predefined = new HashMap <String, Object> ();
+		database = new Database();
+		mailer = new Mailer(new File("views/mail"));
+		responder = new RenderResponder(new File("views/web"), predefined);
+		sessionManager = new DatabaseSessionManager <User> (database, MAX_SESSION_AGE, User::new);
+		server = new Server(PORT, new File("public"), responder, sessionManager);
 		
 		initializeRoutes(server, responder, database);
-		 
+		
 		new UserManager(server, responder, database, mailer, predefined, 
 			(User user) -> {
 				Player player = new Player(user.getUsername());
@@ -36,20 +54,110 @@ public class Main {
 				}
 			}
 		);
+		
+		// Delete all expired score requests
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				database.deleteAll(ScoreRequest.class, (ObjectTemplate objectTemplate) -> {
+					ScoreRequest scoreRequest = (ScoreRequest) objectTemplate;
+					return scoreRequest.expired();
+				});
+			}
+		}, 0, 10000);
+		
+		// Import PreciseIntervalJob from webserver repository
+		new PreciseIntervalJob(() -> {
+			String[] games = {"minesweeper"};
+
+			for(String game : games) {
+				LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+					Score score = (Score) objectTemplate;
+					return score.getGame().equals(game);
+				});
+
+				ArrayList <Score> scores = new ArrayList <Score> ();
+				for(ObjectTemplate objectTemplate : objectTemplates) {
+					scores.add((Score) objectTemplate);
+				}
+				
+				Collections.sort(scores);
+				
+				
+				for(int i = 0; i < Math.min(REWARD_SIZE, scores.size()); i++) {
+					scores.get(i).getPlayer().addFame(REWARD_SIZE - i);
+					database.update(scores.get(i));
+				}
+			}
+		}, 60000);
+		
+		
 	}
 	
 	private static void initializeRoutes(Server server, RenderResponder responder, Database database) {
+		
+		// Game paths
 		server.on("GET", "/", (Request request) -> {
 			return responder.render("index.html");
 		});
 		server.on("GET", "/games/minesweeper", (Request request) -> {
 			return responder.render("games/minesweeper.html");
 		});
-		server.on("GET", "/games/battleship", (Request request) -> {
-			return responder.render("games/battleship.html");
-		});
 		
-		// Scoreboard Paths
+		// Scoreboard paths
+		server.on("GET", "/scoreboard/players", (Request request) -> {
+			StringBuilder stringBuilder = new StringBuilder();
+			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class, (ObjectTemplate objectTemplate) -> {
+				return true;
+			});
+			
+			ArrayList <Player> players = new ArrayList <Player> ();
+			for(ObjectTemplate objectTemplate : objectTemplates) {
+				players.add((Player) objectTemplate);
+			}
+			
+			Collections.sort(players);
+			
+			stringBuilder.append("[");
+			boolean first = true;
+			for(Player player : players) {
+				if(!first) {
+					stringBuilder.append(", ");
+				}
+				stringBuilder.append(player.json());
+				first = false;
+			}
+			stringBuilder.append("]");
+			return responder.text(stringBuilder.toString());
+		});
+		server.on("GET", "/scoreboard/games", (Request request) -> {
+			final String game = request.parameters.get("game");
+			StringBuilder stringBuilder = new StringBuilder();
+			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+				Score score = (Score) objectTemplate;
+				return score.getGame().equals(game);
+			});
+			
+			ArrayList <Score> scores = new ArrayList <Score> ();
+			for(ObjectTemplate objectTemplate : objectTemplates) {
+				scores.add((Score) objectTemplate);
+			}
+			
+			Collections.sort(scores);
+			
+			stringBuilder.append("[");
+			boolean first = true;
+			for(Score score : scores) {
+				if(!first) {
+					stringBuilder.append(", ");
+				}
+				stringBuilder.append(score.json());
+				first = false;
+			}
+			stringBuilder.append("]");
+			return responder.text(stringBuilder.toString());
+		});
 		server.on("GET", "/scoreboard/self", (Request request) -> {
 			User user = (User) request.session.load();
 			if(user != null) {
@@ -58,10 +166,7 @@ public class Main {
 					StringBuilder stringBuilder = new StringBuilder();
 					LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
 						Score score = (Score) objectTemplate;
-						if(score.getPlayer().equals(player)) {
-							return true;
-						}
-						return false;
+						return score.getPlayer().equals(player);
 					});
 					stringBuilder.append("[");
 					boolean first = true;
@@ -74,6 +179,7 @@ public class Main {
 						first = false;
 					}
 					stringBuilder.append("]");
+					return responder.text(stringBuilder.toString());
 				}
 			}
 			return responder.text("error");
@@ -94,6 +200,7 @@ public class Main {
 				if(scoreRequest.verify(request.parameters.get("value"), request.parameters.get("game"))) {
 					return responder.text("valid");
 				}
+				database.update(scoreRequest);
 			}
 			return responder.text("invalid");
 		});

@@ -1,22 +1,21 @@
+import java.util.LinkedList;
+
 import database.templates.IdentifiableStringTemplate;
 import database.templates.IntegerTemplate;
-import database.templates.ListTemplate;
 import database.templates.ObjectTemplate;
 
-public class Player extends ObjectTemplate {
+public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public static final String NAME = "players";
 	
 	private IdentifiableStringTemplate username;
 	private IntegerTemplate fame;
-	private ListTemplate <Score> scores;
 	
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
 		this.username.set(username);
 		fame = new IntegerTemplate("fame");
 		fame.set(0);
-		scores = new ListTemplate <Score> ("scores", Score::new);
 		setIdentifier(this.username);
 	}
 	
@@ -25,9 +24,11 @@ public class Player extends ObjectTemplate {
 	}
 
 	public void delete() {
-		for(Score score : scores) {
-			database.deleteId(Score.class, score.getId());
-		}
+		final Player self = this;
+		database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
+			Score score = (Score) objectTemplate;
+			return score.getPlayer().equals(self);
+		});
 		database.delete(Player.class, username.get());
 	}
 	
@@ -38,12 +39,44 @@ public class Player extends ObjectTemplate {
 	}
 	
 	public Score addScore(int value, String game) {
-		Score score = new Score(this, value, game);
-		database.save(score);
-		return score;
+		Score newScore = new Score(this, value, game);
+		database.save(newScore);
+		
+		final Player self = this;
+		LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+			Score score = (Score) objectTemplate;
+			return score.getPlayer().equals(self);
+		});
+		Score bestScore = null;
+		for(ObjectTemplate objectTemplate : objectTemplates) {
+			Score score = (Score) objectTemplate;
+			if(bestScore == null || score.getScore() > bestScore.getScore()) {
+				bestScore = score;
+			}
+		}
+		final Score finalBestScore = bestScore;
+		database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
+			Score score = (Score) objectTemplate;
+			return !score.equals(finalBestScore);
+		});
+		
+		return (Score) database.loadAll(Score.class).get(0);
 	}
 
 	public String getUsername() {
 		return username.get();
+	}
+	
+	public void addFame(int addend) {
+		fame.set(fame.get() + addend);
+	}
+
+	@Override
+	public int compareTo(Player otherPlayer) {
+		return otherPlayer.fame.get() - fame.get();
+	}
+	
+	public String json() {
+		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\"}";
 	}
 }

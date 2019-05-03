@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/DatabaseSessionManager"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Mailer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/UserManager"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PreciseIntervalJob"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

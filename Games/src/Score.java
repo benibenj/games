@@ -3,7 +3,7 @@ import database.templates.ObjectTemplate;
 import database.templates.ObjectTemplateReference;
 import database.templates.StringTemplate;
 
-public class Score extends ObjectTemplate {
+public class Score extends ObjectTemplate implements Comparable <Score> {
 	
 	public static final String NAME = "scores";
 	
@@ -34,6 +34,15 @@ public class Score extends ObjectTemplate {
 
 	public Object json() {
 		return "{\"username\": \"" + player.get().getUsername() + "\", \"game\": \"" + game.get() + "\", \"score\": \"" + score.get() + "\"}";
+	}
+
+	public int getScore() {
+		return score.get();
+	}
+
+	@Override
+	public int compareTo(Score otherScore) {
+		return otherScore.getScore() - getScore();
 	}
 	
 }

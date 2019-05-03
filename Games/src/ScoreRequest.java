@@ -42,12 +42,17 @@ public class ScoreRequest extends ObjectTemplate {
 				value -= offset.get();
 				if(value%MULTIPLIER == 0) {
 					player.get().addScore(Math.toIntExact(value/MULTIPLIER), game);
+					valid.set(false);
 					return true;
 				}
 			}
 			valid.set(false);
 		}
 		return false;
+	}
+
+	public boolean expired() {
+		return (System.currentTimeMillis() > timestamp.get() + TIMEOUT) || !valid.get();
 	}
 	
 }
