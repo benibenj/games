@@ -10,6 +10,7 @@ public class ScoreRequest extends ObjectTemplate {
 	public static final String NAME = "requests";
 	
 	public static final int MULTIPLIER = 1000000;
+	public static final int TIMEOUT = 1000;
 	
 	private static Random random = new Random();
 	
@@ -31,12 +32,12 @@ public class ScoreRequest extends ObjectTemplate {
 	}
 	
 	public String json() {
-		return "{x: " + getId() + ", y: " + MULTIPLIER + ", z: " + offset.get() + "}";
+		return "{\"x\": \"" + getId() + "\", \"y\": \"" + MULTIPLIER + "\", \"z\": \"" + offset.get() + "\"}";
 	}
 	
 	public boolean verify(String answer, String game) {
 		if(valid.get()) {
-			if(timestamp.get() + 2000 <= System.currentTimeMillis()) {
+			if(System.currentTimeMillis() <= timestamp.get() + TIMEOUT) {
 				long value = Long.parseLong(answer);
 				value -= offset.get();
 				if(value%MULTIPLIER == 0) {

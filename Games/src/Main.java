@@ -56,7 +56,7 @@ public class Main {
 			}
 			return responder.text("error");
 		});
-		server.on("GET", "/scoreboard/submit", (Request request) -> {
+		server.on("POST", "/scoreboard/submit", (Request request) -> {
 			ScoreRequest scoreRequest = null;
 			if((scoreRequest = (ScoreRequest) database.loadId(ScoreRequest.class, request.parameters.get("key"))) != null) {
 				if(scoreRequest.verify(request.parameters.get("value"), request.parameters.get("game"))) {
