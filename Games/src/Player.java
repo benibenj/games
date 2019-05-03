@@ -14,7 +14,7 @@ public class Player extends ObjectTemplate {
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
 		this.username.set(username);
-		fame = new IntegerTemplate("fame", 0, null);
+		fame = new IntegerTemplate("fame");
 		fame.set(0);
 		scores = new ListTemplate <Score> ("scores", Score::new);
 		setIdentifier(this.username);
@@ -41,5 +41,9 @@ public class Player extends ObjectTemplate {
 		Score score = new Score(this, value, game);
 		database.save(score);
 		return score;
+	}
+
+	public String getUsername() {
+		return username.get();
 	}
 }

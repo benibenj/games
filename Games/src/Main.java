@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import database.Database;
+import database.templates.ObjectTemplate;
 import mailer.Mailer;
 import manager.DatabaseSessionManager;
 import responder.RenderResponder;
@@ -45,6 +47,36 @@ public class Main {
 		});
 		server.on("GET", "/games/battleship", (Request request) -> {
 			return responder.render("games/battleship.html");
+		});
+		
+		// Scoreboard Paths
+		server.on("GET", "/scoreboard/self", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				final Player player;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					StringBuilder stringBuilder = new StringBuilder();
+					LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+						Score score = (Score) objectTemplate;
+						if(score.getPlayer().equals(player)) {
+							return true;
+						}
+						return false;
+					});
+					stringBuilder.append("[");
+					boolean first = true;
+					for(ObjectTemplate objectTemplate : objectTemplates) {
+						Score score = (Score) objectTemplate;
+						if(!first) {
+							stringBuilder.append(", ");
+						}
+						stringBuilder.append(score.json());
+						first = false;
+					}
+					stringBuilder.append("]");
+				}
+			}
+			return responder.text("error");
 		});
 		server.on("GET", "/scoreboard/request", (Request request) -> {
 			User user = (User) request.session.load();
