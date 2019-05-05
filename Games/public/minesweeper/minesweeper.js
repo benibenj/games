@@ -162,9 +162,9 @@ function gameWin(){
 	}
 	// Submitting the Score as Time the Player needed in seconds
 	submitScore(time, "minesweeper");
-	loadMyScores(function(array){alert(array[0].username + " 1");}); 
-	loadGameRanking("minesweeper", function(array){alert(array[0].username + " 2");});
-	loadPlayerRanking(function(array){alert(array[0].username + " 3");});
+	loadMyScores(function(array){alert("My Scores: " + JSON.stringify(array));}); 
+	loadGameRanking("minesweeper", function(array){alert("Game Ranking: " + JSON.stringify(array));});
+	loadPlayerRanking(function(array){alert("Player Ranking: " + JSON.stringify(array));});
 }
 
 
