@@ -22,7 +22,7 @@ public class Main {
 	
 	private static final int REWARD_SIZE = 3;
 	private static final int MAX_SESSION_AGE = 7 * 24 * 60 * 60;
-	private static final int PORT = 8000;
+	private static final int PORT = 8001;
 	
 	private static HashMap <String, Object> predefined;
 	private static Database database;
