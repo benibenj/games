@@ -1,4 +1,4 @@
-Fehler
+﻿Fehler
 Seite nicht gefunden
 Interner Server-Fehler
 Senden
@@ -48,7 +48,7 @@ Dieser Link ist veraltet. Bitte suche nach einem neueren Link oder <a href="/pro
 nicht aktiviert
 Account löschen
 Möchtest du diesen Account wirklich löschen? Die Löschung eines Accounts kann nicht rückgängig gemacht werden.
-Benachrichtigungen aktivieren
-Benachrichtigungen deaktivieren
+Benachrichtigungen<br>aktivieren
+Benachrichtigungen<br>deaktivieren
 Home
 Hallo
