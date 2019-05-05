@@ -48,7 +48,7 @@ This link is outdated. Please check for a newer link or <a href="/profile/email"
 not activated
 Delete account
 Do you really want to delete your account? The deletion of an account can't be reversed.
-Enable Notifications
-Disable Notifications
+Enable<br>Notifications
+Disable<br>Notifications
 Home
 Hello
