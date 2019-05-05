@@ -161,10 +161,12 @@ function gameWin(){
 		gametime = min + "min " + sec + "s";
 	}
 	// Submitting the Score as Time the Player needed in seconds
-	submitScore(time, "minesweeper");
-	loadMyScores(function(array){alert("My Scores: " + JSON.stringify(array));}); 
-	loadGameRanking("minesweeper", function(array){alert("Game Ranking: " + JSON.stringify(array));});
-	loadPlayerRanking(function(array){alert("Player Ranking: " + JSON.stringify(array));});
+	submitScore(time, "minesweeper", function() {
+        loadMyScores(function(array){alert("My Scores: " + JSON.stringify(array));}); 
+	    loadGameRanking("minesweeper", function(array){alert("Game Ranking: " + JSON.stringify(array));});
+	    loadPlayerRanking(function(array){alert("Player Ranking: " + JSON.stringify(array));});
+    });
+	
 }
 
 
@@ -229,9 +231,12 @@ function make2DArray(cols, rows){
 	return arr;
 }
 
-
-// ----- Scoreboard Stuff from here on down -----
 /*
+
+----------
+HOW TO USE
+----------
+
 1. Copy-paste this code into your game .js file, do not include it
    with a separate script tag as this code has to be obfuscated with
    your game .js files as well
@@ -247,9 +252,9 @@ function make2DArray(cols, rows){
 
 */
 
-// Submits the score (integer) to the specified game (string)
-// Example: submitScore(100, "minesweeper")
-function submitScore(score, game) {
+// Submits the score (integer) to the specified game (string), executes
+// action (function) if the submission was successful
+function submitScore(score, game, action) {
     getAjax("/scoreboard/request", function(request) {
         console.log(request);
         let object = JSON.parse(request);
@@ -259,13 +264,14 @@ function submitScore(score, game) {
             "key": object.x,
             "value": value,
             "game": game
-        }, function(submit){});
+        }, function(submit){
+            action(submit);
+        });
     });
 }
 
 // Load the current player scores into an array and executes the
 // specified function with this array
-// Example: loadMyScores(function(array){alert(array[0].username);}); 
 function loadMyScores(action) {
     getAjax("/scoreboard/self", function(text){
         action(JSON.parse(text));
@@ -274,7 +280,6 @@ function loadMyScores(action) {
 
 // Load the ranking of the specified game into an array and executes
 // the specified function with this array
-// Example: loadGameRanking("minesweeper", function(array){alert(array[0].username);}); 
 function loadGameRanking(game, action) {
     getAjax("/scoreboard/games?game=" + game, function(text){
         action(JSON.parse(text));

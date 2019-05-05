@@ -19,9 +19,9 @@ HOW TO USE
 
 */
 
-// Submits the score (integer) to the specified game (string)
-// Example: submitScore(100, "minesweeper")
-function submitScore(score, game) {
+// Submits the score (integer) to the specified game (string), executes
+// action (function) if the submission was successful
+function submitScore(score, game, action) {
     getAjax("/scoreboard/request", function(request) {
         console.log(request);
         let object = JSON.parse(request);
@@ -31,13 +31,14 @@ function submitScore(score, game) {
             "key": object.x,
             "value": value,
             "game": game
-        }, function(submit){});
+        }, function(submit){
+            action(submit);
+        });
     });
 }
 
 // Load the current player scores into an array and executes the
 // specified function with this array
-// Example: loadMyScores(function(array){alert(array[0].username);}); 
 function loadMyScores(action) {
     getAjax("/scoreboard/self", function(text){
         action(JSON.parse(text));
@@ -46,7 +47,6 @@ function loadMyScores(action) {
 
 // Load the ranking of the specified game into an array and executes
 // the specified function with this array
-// Example: loadGameRanking("minesweeper", function(array){alert(array[0].username);}); 
 function loadGameRanking(game, action) {
     getAjax("/scoreboard/games?game=" + game, function(text){
         action(JSON.parse(text));
