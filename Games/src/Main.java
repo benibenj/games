@@ -33,7 +33,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		predefined = new HashMap <String, Object> ();
+		predefined = new HashMap <String, Object> (); 
 		predefined.put("url", "http://we.serve.games");
 		
 		database = new Database();
