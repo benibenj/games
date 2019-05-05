@@ -37,7 +37,7 @@ public class Main {
 		predefined.put("url", "http://we.serve.games");
 		
 		database = new Database();
-		mailer = new Mailer(new File("views/mail"));
+		mailer = new Mailer(new File("views/mail"), predefined);
 		responder = new RenderResponder(new File("views/web"), predefined);
 		sessionManager = new DatabaseSessionManager <User> (database, MAX_SESSION_AGE, User::new);
 		server = new Server(PORT, new File("public"), responder, sessionManager);
