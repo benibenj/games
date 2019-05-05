@@ -42,8 +42,6 @@ public class Main {
 		sessionManager = new DatabaseSessionManager <User> (database, MAX_SESSION_AGE, User::new);
 		server = new Server(PORT, new File("public"), responder, sessionManager);
 		
-		initializeRoutes(server, responder, database);
-		
 		new UserManager(server, responder, database, mailer, predefined, 
 			(User user) -> {
 				Player player = new Player(user.getUsername());
@@ -56,6 +54,8 @@ public class Main {
 				}
 			}
 		);
+		
+		initializeRoutes(server, responder, database);
 		
 		// Delete all expired score requests
 		Timer timer = new Timer();
