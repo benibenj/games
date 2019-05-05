@@ -34,6 +34,8 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		predefined = new HashMap <String, Object> ();
+		predefined.put("url", "http://we.serve.games");
+		
 		database = new Database();
 		mailer = new Mailer(new File("views/mail"));
 		responder = new RenderResponder(new File("views/web"), predefined);
