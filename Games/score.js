@@ -21,19 +21,21 @@ HOW TO USE
 
 // Submits the score (integer) to the specified game (string), executes
 // action (function) if the submission was successful
-function submitScore(score, game, action) {
+function submitScore(score, game, action, error) {
     getAjax("/scoreboard/request", function(request) {
-        console.log(request);
-        let object = JSON.parse(request);
-        let value = parseInt(score) * parseInt(object.y) + parseInt(object.z);
-        console.log(value);
-        postAjax("/scoreboard/submit", {
-            "key": object.x,
-            "value": value,
-            "game": game
-        }, function(submit){
-            action(submit);
-        });
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = parseInt(score) * parseInt(object.y) + parseInt(object.z);
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
     });
 }
 
