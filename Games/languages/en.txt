@@ -34,7 +34,7 @@ Account
 Change Email
 Back
 Change Password
-You forgot your password? Recover your account <a href="/recover">here</a>.
+You forgot your password? <br>Recover your account <a href="/recover">here</a>.
 You are currently signed in as {{print htmlencode get "username" variables}}.
 You are new? Sign up <a href="/signup">here</a> to play now!
 Recover Account

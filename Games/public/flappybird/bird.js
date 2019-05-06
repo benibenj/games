@@ -18,11 +18,6 @@ function Bird(){
 		this.velocity *= 0.9; 						// Air resistence
 		this.y += this.velocity;
 
-		if (this.y > height - this.size) {
-			this.y = height - this.size;
-			this.velocity = 0;
-		}
-
 		if (this.y < 0) {
 			this.y = 0;
 			this.velocity = 0;
@@ -34,4 +29,7 @@ function Bird(){
 		this.gravity = 0.3;
 	}
 
+	this.fallout = function(){
+		return (this.y > height);
+	}
 }

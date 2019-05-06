@@ -109,6 +109,9 @@ public class Main {
 		server.on("GET", "/games/flappybird", (Request request) -> {
 			return responder.render("games/flappybird.html");
 		});
+		server.on("GET", "/scoreboard", (Request request) -> {
+			return responder.render("scoreboard.html");
+		});
 		
 		// Scoreboard paths
 		server.on("GET", "/scoreboard/players", (Request request) -> {

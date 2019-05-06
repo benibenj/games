@@ -50,6 +50,19 @@ main h2{
 	font-family: 'railway', sans-serif;
 }
 
+main p{
+	margin-top: 5px;
+	font-size: 16px;
+	font-family: 'railway', sans-serif;
+	line-height: 18px;
+}
+
+main a{
+	text-decoration: none;
+	font-style: italic;
+	color: #111;
+}
+
 main form{
 	margin-top: 20px;
 }

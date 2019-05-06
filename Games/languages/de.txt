@@ -34,7 +34,7 @@ Account
 E-Mail Adresse ändern
 Zurück
 Passwort ändern
-Du hast dein Passwort vergessen? Stelle deinen Account <a href="/recover">hier</a> wieder her.
+Du hast dein Passwort vergessen? <br>Stelle deinen Account <a href="/recover">hier</a> wieder her.
 Du bist derzeit als {{print htmlencode get "username" variables}} angemeldet.
 Du bist neu? Registriere dich <a href="/signup">hier</a>, um jetzt zu spielen!
 Account wiederherstellen

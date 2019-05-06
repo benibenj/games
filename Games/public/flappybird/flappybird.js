@@ -36,6 +36,10 @@ function draw(){
 			}
 		}
 
+		if (bird.fallout()) {
+			gameover = true;
+		}
+
 		// Bird drawings
 		if (started) {
 			bird.update();

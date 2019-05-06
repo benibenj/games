@@ -1,0 +1,155 @@
+{{include "top.html"}}
+<link rel="stylesheet" type="text/css" href="/css/scoreboard.css">
+<main>
+	<h2>Hall of fame</h2>
+
+	<div id="table">
+		<table id="list"></table>
+	</div>
+	
+</main>
+	<div class="list">
+		<button id="0">Hall of fame</button>
+		<button id="1">Minesweeper</button>
+		<button id="2">Flappybird</button>
+	</div>
+</body>
+</html>
+
+<script>
+
+	document.getElementById("0").style.backgroundColor = "#F3B54A";
+	hallOfFame();
+
+	// Event Listeners
+	document.getElementById("0").addEventListener("click", function(){
+		changeBackgroundColor("0");
+		hallOfFame();
+	});
+
+	document.getElementById("1").addEventListener("click", function(){
+		changeBackgroundColor("1");
+		loadGameScoreboard("minesweeper");
+	});
+
+	document.getElementById("2").addEventListener("click", function(){
+		changeBackgroundColor("2");
+		loadGameScoreboard("Flappybird");
+	});
+
+	// change backgroundcolor
+	function changeBackgroundColor(id){
+		// remove the current color
+		document.getElementById("0").style.backgroundColor = "";
+		document.getElementById("1").style.backgroundColor = "";
+		document.getElementById("2").style.backgroundColor = "";
+		// add new color
+		document.getElementById(id).style.backgroundColor = "#F3B54A";
+	}
+
+
+
+	// Tables
+	function hallOfFame(){
+		// get container
+		var container = document.getElementById("table");
+
+		loadPlayerRanking(function(fames){
+			var table = document.createElement("table");
+			table.id = "list";
+			var tr = document.createElement("tr");
+			// Table head for Username
+			var th1 = document.createElement("th");
+			th1.appendChild(document.createTextNode("Username"))
+			tr.appendChild(th1);
+			// Table head for Fame
+			var th2 = document.createElement("th");
+			th2.appendChild(document.createTextNode("Fame"))
+			tr.appendChild(th2);
+			// Add the head row to table
+			table.appendChild(tr);
+			for (var i = 0; i < fames.length; i++) {
+				// This is a table Row
+				var tr = document.createElement("tr");
+				// Table body for Username
+				var tb1 = document.createElement("td");
+				tb1.appendChild(document.createTextNode(fames[i].username))
+				tr.appendChild(tb1);
+				// Table body for Fame
+				var tb2 = document.createElement("td");
+				tb2.appendChild(document.createTextNode(fames[i].fame))
+				tr.appendChild(tb2);
+				// Add Row to table
+				table.appendChild(tr);
+			}
+			container.replaceChild(table, container.childNodes[0]);
+		});
+	}
+
+	function loadGameScoreboard(game){
+		// get container
+		var container = document.getElementById("table");
+
+		loadGameRanking(game, function(scores){
+			var table = document.createElement("table");
+			table.id = "list";
+			var tr = document.createElement("tr");
+			// Table head for Username
+			var th1 = document.createElement("th");
+			th1.appendChild(document.createTextNode("Username"));
+			tr.appendChild(th1);
+			// Table head for Score
+			var th2 = document.createElement("th");
+			th2.appendChild(document.createTextNode("Score"));
+			tr.appendChild(th2);
+			// Add the head row to table
+			table.appendChild(tr);
+			for (var i = 0; i < scores.length; i++) {
+				// This is a table Row
+				var tr = document.createElement("tr");
+				// Table body for Username
+				var tb1 = document.createElement("td");
+				tb1.appendChild(document.createTextNode(scores[i].username));
+				tr.appendChild(tb1);
+				// Table body for Score
+				var tb2 = document.createElement("td");
+				tb2.appendChild(document.createTextNode(scores[i].score));
+				tr.appendChild(tb2);
+				// Add Row to table
+				table.appendChild(tr);
+			}
+			container.replaceChild(table, container.childNodes[0]);
+		});
+	}
+
+	function loadMyScores(action) {
+	    getAjax("/scoreboard/self", function(text){
+	        action(JSON.parse(text));
+	    });
+	}
+
+    function loadGameRanking(game, action) {
+	    getAjax("/scoreboard/games?game=" + game, function(text){
+	        action(JSON.parse(text));
+	    });
+	}
+
+	function loadPlayerRanking(action) {
+	    getAjax("/scoreboard/players", function(text){
+	        action(JSON.parse(text));
+	    });
+	}
+
+	function getAjax(url, success) {
+	    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+	    xhr.open('GET', url);
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
+	    };
+	    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+	    xhr.send();
+	    return xhr;
+	}
+
+</script>
+

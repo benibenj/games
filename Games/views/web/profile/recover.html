@@ -1,12 +1,12 @@
 {{include "top.html"}}
+<link rel="stylesheet" type="text/css" href="/css/error-delete.css">
+<main>
 	<form action="/recover" method="POST">
 		<h1>{{print translate "recover-account"}}</h1>
-		<div>
-			<label for="username">{{print translate "username"}}</label>
-			<input type="text" name="username" id="username"/>
-		</div>
-		<input type="submit" value="{{print translate "submit"}}"/>
+		<input type="text" name="username" id="username" placeholder="{{print translate "username"}}"/>
+		<button type="submit">{{print translate "submit"}}</button>
 		{{include "messages.html"}}
 	</form>
+</main>
 {{include "bottom.html"}}
 

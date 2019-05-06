@@ -2,7 +2,7 @@ var grid;
 var size;
 var w;
 var canvasSize = 551;
-var amountMines = 17;
+var amountMines = 1;
 var flag;
 var starttime;
 var gametime;
@@ -151,7 +151,7 @@ function gameWin(){
 	win = true;
 	// calculating the game time
 	var endtime = new Date().getTime();
-	var time = floor((endtime - starttime)/1000);
+	var time = floor((endtime - starttime)/1000.0);
 	var min = floor(time/60);
 	var sec = floor(time%60);
 	if (min == 0) {
@@ -160,11 +160,11 @@ function gameWin(){
 	else{
 		gametime = min + "min " + sec + "s";
 	}
-	// Submitting the Score as Time the Player needed in seconds
-	submitScore(time, "minesweeper", function() {
-        loadMyScores(function(array){alert("My Scores: " + JSON.stringify(array));}); 
-	    loadGameRanking("minesweeper", function(array){alert("Game Ranking: " + JSON.stringify(array));});
-	    loadPlayerRanking(function(array){alert("Player Ranking: " + JSON.stringify(array));});
+	// Submitting the Score
+	var score = Math.floor(1000000.0/Math.sqrt((endtime - starttime)/1000.0+1.0));
+	submitScore(score, "minesweeper", function() {
+		alert("Score: "+score);
+        
     });
 	
 }
