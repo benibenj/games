@@ -39,6 +39,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	}
 	
 	public Score addScore(int value, String game) {
+		
 		Score newScore = new Score(this, value, game);
 		database.save(newScore);
 		
