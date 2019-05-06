@@ -52,3 +52,4 @@ Enable<br>Notifications
 Disable<br>Notifications
 Home
 Hello
+<h2>Fame Points</h2><br>Fame points are awarded to the player by placing himself in the top 3 places of the game rankings. He receives the points per minute for each game: <br>1st Place - 3 Fame Points <br>2nd Place - 2 Fame Points <br>3rd Place - 1 Fame Points

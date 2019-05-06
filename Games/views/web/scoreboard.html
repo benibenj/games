@@ -7,7 +7,9 @@
 		<table id="list"></table> <!-- Gets replaced -->
 	</div>
 
-	<div id="text"></div> <!-- If Scoreboard wants to give extra info text -->
+	<div class="text" id="text">
+		{{print translate "hallOfFame"}}
+	</div> <!-- If Scoreboard wants to give extra info text -->
 	
 </main>
 	<div class="list">
@@ -21,24 +23,27 @@
 <script>
 
 	document.getElementById("0").style.backgroundColor = "#F3B54A";
+	document.getElementById("text").innerHTML = "{{print translate "hallOfFame"}}";
 	hallOfFame();
 
 	// Event Listeners
 	document.getElementById("0").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Hall of Fame";
-		document.getElementById("text").innerHTML = "{{print translate "hello"}}";
+		document.getElementById("text").innerHTML = "{{print translate "hallOfFame"}}";
 		changeBackgroundColor("0");
 		hallOfFame();
 	});
 
 	document.getElementById("1").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Minesweeper";
+		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("1");
 		loadGameScoreboard("minesweeper");
 	});
 
 	document.getElementById("2").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Flappybird";
+		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("2");
 		loadGameScoreboard("flappybird");
 	});

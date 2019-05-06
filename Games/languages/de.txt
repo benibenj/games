@@ -52,3 +52,4 @@ Benachrichtigungen<br>aktivieren
 Benachrichtigungen<br>deaktivieren
 Home
 Hallo
+<h2>Fame Punkte</h2>Fame Punkte erhält der Spieler indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Die Punkte erhält er pro Minute jeweils für jedes Spiel:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkte
