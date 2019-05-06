@@ -5,5 +5,4 @@
 * Translations
 * Add Game Flappy Bird
 * Logo and Favicon
-* clean up main method
-* Add recover account
+* Dayly challenges
