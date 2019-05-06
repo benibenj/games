@@ -45,7 +45,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		final Player self = this;
 		LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
 			Score score = (Score) objectTemplate;
-			return score.getPlayer().equals(self);
+			return score.getPlayer().equals(self) && score.getGame().equals(game);
 		});
 		Score bestScore = null;
 		for(ObjectTemplate objectTemplate : objectTemplates) {
@@ -57,7 +57,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		final Score finalBestScore = bestScore;
 		database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
 			Score score = (Score) objectTemplate;
-			return !score.equals(finalBestScore);
+			return !score.equals(finalBestScore) && score.getPlayer().equals(self) && score.getGame().equals(game);
 		});
 		
 		return (Score) database.loadAll(Score.class).get(0);

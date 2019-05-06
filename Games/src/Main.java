@@ -140,7 +140,7 @@ public class Main {
 				Score score = (Score) objectTemplate;
 				return score.getGame().equals(game);
 			});
-			
+
 			ArrayList <Score> scores = new ArrayList <Score> ();
 			for(ObjectTemplate objectTemplate : objectTemplates) {
 				scores.add((Score) objectTemplate);

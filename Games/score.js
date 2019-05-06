@@ -57,7 +57,6 @@ function loadGameRanking(game, action) {
 
 // Load the ranking of all players into an array and executes
 // the specified function with this array
-// Example: loadPlayerRanking(function(array){alert(array[0].username);});
 function loadPlayerRanking(action) {
     getAjax("/scoreboard/players", function(text){
         action(JSON.parse(text));
