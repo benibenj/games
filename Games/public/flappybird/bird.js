@@ -1,10 +1,11 @@
 function Bird(){
 	this.y = height/2;
 	this.x = 25;
-	this.size = 50;
+	this.size = 40;
 
-	this.gravity = 0.7;
-	this.lift = -15;
+	this.acceleration = 0.04;
+	this.gravity = 0.5;
+	this.lift = -22;
 	this.velocity = 0;
 
 	this.show = function(){
@@ -12,6 +13,7 @@ function Bird(){
 	}
 
 	this.update = function(){
+		this.gravity += this.acceleration;
 		this.velocity += this.gravity;
 		this.velocity *= 0.9; 						// Air resistence
 		this.y += this.velocity;
@@ -29,6 +31,7 @@ function Bird(){
 
 	this.up = function(){
 		this.velocity += this.lift;
+		this.gravity = 0.3;
 	}
 
 }
