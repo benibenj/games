@@ -1,7 +1,7 @@
 {{include "top.html"}}
 <link rel="stylesheet" type="text/css" href="/css/scoreboard.css">
 <main>
-	<h2>Hall of fame</h2>
+	<h2 id="title">Hall of fame</h2>
 
 	<div id="table">
 		<table id="list"></table>
@@ -23,16 +23,19 @@
 
 	// Event Listeners
 	document.getElementById("0").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Hall of Fame";
 		changeBackgroundColor("0");
 		hallOfFame();
 	});
 
 	document.getElementById("1").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Minesweeper";
 		changeBackgroundColor("1");
 		loadGameScoreboard("minesweeper");
 	});
 
 	document.getElementById("2").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Flappybird";
 		changeBackgroundColor("2");
 		loadGameScoreboard("Flappybird");
 	});

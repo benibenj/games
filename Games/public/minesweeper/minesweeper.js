@@ -2,7 +2,7 @@ var grid;
 var size;
 var w;
 var canvasSize = 551;
-var amountMines = 1;
+var amountMines = 17;
 var flag;
 var starttime;
 var gametime;
@@ -162,11 +162,7 @@ function gameWin(){
 	}
 	// Submitting the Score
 	var score = Math.floor(1000000.0/Math.sqrt((endtime - starttime)/1000.0+1.0));
-	submitScore(score, "minesweeper", function() {
-		alert("Score: "+score);
-        
-    });
-	
+	submitScore(score, "minesweeper", function(){});
 }
 
 
