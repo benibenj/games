@@ -116,8 +116,8 @@ function mousePressed(){
 		}
 		else{
 			firstKey = true;
-		}
-		started = true;*/
+		}*/
+		started = true;
 	}
 	else{
 		if(mouseX > width/4 && mouseX < width*3/4){
