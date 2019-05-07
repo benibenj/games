@@ -70,8 +70,11 @@
 
 		loadPlayerRanking(function(fames){
 			var table = document.createElement("table");
-			table.id = "list";
 			var tr = document.createElement("tr");
+			// Table head for Rank number
+			var th0 = document.createElement("th");
+			th0.appendChild(document.createTextNode(""));
+			tr.appendChild(th0);
 			// Table head for Username
 			var th1 = document.createElement("th");
 			th1.appendChild(document.createTextNode("Username"))
@@ -82,16 +85,20 @@
 			tr.appendChild(th2);
 			// Add the head row to table
 			table.appendChild(tr);
-			for (var i = 0; i < fames.length; i++) {
+			for (let i = 0; i < fames.length; i++) {
 				// This is a table Row
 				var tr = document.createElement("tr");
+				// Table for Rank number
+				var tb0 = document.createElement("td");
+				tb0.appendChild(document.createTextNode(i+1));
+				tr.appendChild(tb0);
 				// Table body for Username
 				var tb1 = document.createElement("td");
-				tb1.appendChild(document.createTextNode(fames[i].username))
+				tb1.appendChild(document.createTextNode(fames[i].username));
 				tr.appendChild(tb1);
 				// Table body for Fame
 				var tb2 = document.createElement("td");
-				tb2.appendChild(document.createTextNode(fames[i].fame))
+				tb2.appendChild(document.createTextNode(fames[i].fame));
 				tr.appendChild(tb2);
 				// Add Row to table
 				table.appendChild(tr);
@@ -106,8 +113,12 @@
 
 		loadGameRanking(game, function(scores){
 			var table = document.createElement("table");
-			table.id = "list";
+
 			var tr = document.createElement("tr");
+			// Table head for Rank number
+			var th0 = document.createElement("th");
+			th0.appendChild(document.createTextNode(""));
+			tr.appendChild(th0);
 			// Table head for Username
 			var th1 = document.createElement("th");
 			th1.appendChild(document.createTextNode("Username"));
@@ -118,9 +129,13 @@
 			tr.appendChild(th2);
 			// Add the head row to table
 			table.appendChild(tr);
-			for (var i = 0; i < scores.length; i++) {
+			for (let i = 0; i < scores.length; i++) {
 				// This is a table Row
 				var tr = document.createElement("tr");
+				// Table for Rank number
+				var tb0 = document.createElement("td");
+				tb0.appendChild(document.createTextNode(i+1));
+				tr.appendChild(tb0);
 				// Table body for Username
 				var tb1 = document.createElement("td");
 				tb1.appendChild(document.createTextNode(scores[i].username));
