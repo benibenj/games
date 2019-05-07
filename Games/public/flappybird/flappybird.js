@@ -95,9 +95,18 @@ function keyPressed(){
 	}
 }
 
+var firstKey = true;
 function mousePressed(){
 	if (!gameover) {
-
+		// A Touch gives to clicks, to avoid this, we register every second touch
+		if (firstKey) {
+			bird.up();
+			firstKey = false;
+		}
+		else{
+			firstKey = true;
+		}
+		started = true;
 	}
 	else{
 		if(mouseX > width/4 && mouseX < width*3/4){
@@ -115,8 +124,7 @@ function preload(){
 function gameOver(){
 	gameover = true;
 	// Submitting the Score
-	var points = Math.floor(1000000.0/Math.sqrt((score)/1000.0+1.0));
-	submitScore(points, "minesweeper", function(){});
+	submitScore(score, "flappybird", function(){}, function(){});
 }
 
 

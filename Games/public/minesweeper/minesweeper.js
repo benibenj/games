@@ -162,7 +162,7 @@ function gameWin(){
 	}
 	// Submitting the Score
 	var score = Math.floor(1000000.0/Math.sqrt((endtime - starttime)/1000.0+1.0));
-	submitScore(score, "minesweeper", function(){});
+	submitScore(score, "minesweeper", function(){}, function(){});
 }
 
 
