@@ -1,3 +1,4 @@
+var can;
 var bird;
 var pipes;
 var score;
@@ -5,7 +6,12 @@ var started;
 var gameover;
 
 function setup(){
-	createCanvas(400, 590);
+	if (screen.width < 400) {
+		createCanvas(screen.width, screen.width * 3/2);
+	}else{
+		createCanvas(400, 600);
+	}
+	
 	started = false;
 	gameover = false;
 	score = 0;
@@ -14,6 +20,7 @@ function setup(){
 }
 
 function draw(){
+
 	if (!gameover) {
 		background(color("#b9e2f5"));
 		
@@ -93,6 +100,9 @@ function keyPressed(){
 		bird.up();
 		started = true;
 	}
+	if (keyCode === ENTER && gameover) {
+		setup();
+	}
 }
 
 var firstKey = true;
@@ -118,7 +128,9 @@ function mousePressed(){
 }
 
 function preload(){
-  	birdimg = loadImage('/img/bird.svg');
+  	birdimg = loadImage('/img/bird.png');
+  	pipebottom = loadImage('/img/Pipebottom.svg');
+  	pipetop = loadImage('/img/Pipetop.svg');
 }
 
 function gameOver(){

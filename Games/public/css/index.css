@@ -18,13 +18,14 @@ main{
 	width: 80%;
 	margin: 20px 10%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 
 main .container{
 	width: 300px;
 	height: 150px;
-	margin-top: 10px;
+	margin: 20px;
 	background-color: #fff;
 	overflow: hidden;
 	border-radius: 5px;
@@ -49,4 +50,16 @@ main .container .pic img{
 	left: 50%;
 	transform: translate(-50%, -50%);
 	height: 100.5%;
+}
+
+
+@media (max-width: 700px){
+	main .container{
+		width: 200px;
+		height: 100px;
+	}
+}
+
+@media (max-width: 500px){
+	
 }
