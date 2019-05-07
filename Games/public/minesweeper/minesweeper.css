@@ -42,3 +42,9 @@ canvas{
 	background-color: var(--dark);
 	color: var(--light);
 }
+
+@media (max-width: 662px){
+	canvas{
+		margin-left: 10px;
+	}
+}

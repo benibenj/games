@@ -15,6 +15,9 @@ function setup(){
 	win = false;
 	start = false;
 	// Calculate the sizes
+	if (screen.width < canvasSize * 1.2) {
+		canvasSize = screen.width / 1.2 - 10;
+	}
 	w = floor((canvasSize-1)/10);
 	let canvas = createCanvas(canvasSize*1.2, canvasSize);
 	canvas.id("canvas");
