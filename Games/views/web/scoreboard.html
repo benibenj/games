@@ -8,7 +8,7 @@
 </div>
 
 <main>
-	<h2 id="title">Hall of fame</h2>
+	<h2 id="title">Hall of Fame</h2>
 
 	<div id="table">
 		<table id="list"></table> <!-- Gets replaced -->
@@ -73,7 +73,7 @@
 			var tr = document.createElement("tr");
 			// Table head for Rank number
 			var th0 = document.createElement("th");
-			th0.appendChild(document.createTextNode(""));
+			th0.appendChild(document.createTextNode("Rank"));
 			tr.appendChild(th0);
 			// Table head for Username
 			var th1 = document.createElement("th");
@@ -88,6 +88,7 @@
 			for (let i = 0; i < fames.length; i++) {
 				// This is a table Row
 				var tr = document.createElement("tr");
+				tr.id = (i % 2 == 0) ? "even":"uneven";
 				// Table for Rank number
 				var tb0 = document.createElement("td");
 				tb0.appendChild(document.createTextNode(i+1));
@@ -117,7 +118,7 @@
 			var tr = document.createElement("tr");
 			// Table head for Rank number
 			var th0 = document.createElement("th");
-			th0.appendChild(document.createTextNode(""));
+			th0.appendChild(document.createTextNode("Rank"));
 			tr.appendChild(th0);
 			// Table head for Username
 			var th1 = document.createElement("th");
@@ -132,6 +133,7 @@
 			for (let i = 0; i < scores.length; i++) {
 				// This is a table Row
 				var tr = document.createElement("tr");
+				tr.id = (i % 2 == 0) ? "even":"uneven";
 				// Table for Rank number
 				var tb0 = document.createElement("td");
 				tb0.appendChild(document.createTextNode(i+1));

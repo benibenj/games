@@ -20,16 +20,37 @@ main h2{
 table{
 	min-width: 90%;
 	margin: 30px 5%;
+	text-align: left;
 }
 
-td, th{
+table tr:first-child th:first-child {
+    border-top-left-radius: 5px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 5px;
+}
+
+tr{
+	line-height: 40px;
+}
+
+tr[id="uneven"]{
+	background-color: #f1f1f1;
+}
+
+th{
 	font-size: 18px;
 	font-family: 'railway', sans-serif;
-	line-height: 28px;
+	background-color: #222;
+	color: #fff;
+	padding-left: 30px; 
 }
 
-table, tr, td, th{
-	border: 2px solid black;
+td{
+	font-size: 18px;
+	font-family: 'railway', sans-serif;
+	padding-left: 30px;
 }
 
 main .text{
@@ -93,5 +114,15 @@ main .text h2{
 }
 
 @media (max-width: 500px){
+	main{
+		padding: 40px 2%;
+	}
 
+	th{
+		padding-left: 15px;
+	}
+
+	td{
+		padding-left: 15px;
+	}
 }
