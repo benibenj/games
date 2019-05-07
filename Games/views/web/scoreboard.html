@@ -91,7 +91,14 @@
 				tr.id = (i % 2 == 0) ? "even":"uneven";
 				// Table for Rank number
 				var tb0 = document.createElement("td");
-				tb0.appendChild(document.createTextNode(i+1));
+				if (i == 0) {
+					img = document.createElement("img");
+					img.src = "/img/crown.svg";
+					tb0.appendChild(img);
+					tb0.id = "crown";
+				}else{
+					tb0.appendChild(document.createTextNode(i+1));
+				}
 				tr.appendChild(tb0);
 				// Table body for Username
 				var tb1 = document.createElement("td");
@@ -136,7 +143,14 @@
 				tr.id = (i % 2 == 0) ? "even":"uneven";
 				// Table for Rank number
 				var tb0 = document.createElement("td");
-				tb0.appendChild(document.createTextNode(i+1));
+				if (i == 0) {
+					img = document.createElement("img");
+					img.src = "/img/crown.svg";
+					tb0.appendChild(img);
+					tb0.id = "crown";
+				}else{
+					tb0.appendChild(document.createTextNode(i+1));
+				}
 				tr.appendChild(tb0);
 				// Table body for Username
 				var tb1 = document.createElement("td");
