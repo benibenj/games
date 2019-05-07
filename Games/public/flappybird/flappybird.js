@@ -108,7 +108,8 @@ function keyPressed(){
 var firstKey = true;
 function mousePressed(){
 	if (!gameover) {
-		// A Touch gives to clicks, to avoid this, we register every second touch
+		bird.up();
+		/* A Touch gives to clicks, to avoid this, we register every second touch
 		if (firstKey) {
 			bird.up();
 			firstKey = false;
@@ -116,7 +117,7 @@ function mousePressed(){
 		else{
 			firstKey = true;
 		}
-		started = true;
+		started = true;*/
 	}
 	else{
 		if(mouseX > width/4 && mouseX < width*3/4){
