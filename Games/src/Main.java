@@ -99,7 +99,7 @@ public class Main {
 	
 	private static void initializeRoutes(Server server, RenderResponder responder, Database database) {
 		
-		// Game paths
+		// Game paths 
 		server.on("GET", "/", (Request request) -> {
 			return responder.render("index.html");
 		});
