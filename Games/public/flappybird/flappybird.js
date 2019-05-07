@@ -26,7 +26,7 @@ function draw(){
 
 
 			if (pipes[i].hits(bird)) {
-				gameover = true;
+				gameOver();
 			}
 
 			// Remove pipe from array and increase score when pipe is off the screen
@@ -54,7 +54,6 @@ function draw(){
 		text(score, width*0.5, height*0.2);
 
 		// Create Pipes all 100 Frames
-
 		if (frameCount % 100 == 0 && started) {
 			pipes.push(new Pipe());
 		}
@@ -62,6 +61,7 @@ function draw(){
 	else{
 		background(color("#dcf0fa"));
 		fill(color("#50b8e7"));
+
 		// Draw Text
 		textAlign(CENTER);
 		strokeWeight(0);
@@ -74,6 +74,17 @@ function draw(){
 		textSize(80);
 		text(score, width*0.5, height*0.35);
 
+		// Draw new Game option
+		fill(color("#fff"));
+		rect(width/4, height*0.5, width/2, 70);
+
+		// Draw text for new Game
+		fill(color("#50b8e7"));
+		textAlign(CENTER);
+		strokeWeight(0);
+		textSize(30);
+		text("New Game", width*0.5, height*0.5 + 45);		
+
 	}
 }
 
@@ -84,6 +95,78 @@ function keyPressed(){
 	}
 }
 
+function mousePressed(){
+	if (!gameover) {
+
+	}
+	else{
+		if(mouseX > width/4 && mouseX < width*3/4){
+			if (mouseY > height*0.5 && mouseY < height*0.5 + 70) {
+				setup();
+			}
+		}
+	}
+}
+
 function preload(){
   	birdimg = loadImage('/img/bird.svg');
+}
+
+function gameOver(){
+	gameover = true;
+	// Submitting the Score
+	var points = Math.floor(1000000.0/Math.sqrt((score)/1000.0+1.0));
+	submitScore(points, "minesweeper", function(){});
+}
+
+
+
+
+
+// Scoreboard Stuff
+
+function submitScore(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = parseInt(score) * parseInt(object.y) + parseInt(object.z);
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+
+// From https://plainjs.com/javascript/ajax/send-ajax-get-and-post-requests-47/
+function postAjax(url, data, success) {
+    var params = typeof data == 'string' ? data : Object.keys(data).map(
+            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
+
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+    return xhr;
+}
+
+function getAjax(url, success) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.send();
+    return xhr;
 }
