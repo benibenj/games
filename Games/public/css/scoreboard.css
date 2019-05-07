@@ -53,6 +53,17 @@ td{
 	padding-left: 30px;
 }
 
+td[id="crown"]{
+	position: relative;
+}
+
+td[id="crown"] img{
+	position: absolute;
+	top: 7px;
+	left: 22px;
+	width: 26px;
+}
+
 main .text{
 	font-size: 16px;
 	font-family: 'railway', sans-serif;
@@ -124,5 +135,9 @@ main .text h2{
 
 	td{
 		padding-left: 15px;
+	}
+
+	td[id="crown"] img{
+		left: 8px;
 	}
 }
