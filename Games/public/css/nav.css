@@ -52,6 +52,7 @@ nav a.nav-links h2{
 	font-size: 1.4em;
 	padding-left: 15%;
 	margin: 0;
+	word-break: break-all;
 }
 
 nav .line{
