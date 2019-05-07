@@ -124,8 +124,7 @@ function preload(){
 function gameOver(){
 	gameover = true;
 	// Submitting the Score
-	var points = Math.floor(1000000.0/Math.sqrt((score)/1000.0+1.0));
-	submitScore(points, "flappybird", function(){}, function(){});
+	submitScore(score, "flappybird", function(){}, function(){});
 }
 
 
