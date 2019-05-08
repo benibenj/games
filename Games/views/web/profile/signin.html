@@ -6,22 +6,22 @@
 		<div class="panel">
 			<a href="/signup">
 				<div class="unit" id="signup" style="background-color: #fff; color: var(--orange);">
-					Sign up
+					{{print translate "signup"}}
 				</div>
 			</a>
 			<a>
 				<div class="unit" id="login" style="background-color: var(--orange); color: #fff;">
-					Sign in
+					{{print translate "login"}}
 				</div>
 			</a>	
 		</div>
 
-		<h2>Sign in</h2>
+		<h2>{{print translate "login"}}</h2>
 		{{include "messages.html"}}
 		<form action="/signin" method="POST">
-			<input type="text" name="username" placeholder="Username"><br>
-			<input type="password" name="password" placeholder="Password"><br>
-			<button type="submit">Login</button>
+			<input type="text" name="username" placeholder="{{print translate "username"}}"><br>
+			<input type="password" name="password" placeholder="{{print translate "password"}}"><br>
+			<button type="submit">{{print translate "login"}}</button>
 		</form>
 		<p>{{print translate "forgot-password"}}</p>
 	</main>
