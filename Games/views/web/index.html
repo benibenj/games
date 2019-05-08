@@ -4,7 +4,7 @@
 <h1>We Serve Games!</h1>
 
 <main>
-	<div class="container" onclick="location.href='/games/minesweeper';">
+	<div class="container"  id="container" onclick="location.href='/games/minesweeper';">
 		<div class="pic">
 			<img src="img/minesweeper.jpg">
 		</div>
@@ -12,7 +12,8 @@
 			
 		</div>
 	</div>
-	<div class="container" onclick="location.href='/games/flappybird';">
+	<div class="spacer" id="spacer"></div>
+	<div class="container" id="container" onclick="location.href='/games/flappybird';">
 		<div class="pic">
 			<img src="img/flappybird.png">
 		</div>
@@ -21,4 +22,9 @@
 		</div>
 	</div>
 </main>
+<div class="js-cursor-container"></div>
+
+
 {{include "bottom.html"}}
+<script type="text/javascript" src="/js/mouseeffect.js"></script>
+
