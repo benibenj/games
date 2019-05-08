@@ -17,6 +17,7 @@ function setup(){
 	score = 0;
 	bird = new Bird();
 	pipes = new Array();
+	lastclick = Date.now();
 }
 
 function draw(){
@@ -105,10 +106,14 @@ function keyPressed(){
 	}
 }
 
+var lastclick = 0;
 function mousePressed(){
-	if (!gameover) {
-		bird.up();
-		started = true;
+	if (!gameover && lastclick + 200 < Date.now()) {
+		if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
+			lastclick = Date.now();
+			bird.up();
+			started = true;
+		}
 	}
 	else{
 		if(mouseX > width/4 && mouseX < width*3/4){
