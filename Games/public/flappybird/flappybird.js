@@ -105,18 +105,9 @@ function keyPressed(){
 	}
 }
 
-var firstKey = true;
 function mousePressed(){
 	if (!gameover) {
 		bird.up();
-		/* A Touch gives to clicks, to avoid this, we register every second touch
-		if (firstKey) {
-			bird.up();
-			firstKey = false;
-		}
-		else{
-			firstKey = true;
-		}*/
 		started = true;
 	}
 	else{

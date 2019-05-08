@@ -45,3 +45,14 @@ canvas{
 	background-color: var(--dark);
 	color: var(--background);
 }
+
+
+@media screen and (max-height: 600px) {
+	canvas{
+		margin-top: 10px;
+	}
+
+	.title{
+		line-height: 1.5em;
+	}
+}
