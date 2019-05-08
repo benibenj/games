@@ -27,9 +27,9 @@ main .container{
 	height: 150px;
 	margin: 20px;
 	background-color: #fff;
-	overflow: hidden;
-	border-radius: 5px;
+	position: relative;
 	cursor: pointer;
+	border-radius: 5px;
 	box-shadow: 3px 3px 2px 2px rgb(0,0,0,0.2);
 }
 
@@ -37,6 +37,8 @@ main .container .pic{
 	height: 100%;
 	width: 100%;
 	position: relative;
+	overflow: hidden;
+	border-radius: 5px;
 }
 
 main .container .pic img{
@@ -45,7 +47,43 @@ main .container .pic img{
 	left: 50%;
 	transform: translate(-50%, -50%);
 	height: 100.5%;
+	z-index: 90;
 }
+
+main .container .content{
+	position: absolute;
+	bottom: 0px;
+	left: 0;
+	border-radius: 0 0 5px 5px;
+	height: 50px;
+	width: 300px;
+	z-index: 80;
+	transition: 0.5s ease-in-out;
+}
+
+main .container:hover, main .container:hover .pic{
+	border-radius: 5px 5px 0 0;
+}
+
+main .container:hover .content{
+	transform: translateY(49px); 
+	box-shadow: 3px 3px 2px 2px rgb(0,0,0,0.2);
+}
+
+main .container .content[id="minesweeper"]{
+	background-color: #652b10;
+}
+
+main .container .content[id="flappybird"]{
+	background-color: #add8e6;
+}
+
+main .container .content h2{
+	font-size: 20px;
+	font-family: 'railway', sans-serif;
+	margin-top: 15px;
+}
+
 
 @media (max-width: 700px){
 	main .container{
