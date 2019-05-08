@@ -33,7 +33,7 @@
     cursor.x = e.clientX;
     cursor.y = e.clientY;
 
-    addParticle( cursor.x, cursor.y, possibleColors[Math.floor(Math.random()*possibleColors.length)]);
+    addParticle(cursor.x, cursor.y, possibleColors[Math.floor(Math.random()*possibleColors.length)]);
   }
 
   function addParticle(x, y, color) {
@@ -67,10 +67,14 @@
   /**
    * Particles
    */
-
   function Particle() {
-
-    this.character = "*";
+    this.rand = Math.random()*300;
+    if (this.rand > 298) {
+      this.character = "BeniBenj";
+    }
+    else{
+      this.character = "*";
+    }
     this.lifeSpan = 120; //ms
     this.initialStyles ={
       "position": "fixed",
