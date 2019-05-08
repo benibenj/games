@@ -53,3 +53,18 @@ disable-notifications
 home
 hello
 hallOfFame
+new game
+username
+rank
+password
+delete-account
+logout
+change-information
+new-password
+repeat-password
+submit
+new-mail
+home
+scoreboard
+signup
+login

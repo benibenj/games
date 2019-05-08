@@ -7,8 +7,8 @@
             <h2>Mail</h2>
             {{include "messages.html"}}
             <form action="/profile/email" method="POST">
-                <input type="text" name="email" placeholder="New E-mail" value="{{print get "email" variables}}"><br>
-                <button>Submit</button>       
+                <input type="text" name="email" placeholder="{{print translate "new-mail"}}" value="{{print get "email" variables}}"><br>
+                <button>{{print translate "submit"}}</button>       
             </form>
         </div>
     </main>

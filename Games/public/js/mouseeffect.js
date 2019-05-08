@@ -68,9 +68,12 @@
    * Particles
    */
   function Particle() {
-    this.rand = Math.random()*300;
-    if (this.rand > 298) {
+    this.rand = Math.random()*1000;
+    if (this.rand > 990) {
       this.character = "BeniBenj";
+    }
+    else if (this.rand > 995) {
+      this.character = "Fäli";
     }
     else{
       this.character = "*";
