@@ -49,11 +49,10 @@ canvas{
 
 @media screen and (max-height: 700px) {
 	canvas{
-		margin-top: 5px;
+		margin-top: 10px;
 	}
 
 	.title{
-		line-height: 1.2em;
-		font-size: 2em;
+		display: none;
 	}
 }
