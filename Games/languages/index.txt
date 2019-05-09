@@ -68,3 +68,4 @@ home
 scoreboard
 signup
 login
+profile

@@ -66,5 +66,6 @@ Senden
 Neue E-mail
 Startseite
 Rangliste
-Regestrieren
+Registrieren
 Einloggen
+Profil

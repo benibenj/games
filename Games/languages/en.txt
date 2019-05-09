@@ -68,3 +68,4 @@ Home
 Scoreboard
 Sign up
 Sign in
+Profile
