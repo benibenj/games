@@ -19,17 +19,21 @@ function Slider(){
 		}
 		if (this.x < 0) {
 			this.x = 0
+			this.left = false;
 		}
 		else if (this.x > width-this.w) {
 			this.x = width-this.w;
+			this.right = false;
 		}
 	}
 
 	this.lefton = function(){
+		this.right = false;
 		this.left = true;
 	}
 
 	this.righton = function(){
+		this.left = false;
 		this.right = true;
 	}
 
