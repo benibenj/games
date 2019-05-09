@@ -25,7 +25,7 @@ main{
 main .container{
 	width: 300px;
 	height: 150px;
-	margin: 20px;
+	margin: 35px 20px;
 	background-color: #fff;
 	position: relative;
 	cursor: pointer;
