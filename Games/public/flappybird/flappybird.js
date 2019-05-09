@@ -1,474 +1,402 @@
-var Hpi7;
-var DEnr;
-var TVuH;
-var lkQx;
-var UB8d;
-var efQA;
+var TBfV;
+var PqMx;
+var jiro;
+var HGwp;
+var Z6G4;
+var jaC5;
+var qtfq=0.5567657;
+function wA4F(){
+}
 function setup(){
 if(screen.width<400){
 createCanvas(screen.width,screen.width*3/2);
 }else{
 createCanvas(400,600);
 }
-UB8d=false;
-efQA=false;
-lkQx=0;
-DEnr=new RvjQ();
-TVuH=new Array();
-kP6g=Date.now();
+Z6G4=false;
+function YOo0(as1P,PPwY,ydM7){
+var tPo4=2054589254;
+function T6wl(t4sX){
+}function I3lK(GLPD){
+}}var nS9X=true;
+function DoWT(i9IU){
+}var HwaL=ydM7+nS9X;
+as1P=nS9X+PPwY;
+function Bk04(){
+var GZYF=as1P+as1P;
+GZYF=i9IU+as1P;
+function sq3a(zSK4,aJZL){
+}}
+jaC5=false;
+HGwp=0;
+PqMx=new vaHB();
+jiro=new Array();
+aoyU=Date.now();
 }
 function draw(){
-if(!efQA){
+if(!jaC5){
 background(color("#b9e2f5"));
-for(let JiW9=TVuH.length-1;
-JiW9>=0;
-JiW9--){
-TVuH[JiW9].FDEy();
-if(UB8d){
-TVuH[JiW9].Lh5u();
-}
-if(TVuH[JiW9].sZOe(DEnr)){
-iNKL();
-}
-if(TVuH[JiW9].XUJc()){
-TVuH.splice(JiW9,1);
-lkQx+=1;
+for(let a6eH=jiro.length-1;
+a6eH>=0;
+a6eH--){
+jiro[a6eH].AFUm();
+if(Z6G4){
+jiro[a6eH].dMuE();
+var qnZK=qnZK+qnZK;
+qnZK=qnZK+qnZK;
+function lqDG(QFnp){
 }
 }
-if(DEnr.ZfBj()){
-efQA=true;
+if(jiro[a6eH].dKXa(PqMx)){
+DE2Q();
 }
-if(UB8d){
-DEnr.Lh5u();
+if(jiro[a6eH].r9WF()){
+jiro.splice(a6eH,1);
+HGwp+=1;
+function zgBX(a5jv,NuhT){
+}function Iso1(cGTJ,XIc2){
+function xBHp(){
+}}
 }
-DEnr.FDEy();
+}
+if(PqMx.oti4()){
+jaC5=true;
+}
+if(Z6G4){
+PqMx.dMuE();
+}
+PqMx.AFUm();
+function ue0T(){
+}
 textAlign(CENTER);
+var gA3l=946858337;
+function dZGc(){
+}
 fill(color("#50b8e7"));
 strokeWeight(0);
 textSize(100);
-text(lkQx,width*0.5,height*0.2);
-if(frameCount%100==0&&UB8d){
-TVuH.push(new JEc9());
+text(HGwp,width*0.5,height*0.2);
+if(frameCount%100==0&&Z6G4){
+jiro.push(new Jwny());
+function RhMB(){
+}var CdG3=CdG3+CdG3;
+CdG3=CdG3+CdG3;
+function ueoN(tN0b,CW40){
+function nejv(y5F4){
+}var p5K7=true;
+function uWrx(fCUf){
+}}if(tN0b==tN0b){
+function szb2(lFHa){
+}}
 }
 }
 else{
 background(color("#dcf0fa"));
 fill(color("#50b8e7"));
+gqR8=gqR8+gqR8;
+function UR1s(wtAF){
+}
 textAlign(CENTER);
 strokeWeight(0);
 textSize(50);
 text("Your Score:",width*0.5,height*0.2);
 textAlign(CENTER);
 strokeWeight(0);
+function NQMz(){
+}function pkbQ(QLCr,NmY8){
+if(NmY8<=QLCr){
+function UsSY(mbaU,qLBk,Yqcd){
+}}var Nakq=QLCr;
+var Nakq=Nakq+QLCr;
+NmY8=NmY8+Nakq;
+function tciD(hliw){
+}}var HKO6=NmY8;
+var HKO6=NmY8+QLCr;
+HKO6=QLCr+HKO6;
+function rTA0(){
+}function N9aH(){
+function tGdC(YdAE){
+}}
 textSize(80);
-text(lkQx,width*0.5,height*0.35);
+var cgps=cgps;
+var cgps=cgps+cgps;
+cgps=cgps+cgps;
+function zSdW(IEPa){
+}
+text(HGwp,width*0.5,height*0.35);
+jv1R=jv1R+jv1R;
+function FzfA(M5JM){
+function VXzu(faYN){
+var lhlY=false;
+function KJ9w(AH4W,ljfC,Iqvt){
+}function Obky(){
+}}}
 fill(color("#fff"));
 rect(width/4,height*0.5,width/2,70);
 fill(color("#50b8e7"));
 textAlign(CENTER);
 strokeWeight(0);
 textSize(30);
+GWCA=GWCA+GWCA;
+function SP6u(YsMh){
+function EYJj(EcmT){
+if(GWCA!=YsMh){
+}}}
 text("New Game",width*0.5,height*0.5+45);
+function cxdO(){
+}
 }
 }
 function keyPressed(){
 if(key===' '){
-DEnr.Tmr5();
-UB8d=true;
+PqMx.bYAi();
+Z6G4=true;
 }
-if(keyCode===ENTER&&efQA){
+if(keyCode===ENTER&&jaC5){
 setup();
 }
 }
-var kP6g=0;
+var aoyU=0;
 function mousePressed(){
-if(!efQA&&kP6g+200<Date.now()){
+if(!jaC5&&aoyU+200<Date.now()){
 if(mouseX>0&&mouseX<width&&mouseY>0&&mouseY<height){
-kP6g=Date.now();
-DEnr.Tmr5();
-UB8d=true;
+aoyU=Date.now();
+var Ynso=1176300308;
+function busd(){
+}
+PqMx.bYAi();
+Z6G4=true;
+var zae0=0.053878784;
+function oPrP(){
+}function kF89(){
+function Pqw2(){
+}function hDrV(GSR3){
+}if(GSR3==GSR3){
+zae0=txDC+zae0;
+function cpmt(AnpD){
+}}if(GSR3<=GSR3){
+}}
 }
 }
 else{
 if(mouseX>width/4&&mouseX<width*3/4){
 if(mouseY>height*0.5&&mouseY<height*0.5+70){
 setup();
+var uPdg=0.9401291;
+function VhWK(){
+function PKzm(ptz5,ikp6,Uquy,GpP4){
+}}
 }
 }
 }
 }
 function preload(){
-ZSGK=loadImage('/img/bird.png');
-aKIh=loadImage('/img/Pipebottom.svg');
-tC4T=loadImage('/img/Pipetop.svg');
+Jech=loadImage('/img/bird.png');
+LhgS=LhgS+LhgS;
+function TiV0(JqGy){
+if(JqGy<LhgS){
+var zSMw=true;
+function Bb5D(SYTv,uLDf){
+}}}
+rc65=loadImage('/img/Pipebottom.svg');
+XECC=loadImage('/img/Pipetop.svg');
 }
-function iNKL(){
-efQA=true;
-Y0Wa(lkQx,"flappybird",function(){},function(){});
+function DE2Q(){
+jaC5=true;
+SISb(HGwp,"flappybird",function(){},function(){});
 }
-function Y0Wa(lkQx,game,action,error){
-W2XE("/scoreboard/request",function(request){
+function SISb(HGwp,game,action,error){
+Lrne("/scoreboard/request",function(request){
 if(request!=="error"){
-let Cznc=JSON.parse(request);
-let kCKw=parseInt(lkQx)*parseInt(Cznc.y)+parseInt(Cznc.z);
-y0Ts("/scoreboard/submit",{
-"key":Cznc.x,
-"value":kCKw,
+let pIik=JSON.parse(request);
+function HJFj(zIqr,sSUY){
+}
+let ecVo=parseInt(HGwp)*parseInt(pIik.y)+parseInt(pIik.z);
+function QdxK(){
+}
+ezH3("/scoreboard/submit",{
+"key":pIik.x,
+"value":ecVo,
 "game":game
 },function(submit){
 action(submit);
 });
+var wt4J=wt4J+wt4J;
+wt4J=wt4J+wt4J;
+function KY7j(){
+}function nu1l(){
+}
 }else{
 error();
 }
 });
 }
-function y0Ts(url,data,success){
-var g586=typeof data=='string'?data:Object.keys(data).map(
+function ezH3(url,data,success){
+var qzTs=typeof data=='string'?data:Object.keys(data).map(
 function(k){return encodeURIComponent(k)+'='+encodeURIComponent(data[k])}
 ).join('&');
-var A0sc=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
-A0sc.open('POST',url);
-A0sc.rCpF=function(){
-if(A0sc.readyState>3&&A0sc.status==200){success(A0sc.responseText);
+var wq82=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP");
+wq82.open('POST',url);
+wq82.uscI=function(){
+if(wq82.readyState>3&&wq82.status==200){success(wq82.responseText);
 }
 };
-A0sc.setRequestHeader('X-Requested-With','XMLHttpRequest');
-A0sc.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-A0sc.send(g586);
-return A0sc;
+wq82.setRequestHeader('X-Requested-With','XMLHttpRequest');
+function qUn3(gUEB,diyH,IvXs){
+function h6gG(wQ4a){
+}}
+wq82.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+var FxDI=false;
+function It18(Ds37){
+}if(Ds37<=FxDI){
+if(FxDI!=FxDI){
+}}
+wq82.send(qzTs);
+return wq82;
+function MkKY(){
 }
-function W2XE(url,success){
-var A0sc=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject('Microsoft.XMLHTTP');
-A0sc.open('GET',url);
-A0sc.rCpF=function(){
-if(A0sc.readyState>3&&A0sc.status==200)success(A0sc.responseText);
+}
+function Lrne(url,success){
+var wq82=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject('Microsoft.XMLHTTP');
+wq82.open('GET',url);
+wq82.uscI=function(){
+if(wq82.readyState>3&&wq82.status==200)success(wq82.responseText);
 };
-A0sc.setRequestHeader('X-Requested-With','XMLHttpRequest');
-A0sc.send();
-return A0sc;
+wq82.setRequestHeader('X-Requested-With','XMLHttpRequest');
+wq82.send();
+return wq82;
 }
-function RvjQ(){
+function vaHB(){
 this.y=height/2;
+kRAp=kRAp+kRAp;
+function iRz9(N2bv){
+function bB9y(IpXE){
+}function lXgU(S4EJ,UM4b,MRVy,evyw){
+}}
 this.x=25;
-this.abNb=56;
-this.Ne5a=40;
-this.BJTw=0.04;
-this.D7KR=0.5;
-this.SpJG=-22;
-this.m94w=0;
-this.FDEy=function(){
-image(ZSGK,this.x,this.y,this.abNb,this.Ne5a);
+this.wdkr=56;
+this.Aabq=40;
+this.GcZF=0.04;
+this.UUld=0.5;
+this.pW8Z=-22;
+this.X1GQ=0;
+this.AFUm=function(){
+image(Jech,this.x,this.y,this.wdkr,this.Aabq);
+function gVdb(ZQ5C,crAR){
 }
-this.Lh5u=function(){
-this.D7KR+=this.BJTw;
-this.m94w+=this.D7KR;
-this.m94w*=0.9;
-this.y+=this.m94w;
+}
+this.dMuE=function(){
+this.UUld+=this.GcZF;
+this.X1GQ+=this.UUld;
+this.X1GQ*=0.9;
+this.y+=this.X1GQ;
 if(this.y<0){
 this.y=0;
-this.m94w=0;
+this.X1GQ=0;
+var p5xL=p5xL+p5xL;
+p5xL=p5xL+p5xL;
+function pQGp(){
+}if(p5xL<=p5xL){
+var XwWU=XwWU;
+var XwWU=XwWU+XwWU;
+XwWU=p5xL+XwWU;
+function o5Qm(){
+}var sMrw=sMrw+XwWU;
+sMrw=XwWU+p5xL;
+function Xfqq(){
+}}function cRGS(Raio,lNwr){
+}p5xL=AbYj+Raio;
+function zoFf(){
+p5xL=AbYj+lNwr;
+function gfMO(){
+}}
 }
 }
-this.Tmr5=function(){
-this.m94w+=this.SpJG;
-this.D7KR=0.3;
+this.bYAi=function(){
+this.X1GQ+=this.pW8Z;
+this.UUld=0.3;
 }
-this.ZfBj=function(){
+this.oti4=function(){
 return(this.y>height);
+function ArKX(){
+var cTXy=-1448351385;
+function jYNd(){
+}cTXy=cTXy+omdG;
+function gb9W(){
+}if(cTXy<=omdG){
+omdG=SNUn+omdG;
+function CKJq(){
+var zNMu=false;
+function Mxzv(){
+}var WBLj=cTXy;
+var WBLj=zNMu+WBLj;
+WBLj=cTXy+cTXy;
+function uhSa(QFZE,x7Xm){
+}}}function tbFa(ZFRJ,XwUI,ediR){
+}}
 }
 }
-function JEc9(){
-this.Wujg=145;
-this.RsBr=random(height/2)+height/4-this.Wujg/2;
-this.glBK=height-this.RsBr-this.Wujg;
+function Jwny(){
+this.Wc01=145;
+this.twvU=random(height/2)+height/4-this.Wc01/2;
+this.MijG=height-this.twvU-this.Wc01;
+function RIQ5(HEvP,rtRz,IWxQ){
+function PCs9(GnKU){
+function YBvu(){
+}function ZDlE(EErU,v3nC){
+var xNSv=false;
+function SSP9(S88q,NV9f){
+}}}function LEYt(EV0m){
+var pyv9=HEvP;
+var pyv9=HEvP+EV0m;
+EV0m=EV0m+GnKU;
+function OD2o(jpVL,MQqy,SlRx,WaPj,hX0g,RQ93,dCAm){
+}}}
 this.x=width;
-this.abNb=40;
-this.gMs7=400;
-this.qyXn=2;
-this.FDEy=function(){
+this.wdkr=40;
+this.Wbw2=400;
+function yVFZ(PFrN,XJSU,RNkG,aIOP,Kp2f){
+if(PFrN>=aIOP){
+}if(aIOP>Kp2f){
+}var Y6HQ=true;
+function Rt5T(wlRV){
+if(Y6HQ!=XJSU){
+}function HDPq(){
+}}function dorv(){
+}}var NZHp=0.07104254;
+function Bzzk(){
+var QTj4=RNkG+Kp2f;
+QTj4=aIOP+XJSU;
+function jm74(){
+}}
+this.wPZF=2;
+var B7PB=-962405802;
+function pJc8(){
+var p5HK=0.36580127;
+function VaYs(jPJJ){
+function Sgiy(CZds){
+}}}var b8jr=B7PB;
+var b8jr=B7PB+B7PB;
+b8jr=b8jr+b8jr;
+function IOiE(){
+}
+this.AFUm=function(){
 fill(255);
-image(tC4T,this.x,this.RsBr-this.gMs7,this.abNb,this.gMs7);
-image(aKIh,this.x,height-this.glBK,this.abNb,this.gMs7);
+image(XECC,this.x,this.twvU-this.Wbw2,this.wdkr,this.Wbw2);
+image(rc65,this.x,height-this.MijG,this.wdkr,this.Wbw2);
 }
-this.Lh5u=function(){
-this.x-=this.qyXn;
+this.dMuE=function(){
+this.x-=this.wPZF;
 }
-this.sZOe=function(){
-if(DEnr.x+DEnr.abNb>this.x&&DEnr.x<this.x+this.abNb){
-if(DEnr.y<this.RsBr||DEnr.y+DEnr.Ne5a>height-this.glBK){
+this.dKXa=function(){
+if(PqMx.x+PqMx.wdkr>this.x&&PqMx.x<this.x+this.wdkr){
+if(PqMx.y<this.twvU||PqMx.y+PqMx.Aabq>height-this.MijG){
 return true;
 }
 }
 return false;
 }
-this.XUJc=function(){
-return(this.x<-this.abNb);
+this.r9WF=function(){
+return(this.x<-this.wdkr);
 }
 }
-/*
-var can;
-var bird;
-var pipes;
-var score;
-var started;
-var gameover;
-
-function setup(){
-	if (screen.width < 400) {
-		createCanvas(screen.width, screen.width * 3/2);
-	}else{
-		createCanvas(400, 600);
-	}
-	
-	started = false;
-	gameover = false;
-	score = 0;
-	bird = new Bird();
-	pipes = new Array();
-	lastclick = Date.now();
-}
-
-function draw(){
-
-	if (!gameover) {
-		background(color("#b9e2f5"));
-		
-		// Pipe checks
-		for (let i = pipes.length - 1; i >= 0; i--) {
-			pipes[i].show();
-			if (started) {
-				pipes[i].update();
-			}
-
-
-			if (pipes[i].hits(bird)) {
-				gameOver();
-			}
-
-			// Remove pipe from array and increase score when pipe is off the screen
-			if (pipes[i].offscreen()) {
-				pipes.splice(i, 1);
-				score += 1;
-			}
-		}
-
-		if (bird.fallout()) {
-			gameover = true;
-		}
-
-		// Bird drawings
-		if (started) {
-			bird.update();
-		}
-		bird.show();
-
-		// Draw Score
-		textAlign(CENTER);
-		fill(color("#50b8e7"));
-		strokeWeight(0);
-		textSize(100);
-		text(score, width*0.5, height*0.2);
-
-		// Create Pipes all 100 Frames
-		if (frameCount % 100 == 0 && started) {
-			pipes.push(new Pipe());
-		}
-	}
-	else{
-		background(color("#dcf0fa"));
-		fill(color("#50b8e7"));
-
-		// Draw Text
-		textAlign(CENTER);
-		strokeWeight(0);
-		textSize(50);
-		text("Your Score:", width*0.5, height*0.2);
-
-		// Draw Score
-		textAlign(CENTER);
-		strokeWeight(0);
-		textSize(80);
-		text(score, width*0.5, height*0.35);
-
-		// Draw new Game option
-		fill(color("#fff"));
-		rect(width/4, height*0.5, width/2, 70);
-
-		// Draw text for new Game
-		fill(color("#50b8e7"));
-		textAlign(CENTER);
-		strokeWeight(0);
-		textSize(30);
-		text("New Game", width*0.5, height*0.5 + 45);		
-
-	}
-}
-
-function keyPressed(){
-	if (key === ' ') {
-		bird.up();
-		started = true;
-	}
-	if (keyCode === ENTER && gameover) {
-		setup();
-	}
-}
-
-var lastclick = 0;
-function mousePressed(){
-	if (!gameover && lastclick + 200 < Date.now()) {
-		if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-			lastclick = Date.now();
-			bird.up();
-			started = true;
-		}
-	}
-	else{
-		if(mouseX > width/4 && mouseX < width*3/4){
-			if (mouseY > height*0.5 && mouseY < height*0.5 + 70) {
-				setup();
-			}
-		}
-	}
-}
-
-function preload(){
-  	birdimg = loadImage('/img/bird.png');
-  	pipebottom = loadImage('/img/Pipebottom.svg');
-  	pipetop = loadImage('/img/Pipetop.svg');
-}
-
-function gameOver(){
-	gameover = true;
-	// Submitting the Score
-	submitScore(score, "flappybird", function(){}, function(){});
-}
-
-
-
-
-
-// Scoreboard Stuff
-
-function submitScore(score, game, action, error) {
-    getAjax("/scoreboard/request", function(request) {
-        if(request !== "error") {
-            let object = JSON.parse(request);
-            let value = parseInt(score) * parseInt(object.y) + parseInt(object.z);
-            postAjax("/scoreboard/submit", {
-                "key": object.x,
-                "value": value,
-                "game": game
-            }, function(submit){
-                action(submit);
-            });
-        } else {
-            error();
-        }
-    });
-}
-
-// From https://plainjs.com/javascript/ajax/send-ajax-get-and-post-requests-47/
-function postAjax(url, data, success) {
-    var params = typeof data == 'string' ? data : Object.keys(data).map(
-            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
-        ).join('&');
-
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
-    xhr.open('POST', url);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
-    };
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(params);
-    return xhr;
-}
-
-function getAjax(url, success) {
-    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-    xhr.open('GET', url);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
-    };
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.send();
-    return xhr;
-}
-
-function Bird(){
-	this.y = height/2;
-	this.x = 25;
-	this.w = 56;
-	this.h = 40;
-
-	this.acceleration = 0.04;
-	this.gravity = 0.5;
-	this.lift = -22;
-	this.velocity = 0;
-
-	this.show = function(){
-		image(birdimg, this.x, this.y, this.w, this.h);
-	}
-
-	this.update = function(){
-		this.gravity += this.acceleration;
-		this.velocity += this.gravity;
-		this.velocity *= 0.9; 						// Air resistence
-		this.y += this.velocity;
-
-		if (this.y < 0) {
-			this.y = 0;
-			this.velocity = 0;
-		}
-	}
-
-	this.up = function(){
-		this.velocity += this.lift;
-		this.gravity = 0.3;
-	}
-
-	this.fallout = function(){
-		return (this.y > height);
-	}
-}
-
-
-function Pipe(){
-	this.pipespace = 145;
-	this.top = random(height/2)+height/4-this.pipespace/2;
-	this.bottom = height - this.top - this.pipespace;
-	this.x = width;
-	this.w = 40;
-	this.pipeheight = 400;
-	this.speed = 2;
-	
-
-	this.show = function(){
-		fill(255);
-		//rect(this.x, 0, this.w, this.top);
-		//rect(this.x, height-this.bottom, this.w, this.bottom);
-		image(pipetop, this.x, this.top-this.pipeheight, this.w, this.pipeheight);
-		image(pipebottom, this.x, height-this.bottom, this.w, this.pipeheight);
-	}
-
-	this.update = function(){
-		this.x -= this.speed;
-	}
-
-	this.hits = function(){
-		if (bird.x + bird.w > this.x && bird.x < this.x + this.w) {
-			if (bird.y < this.top || bird.y + bird.h> height - this.bottom) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	this.offscreen = function(){
-		return (this.x < -this.w);
-	}
-	
-}
-*/
