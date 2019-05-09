@@ -97,6 +97,9 @@ main .container .content h2{
 		width: 200px;
 		height: 100px;
 	}
+	main .container .content{
+		width: 200px
+	}
 }
 
 @media (max-width: 500px){
