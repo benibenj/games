@@ -55,6 +55,8 @@ function getAjax(url, success) {
   }
 
   function onMouseMove(e) {
+    e.preventDefault();
+
     if(e.clientX != undefined){
       cursor.x = e.clientX;
       cursor.y = e.clientY;
