@@ -55,19 +55,19 @@ function getAjax(url, success) {
   }
 
   function onMouseMove(e) {
-    if(e.clientX != null){
+    if(e.clientX != undefined){
       cursor.x = e.clientX;
       cursor.y = e.clientY;
     } else 
-    if(e.touches[0] != null){
+    if(e.touches[0].pageX != undefined){
       cursor.x = e.touches[0].pageX;
       cursor.y = e.touches[0].pageY;
     } else
-    if(e.originalEvent.touches[0] != null){
+    if(e.originalEvent.touches[0].pageX != undefined){
       cursor.x = e.originalEvent.touches[0].pageX;
       cursor.y = e.originalEvent.touches[0].pageY;
     } else
-    if(e.originalEvent.changedTouches[0] != null){
+    if(e.originalEvent.changedTouches[0].pageX != undefined){
       cursor.x = e.originalEvent.changedTouches[0].pageX;
       cursor.y = e.originalEvent.changedTouches[0].pageY;
     }   
