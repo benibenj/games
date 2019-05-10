@@ -55,8 +55,22 @@ function getAjax(url, success) {
   }
 
   function onMouseMove(e) {
-    cursor.x = e.clientX;
-    cursor.y = e.clientY;
+    if(e.clientX != null){
+      cursor.x = e.clientX;
+      cursor.y = e.clientY;
+    } else 
+    if(e.touches[0] != null){
+      cursor.x = e.touches[0].pageX;
+      cursor.y = e.touches[0].pageY;
+    } else
+    if(e.originalEvent.touches[0] != null){
+      cursor.x = e.originalEvent.touches[0].pageX;
+      cursor.y = e.originalEvent.touches[0].pageY;
+    } else
+    if(e.originalEvent.changedTouches[0] != null){
+      cursor.x = e.originalEvent.changedTouches[0].pageX;
+      cursor.y = e.originalEvent.changedTouches[0].pageY;
+    }   
 
     addParticle(cursor.x, cursor.y, possibleColors[Math.floor(Math.random()*possibleColors.length)]);
   }
