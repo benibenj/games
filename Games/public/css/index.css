@@ -105,3 +105,10 @@ main .container .content h2{
 @media (max-width: 500px){
 	
 }
+
+.js-cursor-container{
+    height:0px;
+    overflow:visible;
+    pointer-events:none;
+    background:none !important;
+}
