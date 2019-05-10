@@ -209,7 +209,6 @@ public class Main {
 			ScoreRequest scoreRequest = null;
 			if((scoreRequest = (ScoreRequest) database.loadId(ScoreRequest.class, request.parameters.get("key"))) != null) {
 				if(scoreRequest.verify(request.parameters.get("value"), request.parameters.get("game"))) {
-					System.out.println("UPDATE");
 					database.update(scoreRequest);
 					return responder.text("valid");
 				}
