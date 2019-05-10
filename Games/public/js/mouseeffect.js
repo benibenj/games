@@ -207,5 +207,5 @@ function getAjax(url, success) {
     }
   }
 
-  /*if (!('ontouchstart' in window || navigator.msMaxTouchPoints))*/ init();
+  if (!('ontouchstart' in window || navigator.msMaxTouchPoints)) init();
 })();
