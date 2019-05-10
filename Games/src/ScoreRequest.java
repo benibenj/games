@@ -42,12 +42,14 @@ public class ScoreRequest extends ObjectTemplate {
 				value -= offset.get();
 				if(value%MULTIPLIER == 0) {
 					player.get().addScore(Math.toIntExact(value/MULTIPLIER), game);
+					player.get().removeSuspicion();
 					valid.set(false);
 					return true;
 				}
 			}
 			valid.set(false);
 		}
+		player.get().addSuspicion();
 		return false;
 	}
 

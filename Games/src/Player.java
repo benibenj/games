@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 
+import database.templates.BooleanTemplate;
 import database.templates.IdentifiableStringTemplate;
 import database.templates.IntegerTemplate;
 import database.templates.ObjectTemplate;
@@ -10,12 +11,18 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	private IdentifiableStringTemplate username;
 	private IntegerTemplate fame;
+	private IntegerTemplate suspicion;
+	private BooleanTemplate banned;
 	
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
 		this.username.set(username);
 		fame = new IntegerTemplate("fame");
 		fame.set(0);
+		suspicion = new IntegerTemplate("suspicion");
+		suspicion.set(0);
+		banned = new BooleanTemplate("banned");
+		banned.set(false);
 		setIdentifier(this.username);
 	}
 	
@@ -39,29 +46,31 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	}
 	
 	public Score addScore(int value, String game) {
-		
-		Score newScore = new Score(this, value, game);
-		database.save(newScore);
-		
-		final Player self = this;
-		LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
-			Score score = (Score) objectTemplate;
-			return score.getPlayer().equals(self) && score.getGame().equals(game);
-		});
-		Score bestScore = null;
-		for(ObjectTemplate objectTemplate : objectTemplates) {
-			Score score = (Score) objectTemplate;
-			if(bestScore == null || score.getScore() > bestScore.getScore()) {
-				bestScore = score;
+		if(!banned.get()) {
+			Score newScore = new Score(this, value, game);
+			database.save(newScore);
+			
+			final Player self = this;
+			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+				Score score = (Score) objectTemplate;
+				return score.getPlayer().equals(self) && score.getGame().equals(game);
+			});
+			Score bestScore = null;
+			for(ObjectTemplate objectTemplate : objectTemplates) {
+				Score score = (Score) objectTemplate;
+				if(bestScore == null || score.getScore() > bestScore.getScore()) {
+					bestScore = score;
+				}
 			}
+			final Score finalBestScore = bestScore;
+			database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
+				Score score = (Score) objectTemplate;
+				return !score.equals(finalBestScore) && score.getPlayer().equals(self) && score.getGame().equals(game);
+			});
+			
+			return (Score) database.loadAll(Score.class).get(0);
 		}
-		final Score finalBestScore = bestScore;
-		database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
-			Score score = (Score) objectTemplate;
-			return !score.equals(finalBestScore) && score.getPlayer().equals(self) && score.getGame().equals(game);
-		});
-		
-		return (Score) database.loadAll(Score.class).get(0);
+		return null;
 	}
 
 	public String getUsername() {
@@ -78,6 +87,26 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	}
 	
 	public String json() {
-		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\"}";
+		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": \"" + banned.get() + "\"}";
+	}
+	
+	public void addSuspicion() {
+		if(suspicion.get() < 2) {
+			suspicion.set(suspicion.get() + 1);
+		} else {
+			banned.set(true);
+			fame.set(0);
+			final Player self = this;
+			database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
+				Score score = (Score) objectTemplate;
+				return score.getPlayer().equals(self);
+			});
+		}
+	}
+	
+	public void removeSuspicion() {
+		if(suspicion.get() > 0) {
+			suspicion.set(suspicion.get() - 1);
+		}
 	}
 }
