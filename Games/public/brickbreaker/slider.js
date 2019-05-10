@@ -2,20 +2,21 @@ function Slider(){
 	this.w = 150;
 	this.h = 20;
 	this.x = width/2-this.w/2;
+	this.speed = 7;
 
 	this.left = false;
 	this.right = false;
 
 	this.show = function(){
-		rect(this.x, height-50, this.w, this.h);
+		rect(this.x, height-slider.h-30, this.w, this.h);
 	}
 
 	this.update = function(){
 		if (this.left) {
-			this.x -= 5;
+			this.x -= this.speed;
 		}
 		if (this.right) {
-			this.x += 5;
+			this.x += this.speed;
 		}
 		if (this.x < 0) {
 			this.x = 0
