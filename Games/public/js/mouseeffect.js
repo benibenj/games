@@ -44,8 +44,8 @@ function getAjax(url, success) {
 
   // Bind events that are needed
   function bindEvents() {
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('touchmove', onMouseMove);
+    document.addEventListener('mousemove', function(e){onMouseMove(e);});
+    document.addEventListener('touchmove', function(e){onMouseMove(e);});
     window.addEventListener('resize', onWindowResize);
   }
 
@@ -70,7 +70,7 @@ function getAjax(url, success) {
     if(e.originalEvent.changedTouches[0].pageX != undefined){
       cursor.x = e.originalEvent.changedTouches[0].pageX;
       cursor.y = e.originalEvent.changedTouches[0].pageY;
-    }   
+    }
 
     addParticle(cursor.x, cursor.y, possibleColors[Math.floor(Math.random()*possibleColors.length)]);
   }
@@ -198,5 +198,5 @@ function getAjax(url, success) {
     }
   }
 
-  if (!('ontouchstart' in window || navigator.msMaxTouchPoints)) init();
+  /*if (!('ontouchstart' in window || navigator.msMaxTouchPoints))*/ init();
 })();
