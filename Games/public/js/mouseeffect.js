@@ -5,7 +5,31 @@
  */
 
 
+function loadPlayerRanking(action) {
+    getAjax("/scoreboard/players", function(text){
+        action(JSON.parse(text));
+    });
+}
+
+function getAjax(url, success) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.send();
+    return xhr;
+}
+
 (function fairyDustCursor() {
+
+  var bestPlayer = null;
+  loadPlayerRanking(function(array){
+    if(array.length > 0){
+      bestPlayer = array[0].username;
+    }
+  });
 
   var possibleColors = ["#D61C59", "#E7D84B", "#1B8798"]
   var width = window.innerWidth;
@@ -21,6 +45,7 @@
   // Bind events that are needed
   function bindEvents() {
     document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('touchmove', onMouseMove);
     window.addEventListener('resize', onWindowResize);
   }
 
@@ -68,17 +93,38 @@
    * Particles
    */
   function Particle() {
-    this.rand = Math.random()*1000;
-    if (this.rand > 990) {
-      this.character = "BeniBenj";
+    this.rand = Math.random()*((bestPlayer !== null)?1000:900);
+    
+    if (this.rand < 100) {
+      this.character = "👏";
+    }else
+    if(this.rand < 200){
+      this.character = "🎲";
+    }else
+    if(this.rand < 300){
+      this.character = "🎮";
+    }else
+    if(this.rand < 400){
+      this.character = "👾";
+    }else
+    if(this.rand < 500){
+      this.character = "🕹️";
+    }else
+    if(this.rand < 600){
+      this.character = "❤️";
+    }else
+    if(this.rand < 700){
+      this.character = "😊";
+    }else
+    if(this.rand < 800){
+      this.character = "🍀";
+    }else
+    if(this.rand < 900){
+      this.character = "🤪";
+    }else{
+      this.character = "👑"+bestPlayer+"👑";
     }
-    else if (this.rand > 995) {
-      this.character = "Fäli";
-    }
-    else{
-      this.character = "*";
-    }
-    this.lifeSpan = 120; //ms
+    this.lifeSpan = 100; //ms
     this.initialStyles ={
       "position": "fixed",
       "display": "inline-block",
@@ -99,11 +145,13 @@
         y: 1
       };
 
-      this.position = {x: x + 10, y: y + 10};
-      this.initialStyles.color = color;
+      this.position = {x: x, y: y};
+      this.initialStyles.color = "#000000";
+      this.initialStyles.fontWeight = "bold";
 
       this.element = document.createElement('span');
-      this.element.innerHTML = this.character;
+      this.element.innerText = this.character;
+      //this.element.position = "absolute";
       applyProperties(this.element, this.initialStyles);
       this.update();
 
@@ -115,7 +163,7 @@
       this.position.y += this.velocity.y;
       this.lifeSpan--;
 
-      this.element.style.transform = "translate3d(" + this.position.x + "px," + this.position.y + "px, 0) scale(" + (this.lifeSpan / 120) + ")";
+      this.element.style.transform = "translate3d(calc(" + this.position.x + "px - 50%), calc(" + this.position.y + "px - 50%), 0) scale(" + (this.lifeSpan / 120) + ")";
     }
 
     this.die = function () {
