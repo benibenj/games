@@ -19,13 +19,12 @@ HOW TO USE
 
 */
 
-// Submits the score (integer) to the specified game (string), executes
-// action (function) if the submission was successful
-function submitScore(score, game, action, error) {
+// Trap functions
+function t1(score, game, action, error) {
     getAjax("/scoreboard/request", function(request) {
         if(request !== "error") {
             let object = JSON.parse(request);
-            let value = parseInt(score) * parseInt(object.y) + parseInt(object.z);
+            let value = 54 + parseInt(score) * parseInt(object.y) + parseInt(object.z) + 85;
             postAjax("/scoreboard/submit", {
                 "key": object.x,
                 "value": value,
@@ -38,6 +37,183 @@ function submitScore(score, game, action, error) {
         }
     });
 }
+function t2(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = 3527 + parseInt(score) * parseInt(object.y) + parseInt(object.z) - 3;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+function t3(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value =  - 2245 + parseInt(score) * parseInt(object.y) + parseInt(object.z);
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+function t4(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = parseInt(score) * parseInt(object.y) + parseInt(object.z) + 1349865;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+// More Trap Functions
+function t5(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = - parseInt(score) * parseInt(object.y) + parseInt(object.z) + 85;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+function t6(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = - parseInt(score);
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+function t7(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = - parseInt(score) * 100;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+function t8(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = 54 + parseInt(score) + parseInt(object.z) + 5688;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+
+// Submits the score (integer) to the specified game (string), executes
+// action (function) if the submission was successful
+function submitScore(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = 345 - parseInt(score) * parseInt(object.y) + parseInt(object.z) - 345;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+
+function t9(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = parseInt(score) * parseInt(object.y);
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+function t10(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = parseInt(score) * parseInt(object.y) + 100;
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+
+
 
 // Load the current player scores into an array and executes the
 // specified function with this array
