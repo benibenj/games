@@ -5,7 +5,7 @@ function Brick(i, j, w, color){
 	this.y = j*this.h;
 	this.display = true;
 	this.color = color;
-	this.dropchance = 1;
+	this.dropchance = 0.2;
 
 	this.show = function(){
 		//fill(rgb(0,255,255));
@@ -30,5 +30,9 @@ function Brick(i, j, w, color){
 }
 
 function chooseType(){
-	return expand;
+	let pick = Math.floor(Math.random()*possibleupgrades.length);
+	while(pick === possibleupgrades.length){
+		pick = Math.floor(Math.random()*possibleupgrades.length);
+	}
+	return possibleupgrades[pick];
 }

@@ -4,6 +4,7 @@ var bricks;
 var upgrades;
 var colors;
 var currentupgrades;
+var possibleupgrades = new Array();
 var gamestat;
 var amountx = 8;
 var amounty = 4;
@@ -77,21 +78,31 @@ function draw(){
 	}
 	else if (gamestat === 1) {
 		background(255);
-		// Draw Score
+		// Draw Win
 		textAlign(CENTER);
 		fill(color("#50b8e7"));
 		strokeWeight(0);
 		textSize(70);
 		text("You won!", width*0.5, height*0.2);
+		// New Game
+		rect(width*0.25, height*0.6, width*0.5, 80);
+		fill(color("#fff"));
+		textSize(40);
+		text("New Game", width*0.5, height*0.6 + 55);
 	}
 	else if (gamestat === 2) {
 		background(255);
-		// Draw Score
+		// Draw Game Over
 		textAlign(CENTER);
 		fill(color("#50b8e7"));
 		strokeWeight(0);
 		textSize(70);
 		text("Game Over!", width*0.5, height*0.2);
+		// New Game
+		rect(width*0.25, height*0.6, width*0.5, 80);
+		fill(color("#fff"));
+		textSize(40);
+		text("New Game", width*0.5, height*0.6 + 55);
 	}
 }
 
@@ -132,6 +143,13 @@ function mousePressed(){
 	else if(mouseX < width && mouseX > width/2 && mouseY > 0 && mouseY < height) {
 		slider.righton();
 	}
+	if (gamestat >= 1) {
+		if (mouseX >= width * 0.25 && mouseX <= width * 0.75) {
+			if (mouseY >= height * 0.6 && mouseY <= height * 0.6 + 80) {
+				setup();
+			}
+		}
+	}
 }
 
 function mouseReleased(){
@@ -147,4 +165,6 @@ function mouseReleased(){
 function preload(){
   	shrink = loadImage('/img/shrink.svg');
   	expand = loadImage('/img/expand.svg');
+  	possibleupgrades.push(shrink);
+  	possibleupgrades.push(expand);
 }
