@@ -5,10 +5,12 @@ function Brick(i, j, w, color){
 	this.y = j*this.h;
 	this.display = true;
 	this.color = color;
+	this.dropchance = 1;
 
 	this.show = function(){
 		//fill(rgb(0,255,255));
 		if (this.display) {
+			fill(color);
 			rect(this.x, this.y, this.w, this.h);
 		}
 	}
@@ -17,8 +19,16 @@ function Brick(i, j, w, color){
 		if(ball.y - ball.size/2 <= this.y + this.h && ball.y - ball.size/2 <= this.y){
 			if (ball.x + ball.size/2 >= this.x && ball.x - ball.size/2 <= this.x + this.w) {
 				this.display = false;
+				let rand = Math.random()*10;
+				if (rand <= 10 * this.dropchance){
+					upgrades.push(new Upgrade(this.x + this.w/2, this.y + this.h/2, chooseType()));
+				}
 				return true;
 			}
 		}
 	}
+}
+
+function chooseType(){
+	return expand;
 }

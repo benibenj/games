@@ -8,6 +8,7 @@ function Slider(){
 	this.right = false;
 
 	this.show = function(){
+		fill(255);
 		rect(this.x, height-slider.h-30, this.w, this.h);
 	}
 

@@ -12,6 +12,7 @@ function Ball(){
 	this.onslider = true;
 
 	this.show = function(){
+		fill(255);
 		circle(this.x, this.y, this.size);
 	}
 
@@ -27,11 +28,11 @@ function Ball(){
 			this.vy = Math.abs(this.vy);
 		}
 		// Right and Left Wall
-		if (this.x <= 0 + this.size/2 || this.x >= width -this.size/2) {
-			if (this.timex + 100 < Date.now()) {
-				this.vx = -this.vx;
-				this.timex = Date.now();
-			}
+		if (this.x <= 0 + this.size/2){
+			this.vx = Math.abs(this.vx);
+		}
+		else if(this.x >= width -this.size/2){
+			this.vx = -Math.abs(this.vx);
 		}
 		// Slider top vx
 		if ((this.x + this.size/2 == slider.x + slider.w || this.x + this.size/2 == slider.x) && this.y <= height-slider.h-30-this.size/2 && this.y >= height-30-this.size/2) {
@@ -41,10 +42,7 @@ function Ball(){
 		if (this.y >= height-50-this.size/2 && this.y <= height-40-this.size/2 && !this.onslider) {
 			if (this.x >= slider.x - this.size/2 && this.x <= slider.x + slider.w + this.size/2) {
 				
-				if (this.timey + 100 < Date.now()) {
-					this.vy = -this.vy;
-					this.timey = Date.now();
-				}
+				this.vy = -Math.abs(this.vy);
 				this.vx += this.calc();
 			}
 		}
@@ -55,8 +53,10 @@ function Ball(){
 		// calculate vy
 		this.val();
 		// check if game is over
-		if (this.x > height + this.size/2) {
-			gameover = true;
+		if (this.y > height + this.size/2) {
+			this.vx = 0;
+			this.vy = 0;
+			gamestat = 2;
 		}
 
 	}
@@ -75,7 +75,6 @@ function Ball(){
 		}
 		if (this.vx >= this.max && keep < 0 || this.vx <= -this.max && keep > 0) {
 			keep = keep/slider.w*2;
-			console.log("happens");
 			return keep*6;
 		}
 		return 0;
