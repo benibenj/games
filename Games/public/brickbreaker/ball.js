@@ -58,8 +58,9 @@ function Ball(){
 		if (this.y > height + this.size/2) {
 			this.vx = 0;
 			this.vy = 0;
-			if (!gamestat == 0) {
+			if (gamestat == 0) {
 				submitScore(score, "brickbreaker", function(){}, function(){});
+				console.log("Score submitted");
 			}
 			gamestat = 2;
 		}
