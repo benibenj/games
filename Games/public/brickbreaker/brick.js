@@ -16,14 +16,61 @@ function Brick(i, j, w, color){
 	}
 
 	this.collbot = function(){
-		if(ball.y - ball.size/2 <= this.y + this.h && ball.y - ball.size/2 <= this.y){
-			if (ball.x + ball.size/2 >= this.x && ball.x - ball.size/2 <= this.x + this.w) {
-				this.display = false;
-				let rand = Math.random()*10;
-				if (rand <= 10 * this.dropchance){
-					upgrades.push(new Upgrade(this.x + this.w/2, this.y + this.h/2, chooseType()));
+		if (ball.lasty > ball.y){
+			if(ball.y - ball.size/2 <= this.y + this.h && ball.y - ball.size/2 >= this.y + this.h/2){
+				if (ball.x + ball.size/2 >= this.x && ball.x - ball.size/2 <= this.x + this.w) {
+					this.display = false;
+					let rand = Math.random()*10;
+					if (rand <= 10 * this.dropchance){
+						upgrades.push(new Upgrade(this.x + this.w/2, this.y + this.h/2, chooseType()));
+					}
+					return true;
 				}
-				return true;
+			}
+		}
+	}
+
+	this.colltop = function(){
+		if (ball.lasty < ball.y){
+			if(ball.y - ball.size/2 <= this.y + this.h/2 && ball.y - ball.size/2 >= this.y){
+				if (ball.x + ball.size/2 >= this.x && ball.x - ball.size/2 <= this.x + this.w){
+					this.display = false;
+					let rand = Math.random()*10;
+					if (rand <= 10 * this.dropchance){
+						upgrades.push(new Upgrade(this.x + this.w/2, this.y + this.h/2, chooseType()));
+					}
+					return true;
+				}
+			}
+		}
+	}
+
+	this.collleft = function(){
+		if (ball.lastx < ball.x){
+			if(ball.y - ball.size/2 <= this.y + this.h && ball.y + ball.size/2 >= this.y){
+				if (ball.x + ball.size/2 >= this.x && ball.x - ball.size/2 <= this.x + this.w/2){
+					this.display = false;
+					let rand = Math.random()*10;
+					if (rand <= 10 * this.dropchance){
+						upgrades.push(new Upgrade(this.x + this.w/2, this.y + this.h/2, chooseType()));
+					}
+					return true;
+				}
+			}
+		}
+	}
+
+	this.collright = function(){
+		if (ball.lastx > ball.x){
+			if(ball.y - ball.size/2 <= this.y + this.h && ball.y + ball.size/2 >= this.y){
+				if (ball.x + ball.size/2 >= this.x + this.w/2 && ball.x - ball.size/2 <= this.x + this.w){
+					this.display = false;
+					let rand = Math.random()*10;
+					if (rand <= 10 * this.dropchance){
+						upgrades.push(new Upgrade(this.x + this.w/2, this.y + this.h/2, chooseType()));
+					}
+					return true;
+				}
 			}
 		}
 	}

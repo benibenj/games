@@ -2,6 +2,8 @@ function Ball(){
 	this.size = 20;
 	this.x = slider.x + slider.w/2;
 	this.y = height-50-this.size/2;
+	this.lastx = 0;
+	this.lasty = 0;
 	this.speed = 8;
 	this.max = 7.5;
 	this.vx = 0;
@@ -87,4 +89,10 @@ function Ball(){
 		}
 		this.vy = pos * Math.sqrt(Math.abs(Math.pow(this.speed, 2)-Math.pow(this.vx, 2)));
 	}
+
+	this.lastpos = function(){
+		this.lasty = this.y;
+		this.lastx = this.x;
+	}
+
 }

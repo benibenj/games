@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 210.4 210.4" style="enable-background:new 0 0 210.4 210.4;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#B3B2B2;stroke:#000000;stroke-miterlimit:10;}
-	.st1{fill:#FFFFFF;stroke:#E30613;stroke-width:2;stroke-miterlimit:10;}
-	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st1{fill:#B3B2B2;stroke:#000000;stroke-miterlimit:10;}
+	.st2{fill:#FFFFFF;stroke:#E30613;stroke-width:2;stroke-miterlimit:10;}
 </style>
+<circle class="st0" cx="105.2" cy="105.2" r="105.2"/>
 <g id="Background">
 </g>
-<g id="Ebene_1">
-	<path class="st0" d="M166.66,115.4H45.72c-5.95,0-10.78-4.57-10.78-10.2c0-5.64,4.83-10.2,10.78-10.2h120.94
-		c5.95,0,10.78,4.57,10.78,10.2C177.44,110.83,172.62,115.4,166.66,115.4z"/>
-	<path class="st1" d="M204.09,116.54c-7.27-10.76,0-22.68,0-22.68"/>
-	<path class="st1" d="M197.53,120.18c-9.6-14.22,0-29.96,0-29.96"/>
-	<path class="st1" d="M190.41,122.95c-11.37-16.84,0-35.5,0-35.5"/>
-	<path class="st1" d="M8.28,116.54c7.27-10.76,0-22.68,0-22.68"/>
-	<path class="st1" d="M14.84,120.18c9.6-14.22,0-29.96,0-29.96"/>
-	<path class="st1" d="M21.97,122.95c11.37-16.84,0-35.5,0-35.5"/>
-	<circle class="st2" cx="105.2" cy="105.2" r="105.2"/>
+<g>
+	<path class="st1" d="M166.7,115.4H45.7c-6,0-10.8-4.6-10.8-10.2c0-5.6,4.8-10.2,10.8-10.2h120.9c5.9,0,10.8,4.6,10.8,10.2
+		S172.6,115.4,166.7,115.4z"/>
+	<path class="st2" d="M204.1,116.5c-7.3-10.8,0-22.7,0-22.7"/>
+	<path class="st2" d="M197.5,120.2c-9.6-14.2,0-30,0-30"/>
+	<path class="st2" d="M22,122.9c11.4-16.8,0-35.5,0-35.5"/>
+	<path class="st2" d="M190.4,122.9c-11.4-16.8,0-35.5,0-35.5"/>
+	<path class="st2" d="M8.3,116.5c7.3-10.8,0-22.7,0-22.7"/>
+	<path class="st2" d="M14.8,120.2c9.6-14.2,0-30,0-30"/>
 </g>
 </svg>

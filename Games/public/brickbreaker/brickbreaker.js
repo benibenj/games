@@ -10,6 +10,8 @@ var amountx = 8;
 var amounty = 4;
 var bricksize;
 var score;
+var round;
+var lastgame;
 function setup(){
 	createCanvas(600,600);
 	gamestat = 0;
@@ -19,8 +21,28 @@ function setup(){
 	upgrades = new Array();
 	currentupgrades = new Array();
 	score = 0;
+	round = 0;
+	lastgame = 0;
 	colors = [color("#a6206a"), color("#ec1c4b"), color("#f16a43"), color("#f7d969"), color("#2f9395")];
 	bricksize = width / amountx;
+	for (let i = 0; i < amountx; i++){
+		for (let j = 0; j < amounty; j++){
+			bricks[i][j] = new Brick(i, j, bricksize, colors[Math.round(Math.random()*(colors.length-1))]);
+		}
+	}
+}
+
+function nextgame(){
+	slider = new Slider();
+	ball = new Ball();
+
+	// next level stuff
+	ball.speed += round;
+	amounty += round;
+	console.log(round);
+	bricks = make2DArray(amountx, amounty);
+	upgrades = new Array();
+	currentupgrades = new Array();
 	for (let i = 0; i < amountx; i++){
 		for (let j = 0; j < amounty; j++){
 			bricks[i][j] = new Brick(i, j, bricksize, colors[Math.round(Math.random()*(colors.length-1))]);
@@ -33,15 +55,33 @@ function draw(){
 		background(0);
 		slider.update();
 		slider.show();
+
+
+		// BRICKS
 		for (let i = amountx-1; i >= 0; i--) {
 			for (let j = amounty-1; j >= 0; j--){
 				if(bricks[i][j].display && bricks[i][j].collbot()){
 					ball.vy = Math.abs(ball.vy);
 					score++;
 				}
+				else if(bricks[i][j].display && bricks[i][j].collleft()){
+					ball.vx = -Math.abs(ball.vx);
+					score++;
+				}
+				else if(bricks[i][j].display && bricks[i][j].collright()){
+					ball.vx = Math.abs(ball.vx);
+					score++;
+				}
+				else if(bricks[i][j].display && bricks[i][j].colltop()){
+					ball.vy = -Math.abs(ball.vy);
+					score++;
+				}
 				bricks[i][j].show();
+
 			}
 		}
+
+		// UPGRADES
 		for (let i = upgrades.length-1; i >= 0; i--) {
 			upgrades[i].update();
 			let pickup = upgrades[i].pickup();
@@ -51,6 +91,7 @@ function draw(){
 				switch(pickup){
 					case expand: currentupgrades.push(new Expand()); break;
 					case shrink: currentupgrades.push(new Shrink()); break;
+					case bomb: currentupgrades.push(new Bomb()); break;
 					default:
 				}
 			}
@@ -58,12 +99,14 @@ function draw(){
 				upgrades[i].show();
 			}	
 		}
+
+		// CURRENTUPGRADES
 		for (let i = currentupgrades.length-1; i >= 0; i--) {
 			if(currentupgrades[i].update()){
 				currentupgrades.splice(i, 1);
 			}
 		}
-
+		ball.lastpos();
 		ball.update();
 		ball.show();
 		// Draw Score
@@ -72,8 +115,10 @@ function draw(){
 		strokeWeight(0);
 		textSize(30);
 		text(score, width*0.9, height*0.2);
-		if (score == amountx * amounty) {
-			gamestat = 1;
+		if (score == amountx * amounty + lastgame) {
+			lastgame = score;
+			round += 1;
+			nextgame();
 		}
 	}
 	else if (gamestat === 1) {
@@ -113,8 +158,11 @@ function keyPressed(){
 	else if (keyCode == RIGHT_ARROW){
 		slider.righton();
 	}
-	else if (keyCode == 32){
+	else if (keyCode == 32 || keyCode == UP_ARROW){
 		ball.go();
+	}
+	if (gamestat >= 1) {
+		setup();
 	}
 }
 
@@ -165,6 +213,8 @@ function mouseReleased(){
 function preload(){
   	shrink = loadImage('/img/shrink.svg');
   	expand = loadImage('/img/expand.svg');
+  	bomb = loadImage('/img/BBbomb.svg');
+  	possibleupgrades.push(bomb);
   	possibleupgrades.push(shrink);
   	possibleupgrades.push(expand);
 }
