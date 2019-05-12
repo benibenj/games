@@ -10,7 +10,7 @@ function Brick(i, j, w, color){
 	this.show = function(){
 		//fill(rgb(0,255,255));
 		if (this.display) {
-			fill(color);
+			fill(this.color);
 			rect(this.x, this.y, this.w, this.h);
 		}
 	}

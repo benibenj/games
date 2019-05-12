@@ -12,6 +12,7 @@ var bricksize;
 var score;
 var round;
 var lastgame;
+var slidercolor;
 function setup(){
 	createCanvas(600,600);
 	gamestat = 0;
@@ -23,6 +24,7 @@ function setup(){
 	score = 0;
 	round = 0;
 	lastgame = 0;
+	slidercolor = color("#0041d4");
 	colors = [color("#a6206a"), color("#ec1c4b"), color("#f16a43"), color("#f7d969"), color("#2f9395")];
 	bricksize = width / amountx;
 	for (let i = 0; i < amountx; i++){

@@ -8,8 +8,12 @@ function Slider(){
 	this.right = false;
 
 	this.show = function(){
+		fill(slidercolor);
+		rect(this.x, height-slider.h-30, this.h, this.h);
 		fill(255);
-		rect(this.x, height-slider.h-30, this.w, this.h);
+		rect(this.x+this.h, height-slider.h-30, this.w - 2 * this.h, this.h);
+		fill(slidercolor);
+		rect(this.x + this.w - this.h, height-slider.h-30, this.h, this.h);
 	}
 
 	this.update = function(){

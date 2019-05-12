@@ -85,10 +85,18 @@ main .container .content[id="flappybird"]{
 	background-color: #add8e6;
 }
 
+main .container .content[id="brickbreaker"]{
+	background-color: #000;
+}
+
 main .container .content h2{
 	font-size: 20px;
 	font-family: 'railway', sans-serif;
 	margin-top: 15px;
+}
+
+main .container .content h2[id="brickbreaker"]{
+	color: #fff;
 }
 
 
