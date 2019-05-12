@@ -71,7 +71,7 @@ public class Main {
 		
 		// Import PreciseIntervalJob from webserver repository
 		new PreciseIntervalJob(() -> {
-			String[] games = {"minesweeper"};
+			String[] games = {"minesweeper", "flappybird", "brickbreaker"};
 
 			for(String game : games) {
 				LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
