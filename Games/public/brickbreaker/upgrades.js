@@ -2,7 +2,7 @@ function Upgrade(x, y, type){
 	this.x = x;
 	this.y = y;
 	this.vy = 5;
-	this.size = 30;
+	this.size = 50;
 	this.type = type;
 
 	this.show = function(){

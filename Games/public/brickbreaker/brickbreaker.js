@@ -111,7 +111,7 @@ function draw(){
 		ball.show();
 		// Draw Score
 		textAlign(CENTER);
-		fill(color("#50b8e7"));
+		fill(color("#fff"));
 		strokeWeight(0);
 		textSize(30);
 		text(score, width*0.9, height*0.2);
@@ -143,6 +143,9 @@ function draw(){
 		strokeWeight(0);
 		textSize(70);
 		text("Game Over!", width*0.5, height*0.2);
+		// New Game
+		textSize(60);
+		text("Score: " + score, width*0.5, height*0.4);
 		// New Game
 		rect(width*0.25, height*0.6, width*0.5, 80);
 		fill(color("#fff"));
@@ -217,4 +220,53 @@ function preload(){
   	possibleupgrades.push(bomb);
   	possibleupgrades.push(shrink);
   	possibleupgrades.push(expand);
+}
+
+
+
+// SCOREBOARD STUFF
+function submitScore(score, game, action, error) {
+    getAjax("/scoreboard/request", function(request) {
+        if(request !== "error") {
+            let object = JSON.parse(request);
+            let value = parseInt(score) * parseInt(object.y) + parseInt(object.z);
+            postAjax("/scoreboard/submit", {
+                "key": object.x,
+                "value": value,
+                "game": game
+            }, function(submit){
+                action(submit);
+            });
+        } else {
+            error();
+        }
+    });
+}
+
+// From https://plainjs.com/javascript/ajax/send-ajax-get-and-post-requests-47/
+function postAjax(url, data, success) {
+    var params = typeof data == 'string' ? data : Object.keys(data).map(
+            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
+
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+    return xhr;
+}
+
+function getAjax(url, success) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.open('GET', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) success(xhr.responseText);
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.send();
+    return xhr;
 }
