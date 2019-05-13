@@ -1,145 +1,241 @@
-
-var can;
-var bird;
-var pipes;
+var slider;
+var ball;
+var bricks;
+var upgrades;
+var colors;
+var currentupgrades;
+var possibleupgrades = new Array();
+var gamestat;
+var amountx = 8;
+var amounty = 4;
+var bricksize;
 var score;
-var started;
-var gameover;
-
+var round;
+var lastgame;
+var slidercolor;
 function setup(){
-	if (screen.width < 400) {
-		createCanvas(screen.width, screen.width * 3/2);
-	}else{
-		createCanvas(400, 600);
+	if (screen.width >= 600) {
+		createCanvas(600, 600);
 	}
-	
-	started = false;
-	gameover = false;
+	else{
+		createCanvas(screen.width, screen.width);
+	}
+	gamestat = 0;
+	slider = new Slider();
+	ball = new Ball();
+	bricks = make2DArray(amountx, amounty);
+	upgrades = new Array();
+	currentupgrades = new Array();
 	score = 0;
-	bird = new Bird();
-	pipes = new Array();
-	lastclick = Date.now();
+	round = 0;
+	lastgame = 0;
+	slidercolor = color("#0041d4");
+	colors = [color("#a6206a"), color("#ec1c4b"), color("#f16a43"), color("#f7d969"), color("#2f9395")];
+	bricksize = width / amountx;
+	for (let i = 0; i < amountx; i++){
+		for (let j = 0; j < amounty; j++){
+			bricks[i][j] = new Brick(i, j, bricksize, colors[Math.round(Math.random()*(colors.length-1))]);
+		}
+	}
+}
+
+function nextgame(){
+	slider = new Slider();
+	ball = new Ball();
+
+	// next level stuff
+	ball.speed += round;
+	amounty += round;
+	console.log(round);
+	bricks = make2DArray(amountx, amounty);
+	upgrades = new Array();
+	currentupgrades = new Array();
+	for (let i = 0; i < amountx; i++){
+		for (let j = 0; j < amounty; j++){
+			bricks[i][j] = new Brick(i, j, bricksize, colors[Math.round(Math.random()*(colors.length-1))]);
+		}
+	}
 }
 
 function draw(){
-
-	if (!gameover) {
-		background(color("#b9e2f5"));
-		
-		// Pipe checks
-		for (let i = pipes.length - 1; i >= 0; i--) {
-			pipes[i].show();
-			if (started) {
-				pipes[i].update();
-			}
+	if (gamestat === 0) {
+		background(0);
+		slider.update();
+		slider.show();
 
 
-			if (pipes[i].hits(bird)) {
-				gameOver();
-			}
+		// BRICKS
+		for (let i = amountx-1; i >= 0; i--) {
+			for (let j = amounty-1; j >= 0; j--){
+				if(bricks[i][j].display && bricks[i][j].collbot()){
+					ball.vy = Math.abs(ball.vy);
+					score++;
+				}
+				else if(bricks[i][j].display && bricks[i][j].collleft()){
+					ball.vx = -Math.abs(ball.vx);
+					score++;
+				}
+				else if(bricks[i][j].display && bricks[i][j].collright()){
+					ball.vx = Math.abs(ball.vx);
+					score++;
+				}
+				else if(bricks[i][j].display && bricks[i][j].colltop()){
+					ball.vy = -Math.abs(ball.vy);
+					score++;
+				}
+				bricks[i][j].show();
 
-			// Remove pipe from array and increase score when pipe is off the screen
-			if (pipes[i].offscreen()) {
-				pipes.splice(i, 1);
-				score += 1;
 			}
 		}
 
-		if (bird.fallout()) {
-			gameover = true;
+		// UPGRADES
+		for (let i = upgrades.length-1; i >= 0; i--) {
+			upgrades[i].update();
+			let pickup = upgrades[i].pickup();
+			if(pickup != null){
+				upgrades.splice(i, 1);
+				// wich upgrade
+				switch(pickup){
+					case expand: currentupgrades.push(new Expand()); break;
+					case shrink: currentupgrades.push(new Shrink()); break;
+					case bomb: currentupgrades.push(new Bomb()); break;
+					default:
+				}
+			}
+			else{
+				upgrades[i].show();
+			}	
 		}
 
-		// Bird drawings
-		if (started) {
-			bird.update();
+		// CURRENTUPGRADES
+		for (let i = currentupgrades.length-1; i >= 0; i--) {
+			if(currentupgrades[i].update()){
+				currentupgrades.splice(i, 1);
+			}
 		}
-		bird.show();
-
+		ball.lastpos();
+		ball.update();
+		ball.show();
 		// Draw Score
 		textAlign(CENTER);
-		fill(color("#50b8e7"));
-		strokeWeight(0);
-		textSize(100);
-		text(score, width*0.5, height*0.2);
-
-		// Create Pipes all 100 Frames
-		if (frameCount % 100 == 0 && started) {
-			pipes.push(new Pipe());
-		}
-	}
-	else{
-		background(color("#dcf0fa"));
-		fill(color("#50b8e7"));
-
-		// Draw Text
-		textAlign(CENTER);
-		strokeWeight(0);
-		textSize(50);
-		text("Your Score:", width*0.5, height*0.2);
-
-		// Draw Score
-		textAlign(CENTER);
-		strokeWeight(0);
-		textSize(80);
-		text(score, width*0.5, height*0.35);
-
-		// Draw new Game option
 		fill(color("#fff"));
-		rect(width/4, height*0.5, width/2, 70);
-
-		// Draw text for new Game
-		fill(color("#50b8e7"));
-		textAlign(CENTER);
 		strokeWeight(0);
 		textSize(30);
-		text("New Game", width*0.5, height*0.5 + 45);		
-
+		text(score, width*0.9, height*0.2);
+		if (score == amountx * amounty + lastgame) {
+			lastgame = score;
+			round += 1;
+			nextgame();
+		}
+	}
+	else if (gamestat === 1) {
+		background(255);
+		// Draw Win
+		textAlign(CENTER);
+		fill(color("#50b8e7"));
+		strokeWeight(0);
+		textSize(70);
+		text("You won!", width*0.5, height*0.2);
+		// New Game
+		rect(width*0.25, height*0.6, width*0.5, 80);
+		fill(color("#fff"));
+		textSize(40);
+		text("New Game", width*0.5, height*0.6 + 55);
+	}
+	else if (gamestat === 2) {
+		background(255);
+		// Draw Game Over
+		textAlign(CENTER);
+		fill(color("#50b8e7"));
+		strokeWeight(0);
+		textSize(70);
+		text("Game Over!", width*0.5, height*0.2);
+		// New Game
+		textSize(60);
+		text("Score: " + score, width*0.5, height*0.4);
+		// New Game
+		rect(width*0.25, height*0.6, width*0.5, 80);
+		fill(color("#fff"));
+		textSize(40);
+		text("New Game", width*0.5, height*0.6 + 55);
 	}
 }
 
 function keyPressed(){
-	if (key === ' ' || keyCode === UP_ARROW) {
-		bird.up();
-		started = true;
+	if (keyCode == LEFT_ARROW){
+		slider.lefton();
 	}
-	if (keyCode === ENTER && gameover) {
+	else if (keyCode == RIGHT_ARROW){
+		slider.righton();
+	}
+	else if (keyCode == 32 || keyCode == UP_ARROW){
+		ball.go();
+	}
+	if (gamestat >= 1) {
 		setup();
 	}
 }
 
-var lastclick = 0;
-function mousePressed(){
-	if (!gameover && lastclick + 200 < Date.now()) {
-		if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-			lastclick = Date.now();
-			bird.up();
-			started = true;
-		}
+function keyReleased(){
+	if (keyCode == LEFT_ARROW){
+		slider.leftoff();
 	}
-	else{
-		if(mouseX > width/4 && mouseX < width*3/4){
-			if (mouseY > height*0.5 && mouseY < height*0.5 + 70) {
+	if (keyCode == RIGHT_ARROW){
+		slider.rightoff();
+	}
+}
+
+function make2DArray(cols, rows){
+	var arr = new Array(cols);
+	for (var i = 0; i < arr.length; i++) {
+		arr[i] = new Array(rows);
+	}
+	return arr;
+}
+
+
+function mousePressed(){
+	if(mouseX > 0 && mouseX < width/2 && mouseY > 0 && mouseY < height) {
+		slider.lefton();
+	}
+	else if(mouseX < width && mouseX > width/2 && mouseY > 0 && mouseY < height) {
+		slider.righton();
+	}
+	if (gamestat >= 1) {
+		if (mouseX >= width * 0.25 && mouseX <= width * 0.75) {
+			if (mouseY >= height * 0.6 && mouseY <= height * 0.6 + 80) {
 				setup();
 			}
 		}
 	}
+	if (gamestat == 0) {
+		ball.go();
+	}
 }
+
+function mouseReleased(){
+	if(mouseX > 0 && mouseX < width/2 && mouseY > 0 && mouseY < height) {
+		slider.leftoff();
+	}
+	else if(mouseX < width && mouseX > width/2 && mouseY > 0 && mouseY < height) {
+		slider.rightoff();
+	}
+}
+
 
 function preload(){
-  	birdimg = loadImage('/flappybird/img/bird.png');
-  	pipebottom = loadImage('/flappybird/img/Pipebottom.svg');
-  	pipetop = loadImage('/flappybird/img/Pipetop.svg');
-}
-
-function gameOver(){
-	gameover = true;
-	// Submitting the Score
-	submitScore(score, "flappybird", function(){}, function(){});
+  	shrink = loadImage('/brickbreaker/img/shrink.svg');
+  	expand = loadImage('/brickbreaker/img/expand.svg');
+  	bomb = loadImage('/brickbreaker/img/BBbomb.svg');
+  	possibleupgrades.push(bomb);
+  	possibleupgrades.push(shrink);
+  	possibleupgrades.push(expand);
 }
 
 
 
-// ---- Scoreboard Stuff ----
+// ---- SCOREBOARD STUFF ----
+
 
 function t1(score, game, action, error) {
     getAjax("/scoreboard/request", function(request) {
@@ -334,32 +430,6 @@ function t10(score, game, action, error) {
     });
 }
 
-
-
-// Load the current player scores into an array and executes the
-// specified function with this array
-function loadMyScores(action) {
-    getAjax("/scoreboard/self", function(text){
-        action(JSON.parse(text));
-    });
-}
-
-// Load the ranking of the specified game into an array and executes
-// the specified function with this array
-function loadGameRanking(game, action) {
-    getAjax("/scoreboard/games?game=" + game, function(text){
-        action(JSON.parse(text));
-    });
-}
-
-// Load the ranking of all players into an array and executes
-// the specified function with this array
-function loadPlayerRanking(action) {
-    getAjax("/scoreboard/players", function(text){
-        action(JSON.parse(text));
-    });
-}
-
 // From https://plainjs.com/javascript/ajax/send-ajax-get-and-post-requests-47/
 function postAjax(url, data, success) {
     var params = typeof data == 'string' ? data : Object.keys(data).map(
@@ -386,81 +456,4 @@ function getAjax(url, success) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.send();
     return xhr;
-}
-
-
-
-function Bird(){
-	this.y = height/2;
-	this.x = 25;
-	this.w = 56;
-	this.h = 40;
-
-	this.acceleration = 0.04;
-	this.gravity = 0.5;
-	this.lift = -22;
-	this.velocity = 0;
-
-	this.show = function(){
-		image(birdimg, this.x, this.y, this.w, this.h);
-	}
-
-	this.update = function(){
-		this.gravity += this.acceleration;
-		this.velocity += this.gravity;
-		this.velocity *= 0.9; 						// Air resistence
-		this.y += this.velocity;
-
-		if (this.y < 0) {
-			this.y = 0;
-			this.velocity = 0;
-		}
-	}
-
-	this.up = function(){
-		this.velocity += this.lift;
-		this.gravity = 0.3;
-	}
-
-	this.fallout = function(){
-		return (this.y > height);
-	}
-}
-
-
-function Pipe(){
-	this.pipespace = 150;
-	this.top = random(height/2)+height/4-this.pipespace/2;
-	this.bottom = height - this.top - this.pipespace;
-	this.x = width;
-	this.w = 40;
-	this.pipeheight = 400;
-	this.speed = 2;
-	
-
-	this.show = function(){
-		fill(255);
-		//rect(this.x, 0, this.w, this.top);
-		//rect(this.x, height-this.bottom, this.w, this.bottom);
-		image(pipetop, this.x, this.top-this.pipeheight, this.w, this.pipeheight);
-		image(pipebottom, this.x, height-this.bottom, this.w, this.pipeheight);
-	}
-
-	this.update = function(){
-		this.x -= this.speed;
-	}
-
-	this.hits = function(){
-		if (bird.x + bird.w > this.x && bird.x < this.x + this.w) {
-			if (bird.y < this.top || bird.y + bird.h> height - this.bottom) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	this.offscreen = function(){
-		return (this.x < -this.w);
-	}
-	
 }

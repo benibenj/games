@@ -28,6 +28,14 @@ h2{
 	margin-bottom: 25px;
 }
 
+h3{
+	font-size: 18px;
+	font-family: 'railway', sans-serif;
+	font-weight: normal;
+	line-height: 22px;
+	margin: 0 20px;
+}
+
 button{
 	width: 50%;
 	min-width: 180px;
@@ -115,5 +123,9 @@ button[id="pwd"]{
 
 	main .change{
 		width: 100%;
+	}
+
+	h3{
+		margin: 0 2px;
 	}
 }

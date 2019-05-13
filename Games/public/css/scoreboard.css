@@ -39,6 +39,10 @@ tr[id="uneven"]{
 	background-color: #f1f1f1;
 }
 
+tr.user{
+	background-color: #d6d6ea;
+}
+
 th{
 	font-size: 18px;
 	font-family: 'railway', sans-serif;

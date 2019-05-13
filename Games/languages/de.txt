@@ -43,7 +43,7 @@ Bitte klicke <a href="{{print get "url" variables}}/unlock?id={{print get "encry
 Der Account kann nicht wiederhergestellt werden, da der Link fehlerhaft ist.
 Account aktivieren
 Aktiviere deinen Account jetzt, indem du <a href="{{print get "url" variables}}/activate?id={{print get "encrypted-username" variables}}&key={{print get "key" variables}}">hier</a> klickst.
-Dein Account ist noch nicht aktiviert. Bitte überprüfe den Posteingang der E-Mail Adresse, die du angegeben hast, um deinen Account zu bestätigen.
+Dein Account ist noch nicht aktiviert. <br/>Bitte überprüfe den Posteingang der E-Mail Adresse, die du angegeben hast, um deinen Account zu bestätigen.
 Dieser Link ist veraltet. Bitte suche nach einem neueren Link oder <a href="/profile/email">ändere deine E-Mail Adresse</a> um ein neues Aktivierungs-Mail zu erhalten.
 nicht aktiviert
 Account löschen
@@ -52,7 +52,7 @@ Benachrichtigungen<br>aktivieren
 Benachrichtigungen<br>deaktivieren
 Home
 Hallo
-<h2>Fame Punkte</h2>Fame Punkte erhält der Spieler, indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Für die Punkte erhält er pro Minute jeweils:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkt_          
+<h2>Fame Punkte</h2>Fame Punkte erhält der Spieler, indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Für die Punkte erhält er pro Minute jeweils:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkt
 Neues Spiel
 Benutzername
 Rang

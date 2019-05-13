@@ -98,6 +98,11 @@
 				// This is a table Row
 				var tr = document.createElement("tr");
 				tr.id = (i % 2 == 0) ? "even":"uneven";
+				// get username and check if this is him
+				var username = "{{print get "username" variables}}";
+				if (username === fames[i].username) {
+					tr.setAttribute("class", "user");
+				}
 				// Table for Rank number
 				var tb0 = document.createElement("td");
 				if (i == 0) {
@@ -150,6 +155,11 @@
 				// This is a table Row
 				var tr = document.createElement("tr");
 				tr.id = (i % 2 == 0) ? "even":"uneven";
+				// get username and check if this is him
+				var username = "{{print get "username" variables}}";
+				if (username === scores[i].username) {
+					tr.setAttribute("class", "user");
+				}
 				// Table for Rank number
 				var tb0 = document.createElement("td");
 				if (i == 0) {
