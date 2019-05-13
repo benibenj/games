@@ -334,32 +334,6 @@ function t10(score, game, action, error) {
     });
 }
 
-
-
-// Load the current player scores into an array and executes the
-// specified function with this array
-function loadMyScores(action) {
-    getAjax("/scoreboard/self", function(text){
-        action(JSON.parse(text));
-    });
-}
-
-// Load the ranking of the specified game into an array and executes
-// the specified function with this array
-function loadGameRanking(game, action) {
-    getAjax("/scoreboard/games?game=" + game, function(text){
-        action(JSON.parse(text));
-    });
-}
-
-// Load the ranking of all players into an array and executes
-// the specified function with this array
-function loadPlayerRanking(action) {
-    getAjax("/scoreboard/players", function(text){
-        action(JSON.parse(text));
-    });
-}
-
 // From https://plainjs.com/javascript/ajax/send-ajax-get-and-post-requests-47/
 function postAjax(url, data, success) {
     var params = typeof data == 'string' ? data : Object.keys(data).map(
