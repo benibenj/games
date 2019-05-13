@@ -23,14 +23,14 @@ function setup(){
 	gamestat = 0;
 	slider = new Slider();
 	ball = new Ball();
+	amountx = 8;
+	amounty = 4;
 	bricks = make2DArray(amountx, amounty);
 	upgrades = new Array();
 	currentupgrades = new Array();
 	score = 0;
 	round = 0;
 	lastgame = 0;
-	amountx = 8;
-	amounty = 4;
 	slidercolor = color("#0041d4");
 	colors = [color("#a6206a"), color("#ec1c4b"), color("#f16a43"), color("#f7d969"), color("#2f9395")];
 	bricksize = width / amountx;
