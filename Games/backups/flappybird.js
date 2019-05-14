@@ -46,7 +46,7 @@ function draw(){
 		}
 
 		if (bird.fallout()) {
-			gameover = true;
+			gameOver();
 		}
 
 		// Bird drawings
