@@ -132,9 +132,9 @@ function preload(){
 }
 
 function gameOver(){
-	gameover = true;
 	// Submitting the Score
 	submitScore(score, "flappybird", function(){}, function(){});
+    gameover = true;
 }
 
 
