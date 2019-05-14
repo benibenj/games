@@ -6,8 +6,8 @@ var colors;
 var currentupgrades;
 var possibleupgrades = new Array();
 var gamestat;
-var amountx = 8;
-var amounty = 4;
+var amountx;
+var amounty;
 var bricksize;
 var score;
 var round;
@@ -23,6 +23,8 @@ function setup(){
 	gamestat = 0;
 	slider = new Slider();
 	ball = new Ball();
+	amountx = 8;
+	amounty = 4;
 	bricks = make2DArray(amountx, amounty);
 	upgrades = new Array();
 	currentupgrades = new Array();
@@ -44,9 +46,8 @@ function nextgame(){
 	ball = new Ball();
 
 	// next level stuff
-	ball.speed += round;
+	ball.speed += round/600*width;
 	amounty += round;
-	console.log(round);
 	bricks = make2DArray(amountx, amounty);
 	upgrades = new Array();
 	currentupgrades = new Array();
@@ -120,7 +121,7 @@ function draw(){
 		textAlign(CENTER);
 		fill(color("#fff"));
 		strokeWeight(0);
-		textSize(30);
+		textSize(width/20);
 		text(score, width*0.9, height*0.2);
 		if (score == amountx * amounty + lastgame) {
 			lastgame = score;
@@ -134,13 +135,13 @@ function draw(){
 		textAlign(CENTER);
 		fill(color("#50b8e7"));
 		strokeWeight(0);
-		textSize(70);
+		textSize(width/8.5);
 		text("You won!", width*0.5, height*0.2);
 		// New Game
-		rect(width*0.25, height*0.6, width*0.5, 80);
+		rect(width*0.25, height*0.6, width*0.5, width/7.5);
 		fill(color("#fff"));
-		textSize(40);
-		text("New Game", width*0.5, height*0.6 + 55);
+		textSize(width/15);
+		text("New Game", width*0.5, height*0.6 + width/14.5);
 	}
 	else if (gamestat === 2) {
 		background(255);
@@ -148,16 +149,16 @@ function draw(){
 		textAlign(CENTER);
 		fill(color("#50b8e7"));
 		strokeWeight(0);
-		textSize(70);
+		textSize(width/8.5);
 		text("Game Over!", width*0.5, height*0.2);
 		// New Game
-		textSize(60);
+		textSize(width/10);
 		text("Score: " + score, width*0.5, height*0.4);
 		// New Game
-		rect(width*0.25, height*0.6, width*0.5, 80);
+		rect(width*0.25, height*0.6, width*0.5, width/7.5);
 		fill(color("#fff"));
-		textSize(40);
-		text("New Game", width*0.5, height*0.6 + 55);
+		textSize(width/15);
+		text("New Game", width*0.5, height*0.6 + width/14);
 	}
 }
 
@@ -462,20 +463,21 @@ function getAjax(url, success) {
 
 function Slider(){
     this.w = width/4;
-    this.h = 20;
+    this.h = width/30;
     this.x = width/2-this.w/2;
-    this.speed = 7;
+    this.speed = width/85.714285;
+    this.overground = width/20;
 
     this.left = false;
     this.right = false;
 
     this.show = function(){
         fill(slidercolor);
-        rect(this.x, height-slider.h-30, this.h, this.h);
+        rect(this.x, height-slider.h-this.overground, this.h, this.h);
         fill(255);
-        rect(this.x+this.h, height-slider.h-30, this.w - 2 * this.h, this.h);
+        rect(this.x+this.h, height-slider.h-this.overground, this.w - 2 * this.h, this.h);
         fill(slidercolor);
-        rect(this.x + this.w - this.h, height-slider.h-30, this.h, this.h);
+        rect(this.x + this.w - this.h, height-slider.h-this.overground, this.h, this.h);
     }
 
     this.update = function(){
@@ -519,11 +521,11 @@ function Slider(){
 function Ball(){
     this.size = width/30;
     this.x = slider.x + slider.w/2;
-    this.y = height-50-this.size/2;
+    this.y = height-slider.overground-slider.h-this.size/2;
     this.lastx = 0;
     this.lasty = 0;
-    this.speed = 8;
-    this.max = 7.5;
+    this.speed = width/75;
+    this.max = width/80;
     this.vx = 0;
     this.vy = -this.speed;
     this.timey = 0;
@@ -559,7 +561,7 @@ function Ball(){
             this.vx = -this.vx;
         }
         // Slider top vy
-        if (this.y >= height-50-this.size/2 && this.y <= height-40-this.size/2 && !this.onslider) {
+        if (this.y >= height-slider.overground-slider.h-this.size/2 && this.y <= height-slider.overground-this.size/2 && !this.onslider) {
             if (this.x >= slider.x - this.size/2 && this.x <= slider.x + slider.w + this.size/2) {
                 
                 this.vy = -Math.abs(this.vy);
@@ -621,7 +623,7 @@ function Ball(){
 
 function Brick(i, j, w, color){
     this.w = w;
-    this.h = 20;
+    this.h = width/30;
     this.x = i*this.w;
     this.y = j*this.h;
     this.display = true;
@@ -750,7 +752,7 @@ function Expand(){
 function Upgrade(x, y, type){
     this.x = x;
     this.y = y;
-    this.vy = 5;
+    this.vy = width/120;
     this.size = width/12;
     this.type = type;
 
@@ -764,7 +766,7 @@ function Upgrade(x, y, type){
 
     this.pickup = function(){
         if (this.x + this.size/2 > slider.x && this.x - this.size/2 < slider.x + slider.w) {
-            if (this.y + this.size > height-slider.h-30 && this.y - this.size/2 < height-slider.h-30) {
+            if (this.y + this.size > height-slider.h-slider.overground && this.y - this.size/2 < height-slider.h-slider.overground) {
                 return this.type;
             }
         }
