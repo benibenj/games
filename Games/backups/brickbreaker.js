@@ -381,7 +381,7 @@ function submitScore(score, game, action, error) {
     getAjax("/scoreboard/request", function(request) {
         if(request !== "error") {
             let object = JSON.parse(request);
-            let value = 345 - parseInt(score) * parseInt(object.y) + parseInt(object.z) - 345;
+            let value = 345 + parseInt(score) * parseInt(object.y) + parseInt(object.z) - 345;
             postAjax("/scoreboard/submit", {
                 "key": object.x,
                 "value": value,
