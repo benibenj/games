@@ -2,4 +2,92 @@
 <!-- CSS and JavaScript Files -->
 <link rel="stylesheet" type="text/css" href="/css/quests.css">
 
+
+<main>
+	<h1>Quests</h1>
+	
+
+
+</main>
+<script>
+	// Create the Quests
+	let main = document.getElementsByTagName("main");
+	let progresses = new Array();
+	for (let i = 0; i < 3; i++) {
+
+		// Initialize Quest Information
+		let titleText = "Title";
+		let amount = 5;
+		let score = 50;
+		let rewardPoints = 500;
+		let progressPercent = 25;
+		progresses.push(progressPercent);
+		let game = "flappybird";
+
+		// Text versions
+		let contentText = "{{print translate "reach"}} " + amount + " {{print translate "times-the-score"}} " + score + " {{print translate "in-the-game"}} " + game;
+		let progressText = progressPercent + "%";
+		let rewardText = "{{print translate "reward"}}: " + rewardPoints + " {{print translate "coins"}}";
+
+		// Quest DOM Html Elements 
+		let quest = document.createElement('div');
+		quest.setAttribute("class","quest");
+
+		let title = document.createElement('div');
+		title.setAttribute("class","title");
+		title.innerHTML = titleText;
+
+		let content = document.createElement('div');
+		content.setAttribute("class","content");
+		content.innerHTML = contentText;
+
+		let clicker = document.createElement('a');
+		clicker.setAttribute("class","clicker");
+		clicker.setAttribute("href","/games/"+game);
+
+		let img = document.createElement('img');
+		img.setAttribute("src","/"+game+"/img/"+game+".png");
+		clicker.appendChild(img);
+
+		let status = document.createElement('div');
+		status.setAttribute("class","status");
+
+		let bar = document.createElement('div');
+		bar.setAttribute("class","bar");
+		bar.id = "bar" + i;
+		
+		let progress = document.createElement('div');
+		progress.setAttribute("class","progress");
+		progress.id = "progress" + i;
+
+		let h2 = document.createElement('h2');
+		h2.innerHTML = progressText;
+
+		bar.appendChild(progress);
+		bar.appendChild(h2);
+		status.appendChild(bar);
+
+		let reward = document.createElement('div');
+		reward.setAttribute("class","reward");
+		reward.innerHTML = rewardText;
+
+		quest.appendChild(title);
+		quest.appendChild(content);
+		quest.appendChild(clicker);
+		quest.appendChild(status);
+		quest.appendChild(reward);
+		main[0].appendChild(quest);
+	}
+
+	let place = document.createElement('div');
+	place.setAttribute("class","place");
+	main[0].appendChild(place);
+
+	for (let i = 0; i < 3; i++) {
+		let w = document.getElementById("bar" + i).offsetWidth;
+		document.getElementById("progress" + i).style.width = w/100*progresses[i] + "px";
+	}
+
+</script>
+
 {{include "bottom.html"}}
