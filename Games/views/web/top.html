@@ -14,3 +14,14 @@
 </head>
 <body>
 	{{include "nav.html"}}
+
+	<script>
+		window.addEventListener("load", function(){
+			setTimeout(function() {
+				var canvas = document.getElementsByTagName('canvas');
+				if(canvas.length > 0){
+					canvas[0].onselectstart = function(){return false;}
+				}
+			}, 1000);
+		});
+	</script>

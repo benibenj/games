@@ -115,6 +115,9 @@ public class Main {
 		server.on("GET", "/scoreboard", (Request request) -> {
 			return responder.render("scoreboard.html");
 		});
+		server.on("GET", "/quests", (Request request) -> {
+			return responder.render("quests.html");
+		});
 		
 		// Scoreboard paths
 		server.on("GET", "/scoreboard/players", (Request request) -> {
