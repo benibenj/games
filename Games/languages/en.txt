@@ -69,3 +69,8 @@ Scoreboard
 Sign up
 Sign in
 Profile
+Reward
+Coins
+Reach
+times the score
+in the game

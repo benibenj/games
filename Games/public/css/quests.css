@@ -1,0 +1,131 @@
+main{
+	width: 60%;
+	position: relative;
+	background-color: #fff;
+	margin: 40px 20%;
+	border-radius: 3px;
+	text-align: center;
+	padding: 10px;
+	padding-bottom: 30px;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	box-shadow: inset 0 0 10px rgb(0,0,0,0.2);
+	justify-content: space-around;
+}
+
+h1{
+	font-size: 26px;
+	font-family: 'Raleway', sans-serif;
+	width: 100%;
+	margin: 20px 0;
+}
+
+.quest{
+	width: 30%;
+	min-width: 250px;
+	padding: 20px 10px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	box-shadow: inset 0 0 10px rgb(0,0,0,0.2);
+}
+
+.quest .title{
+	font-size: 22px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.quest .content{
+	font-size: 18px;
+	font-family: 'Raleway', sans-serif;
+	line-height: 20px;
+}
+
+.quest a{
+	width: 100%;
+	margin: 10px 0;
+	cursor: pointer;
+}
+
+.quest .clicker img{
+	width: 100%;
+	margin: 10px 0;
+}
+
+.quest .status{
+	width: 100%;
+	height: 20px;
+	box-sizing: border-box;
+}
+
+.quest .status .bar{
+	width: 100%;
+	height: 100%;
+	background-color: tomato;
+	position: relative;
+}
+
+.quest .status .bar h2{
+	position: absolute;
+	left: 0;
+	top: 5%;
+	width: 100%;
+	text-align: center;
+	font-size: 90%;
+	font-family: 'Raleway', sans-serif;
+}
+.quest .status .bar .progress{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	background-color: limegreen;
+}
+
+.quest .status .bar .progress[id="p0"]{
+	width: 55%;
+}
+
+.quest .status .bar .progress[id="p1"]{
+	width: 100%;
+}
+
+.quest .status .bar .progress[id="p2"]{
+	width: 25%;
+}
+
+.quest .reward{
+	margin-top: 10px;
+	font-size: 18px;
+	font-family: 'Raleway', sans-serif;
+	line-height: 20px;
+}
+
+.place{
+	width: 30%;
+	min-width: 250px;
+	height: 0;
+}
+
+
+@media (max-width: 800px){
+
+	body{
+		background-color: #fff;
+	}
+
+	body main{
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		box-shadow: none;
+	}
+}
+
+@media (max-width: 500px){
+
+
+}
