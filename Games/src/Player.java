@@ -1,18 +1,28 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
+import java.util.Scanner;
 
 import database.templates.BooleanTemplate;
 import database.templates.IdentifiableStringTemplate;
 import database.templates.IntegerTemplate;
+import database.templates.ListTemplate;
 import database.templates.ObjectTemplate;
 
 public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public static final String NAME = "players";
 	
+	public static final File questFile = new File("stats/quests.txt");
+	public static final Random random = new Random();
+	
 	private IdentifiableStringTemplate username;
 	private IntegerTemplate fame;
 	private IntegerTemplate suspicion;
 	private BooleanTemplate banned;
+	private ListTemplate <Quest> quests;
 	
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
@@ -23,6 +33,8 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		suspicion.set(0);
 		banned = new BooleanTemplate("banned");
 		banned.set(false);
+		quests = new ListTemplate <Quest> ("quests", Quest::new);
+		refreshQuests();
 		setIdentifier(this.username);
 	}
 	
@@ -47,6 +59,12 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public Score addScore(int value, String game) {
 		if(!banned.get()) {
+			
+			for(Quest quest : quests) {
+				quest.update(value, game);
+			}
+			database.save(this);
+			
 			Score newScore = new Score(this, value, game);
 			database.save(newScore);
 			
@@ -107,6 +125,36 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public void removeSuspicion() {
 		if(suspicion.get() > 0) {
 			suspicion.set(suspicion.get() - 1);
+		}
+	}
+	
+	public String questsJson() {
+		StringBuilder output = new StringBuilder();
+		output.append("[");
+		for(int i = 0; i < 3; i++) {
+			if(i != 0) {
+				output.append(", ");
+				output.append(quests.get(i).json());
+			}
+		}
+		output.append("]");
+		return output.toString();
+	}
+	
+	public void refreshQuests() {
+		ArrayList <Quest> all = new ArrayList <Quest> ();
+		Scanner in;
+		try {
+			in = new Scanner(questFile);
+			while(in.hasNext()) {
+				all.add(new Quest(this, in.next(), in.nextInt(), in.nextInt()));
+			}
+			for(int i = 0; i < 3; i++) {
+				quests.clear();
+				quests.add(all.get(random.nextInt(all.size())));
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 }

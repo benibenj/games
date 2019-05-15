@@ -94,7 +94,6 @@ public class Main {
 			}
 		}, 60000);
 		
-		
 	}
 	
 	private static void initializeRoutes(Server server, RenderResponder responder, Database database) {
