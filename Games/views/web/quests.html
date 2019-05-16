@@ -5,29 +5,52 @@
 
 <main>
 	<h1>Quests</h1>
-	
-
 
 </main>
 <script>
+	let amountQuest = 5;
 	// Create the Quests
 	let main = document.getElementsByTagName("main");
 	let progresses = new Array();
-	for (let i = 0; i < 3; i++) {
+	for (let i = 0; i < amountQuest; i++) {
 
 		// Initialize Quest Information
 		let titleText = "Title";
 		let amount = 5;
 		let score = 50;
 		let rewardPoints = 500;
-		let progressPercent = 25;
+		let progressPercent = Math.floor(Math.random()*100);
 		progresses.push(progressPercent);
 		let game = "flappybird";
+		let time = 5;
+		let min = time % 60;
+		let hour = Math.floor(time/60);
+		let completed = false;
+		let gameText;
+		switch(game){
+			case "flappybird": gameText = "Flappy Bird"; break;
+			case "brickbreaker": gameText = "Brick Breaker"; break;
+			case "minesweeper": gameText = "Minesweeper"; break;
+			default:
+		}
 
 		// Text versions
-		let contentText = "{{print translate "reach"}} " + amount + " {{print translate "times-the-score"}} " + score + " {{print translate "in-the-game"}} " + game;
-		let progressText = progressPercent + "%";
+		let contentText = "{{print translate "reach"}} " + amount + " {{print translate "times-the-score"}} " + score + " {{print translate "in-the-game"}} " + gameText;
 		let rewardText = "{{print translate "reward"}}: " + rewardPoints + " {{print translate "coins"}}";
+
+		if (completed) {
+			var progressText = "{{print translate "completed"}}";
+			var timeLeftText = "";
+		}
+		else{
+			var progressText = progressPercent + "%";
+			if (hour === 0) {
+				var timeLeftText = "{{print translate "time-remaining"}}: " + min + "min";
+			}
+			else{
+				var timeLeftText = "{{print translate "time-remaining"}}: " + hour + "h " + min + "min";
+			}
+		}
 
 		// Quest DOM Html Elements 
 		let quest = document.createElement('div');
@@ -71,19 +94,25 @@
 		reward.setAttribute("class","reward");
 		reward.innerHTML = rewardText;
 
+		let timeleft = document.createElement('div');
+		timeleft.setAttribute("class","timeleft");
+		timeleft.innerHTML = timeLeftText;
+
 		quest.appendChild(title);
 		quest.appendChild(content);
 		quest.appendChild(clicker);
 		quest.appendChild(status);
 		quest.appendChild(reward);
+		quest.appendChild(timeleft);
 		main[0].appendChild(quest);
 	}
 
+	// This is to align the third Quest when on the second line
 	let place = document.createElement('div');
 	place.setAttribute("class","place");
 	main[0].appendChild(place);
 
-	for (let i = 0; i < 3; i++) {
+	for (let i = 0; i < amountQuest; i++) {
 		let w = document.getElementById("bar" + i).offsetWidth;
 		document.getElementById("progress" + i).style.width = w/100*progresses[i] + "px";
 	}

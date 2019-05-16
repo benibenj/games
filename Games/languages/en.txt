@@ -74,3 +74,5 @@ Coins
 Reach
 times the score
 in the game
+completed
+Time remaining

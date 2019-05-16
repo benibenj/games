@@ -74,3 +74,5 @@ Münzen
 Erreiche
 mal das Ergebnis
 im Spiel
+erreicht
+Verbleibende Zeit

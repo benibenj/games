@@ -74,3 +74,5 @@ coins
 reach
 times-the-score
 in-the-game
+completed
+time-remaining

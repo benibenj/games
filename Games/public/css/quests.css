@@ -101,7 +101,15 @@ h1{
 	margin-top: 10px;
 	font-size: 18px;
 	font-family: 'Raleway', sans-serif;
-	line-height: 20px;
+	line-height: 22px;
+	text-align: left;
+}
+
+.quest .timeleft{
+	font-size: 18px;
+	font-family: 'Raleway', sans-serif;
+	line-height: 22px;
+	text-align: left;
 }
 
 .place{

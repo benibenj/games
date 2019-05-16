@@ -46,13 +46,17 @@ nav a.nav-links{
 	text-decoration: none;
 }
 
-nav a.nav-links h2{
+nav h2{
 	color: var(--light);
 	font-family: arial;
 	font-size: 1.4em;
 	padding-left: 15%;
 	margin: 0;
 	word-break: break-all;
+}
+
+nav img{
+	width: 18px;
 }
 
 nav .line{
