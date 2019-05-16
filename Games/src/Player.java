@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
@@ -15,8 +16,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public static final String NAME = "players";
 	
-	public static final File questFile = new File("stats/quests.txt");
-	public static final Random random = new Random();
+	public static final File QUEST_FILE = new File("stats/quests.txt");
+	public static final int QUEST_AMOUNT = 5;
+	public static final Random RANDOM = new Random();
 	
 	private IdentifiableStringTemplate username;
 	private IntegerTemplate fame;
@@ -34,7 +36,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		banned = new BooleanTemplate("banned");
 		banned.set(false);
 		quests = new ListTemplate <Quest> ("quests", Quest::new);
-		refreshQuests();
+		for(int i = 0; i < QUEST_AMOUNT; i++) {
+			addQuest();
+		}
 		setIdentifier(this.username);
 	}
 	
@@ -61,7 +65,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		if(!banned.get()) {
 			
 			for(Quest quest : quests) {
-				quest.update(value, game);
+				quest.updateProgress(value, game);
 			}
 			database.save(this);
 			
@@ -128,33 +132,26 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		}
 	}
 	
-	public String questsJson() {
-		StringBuilder output = new StringBuilder();
-		output.append("[");
-		for(int i = 0; i < 3; i++) {
-			if(i != 0) {
-				output.append(", ");
-				output.append(quests.get(i).json());
-			}
+	public LinkedList <HashMap <String, Object>> getQuestInfos() {
+		LinkedList <HashMap <String, Object>> output = new LinkedList <HashMap <String, Object>> ();
+		for(Quest quest : quests) {
+			output.add(quest.getInfo());
 		}
-		output.append("]");
-		return output.toString();
+		return output;
 	}
 	
-	public void refreshQuests() {
+	public void addQuest() {
 		ArrayList <Quest> all = new ArrayList <Quest> ();
 		Scanner in;
 		try {
-			in = new Scanner(questFile);
+			in = new Scanner(QUEST_FILE);
 			while(in.hasNext()) {
-				all.add(new Quest(this, in.next(), in.nextInt(), in.nextInt()));
+				all.add(new Quest(this, in.next(), in.next(), in.nextInt(), in.nextInt(), in.nextInt(), in.nextInt()));
 			}
-			for(int i = 0; i < 3; i++) {
-				quests.clear();
-				quests.add(all.get(random.nextInt(all.size())));
-			}
+			quests.add(all.get(RANDOM.nextInt(all.size())));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		database.save(this);
 	}
 }

@@ -1,5 +1,6 @@
+import java.util.HashMap;
+
 import database.templates.IntegerTemplate;
-import database.templates.LongTemplate;
 import database.templates.ObjectTemplate;
 import database.templates.ObjectTemplateReference;
 import database.templates.StringTemplate;
@@ -11,37 +12,40 @@ public class Quest extends ObjectTemplate {
 	private ObjectTemplateReference <Player> player;
 	private IntegerTemplate times;
 	private IntegerTemplate score;
+	private StringTemplate name;
 	private StringTemplate game;
 	private IntegerTemplate reward;
 	private IntegerTemplate progress;
-	private LongTemplate duration;
+	private IntegerTemplate duration;
 	
-	public Quest(Player player, String game, int times, int score) {
+	public Quest(Player player, String name, String game, int times, int score, int reward, int duration) {
 		this.player = new ObjectTemplateReference <Player> ("player", Player::new);
 		this.player.set(player);
 		this.times = new IntegerTemplate("times");
 		this.times.set(times);
 		this.score = new IntegerTemplate("score");
 		this.score.set(score);
-		this.game = new StringTemplate("game", 1, 64);
+		this.name = new StringTemplate("name");
+		this.name.set(game);
+		this.game = new StringTemplate("game");
 		this.game.set(game);
 		this.reward = new IntegerTemplate("reward");
-		this.reward.set(0);
-		this.progress = new IntegerTemplate("progress", 0, Integer.MAX_VALUE);
+		this.reward.set(reward);
+		this.progress = new IntegerTemplate("progress");
 		this.progress.set(0);
-		this.duration = new LongTemplate("duration");
-		this.duration.set(new Long(60 * 24));
+		this.duration = new IntegerTemplate("duration");
+		this.duration.set(duration);
 	}
 	
 	public Quest() {
-		this(null, null, 0, 0);
+		this(null, null, null, 0, 0, 0, 0);
 	}
 
-	public Object json() {
-		return "{\"times\": \"" + times.get() + "\", \"score\": \"" + score.get() + "\", \"game\": \"" + game.get() + "\", \"progress\": \"" + progress.get() + "\"}";
+	public HashMap <String, Object> getInfo() {
+		return renderPrimitivesToMap(new String[] {"name", "game", "times", "score", "reward", "duration", "progress"});
 	}
 
-	public void update(int value, String game) {
+	public void updateProgress(int value, String game) {
 		if(this.game.get().equals(game)) {
 			if(value >= score.get()) {
 				progress.set(progress.get() + 1);
@@ -50,6 +54,15 @@ public class Quest extends ObjectTemplate {
 				}
 			}
 		}
+	}
+	
+	public void updateDuration() {
+		duration.set(duration.get() - 1);
+		if(duration.get() <= 0) {
+			player.get().addQuest();
+			database.delete(Quest.class, getId());
+		}
+		database.save(this);
 	}
 
 }
