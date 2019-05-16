@@ -13,6 +13,11 @@
 	<a class="nav-links" href="/games/brickbreaker"><h2>Brick Breaker</h2></a>
 	<div class="line"></div>
 	<a class="nav-links" href="/scoreboard"><h2>{{print translate "scoreboard"}}</h2></a>
+	{{
+		if not equals get "username" variables null
+			print "<a class=\"nav-links\" href=\"/quests\"><h2>Quests</h2></a>"
+		end
+	}}
 	<div class="line"></div>
 	{{
 		if equals get "username" variables null
