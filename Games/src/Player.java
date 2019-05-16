@@ -16,7 +16,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public static final String NAME = "players";
 	
-	public static final File QUEST_FILE = new File("stats/quests.txt");
+	public static final File QUEST_FILE = new File("files/quests.txt");
 	public static final int QUEST_AMOUNT = 5;
 	public static final Random RANDOM = new Random();
 	
@@ -25,6 +25,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	private IntegerTemplate suspicion;
 	private BooleanTemplate banned;
 	private ListTemplate <Quest> quests;
+	private IntegerTemplate coins;
 	
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
@@ -39,6 +40,8 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		for(int i = 0; i < QUEST_AMOUNT; i++) {
 			addQuest();
 		}
+		coins = new IntegerTemplate("coins");
+		coins.set(10);
 		setIdentifier(this.username);
 	}
 	
@@ -152,6 +155,21 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		database.save(this);
+	}
+
+	public void addCoins(int value) {
+		coins.set(coins.get() + value);
+	}
+	
+	public boolean removeCoins(int value) {
+		if(coins.get() >= value) {
+			coins.set(coins.get() - value);
+			return true;
+		}
+		return false;
+	}
+	
+	public int getCoins() {
+		return coins.get();
 	}
 }

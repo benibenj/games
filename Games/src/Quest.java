@@ -1,5 +1,6 @@
 import java.util.HashMap;
 
+import database.templates.BooleanTemplate;
 import database.templates.IntegerTemplate;
 import database.templates.ObjectTemplate;
 import database.templates.ObjectTemplateReference;
@@ -17,6 +18,7 @@ public class Quest extends ObjectTemplate {
 	private IntegerTemplate reward;
 	private IntegerTemplate progress;
 	private IntegerTemplate duration;
+	private BooleanTemplate completed;
 	
 	public Quest(Player player, String name, String game, int times, int score, int reward, int duration) {
 		this.player = new ObjectTemplateReference <Player> ("player", Player::new);
@@ -35,6 +37,8 @@ public class Quest extends ObjectTemplate {
 		this.progress.set(0);
 		this.duration = new IntegerTemplate("duration");
 		this.duration.set(duration);
+		this.completed = new BooleanTemplate("completed");
+		this.completed.set(false);
 	}
 	
 	public Quest() {
@@ -42,15 +46,20 @@ public class Quest extends ObjectTemplate {
 	}
 
 	public HashMap <String, Object> getInfo() {
-		return renderPrimitivesToMap(new String[] {"name", "game", "times", "score", "reward", "duration", "progress"});
+		return renderPrimitivesToMap(new String[] {"name", "game", "times", "score", "reward", "duration", "progress", "completed"});
 	}
 
 	public void updateProgress(int value, String game) {
-		if(this.game.get().equals(game)) {
-			if(value >= score.get()) {
-				progress.set(progress.get() + 1);
-				if(progress.get() >= times.get()) {
-					
+		if(!completed.get()) {
+			if(this.game.get().equals(game)) {
+				if(value >= score.get()) {
+					progress.set(progress.get() + 1);
+					if(progress.get() >= times.get()) {
+						completed.set(true);
+						player.get().addCoins(reward.get());
+						database.update(player.get());
+						database.update(this);
+					}
 				}
 			}
 		}
@@ -62,7 +71,7 @@ public class Quest extends ObjectTemplate {
 			player.get().addQuest();
 			database.delete(Quest.class, getId());
 		}
-		database.save(this);
+		database.update(this);
 	}
 
 }

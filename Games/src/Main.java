@@ -72,6 +72,8 @@ public class Main {
 		// Import PreciseIntervalJob from webserver repository
 		new PreciseIntervalJob(() -> {
 			// Update fame for all games listed here
+			System.out.println("Updating Fame");
+			
 			String[] games = {"minesweeper", "flappybird", "brickbreaker"};
 
 			for(String game : games) {
@@ -93,19 +95,36 @@ public class Main {
 					database.update(scores.get(i));
 				}
 				
-				// Update quests
-				LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
-				for(ObjectTemplate objectTemplate : questObjectTemplates) {
-					Quest quest = (Quest) objectTemplate;
-					quest.updateDuration();
-				}
 			}
+			
+			// Update quests
+			
+			System.out.println("Updating Quests");
+			
+			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
+			for(ObjectTemplate objectTemplate : questObjectTemplates) {
+				Quest quest = (Quest) objectTemplate;
+				quest.updateDuration();
+			}
+			
 		}, 60000);
 		
 		
 	}
 	
 	private static void initializeRoutes(Server server, RenderResponder responder, Database database) {
+		
+		server.on("ALL", ".*", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user == null) {
+				predefined.put("coins", null);
+			} else {
+				Player player = (Player) database.load(Player.class, user.getUsername());
+				predefined.put("coins", player.getCoins());
+			}
+			return responder.next();
+		});
+		
 		
 		// Game paths 
 		server.on("GET", "/", (Request request) -> {
@@ -130,6 +149,28 @@ public class Main {
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
 					HashMap <String, Object> variables = new HashMap <String, Object> ();
 					variables.put("quests", player.getQuestInfos());
+					StringBuilder json = new StringBuilder();
+					json.append("[");
+					boolean first = true;
+					for(HashMap <String, Object> quest : player.getQuestInfos()) {
+						if(!first) {
+							json.append(", ");
+						} else {
+							first = false;
+						}
+						json.append("{");
+						json.append("name: \"" + quest.get("name") + "\", ");
+						json.append("game: \"" + quest.get("game") + "\", ");
+						json.append("times: " + quest.get("times") + ", ");
+						json.append("score: " + quest.get("score") + ", ");
+						json.append("reward: " + quest.get("reward") + ", ");
+						json.append("duration: " + quest.get("duration") + ", ");
+						json.append("completed: " + quest.get("completed") + ", ");
+						json.append("progress: " + Math.floor(new Float((Integer) quest.get("progress")) / new Float((Integer) quest.get("times")) * 100));
+						json.append("}");
+					}
+					json.append("]");
+					variables.put("json", json.toString());
 					return responder.render("quests.html", request.languages, variables);
 				}
 			}
