@@ -1,9 +1,9 @@
 quest-flappybird-1 flappybird 20 5 1 1440
 quest-flappybird-2 flappybird 10 10 2 1440
 quest-flappybird-3 flappybird 1 30 3 1440
-quest-brickbreaker-1 brickbreaker 10 50 1 1440
-quest-brickbreaker-2 brickbreaker 5 100 2 1440
+quest-brickbreaker-1 brickbreaker 5 50 1 1440
+quest-brickbreaker-2 brickbreaker 2 100 2 1440
 quest-brickbreaker-3 brickbreaker 1 200 3 1440
 quest-minesweeper-1 minesweeper 5 50000 1 1440
-quest-minesweeper-2 minesweeper 2 100000 2 1440
-quest-minesweeper-3 minesweeper 1 130000 3 1440
+quest-minesweeper-2 minesweeper 2 80000 2 1440
+quest-minesweeper-3 minesweeper 1 100000 3 1440
