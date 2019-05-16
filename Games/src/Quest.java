@@ -57,7 +57,7 @@ public class Quest extends ObjectTemplate {
 					if(progress.get() >= times.get()) {
 						completed.set(true);
 						player.get().addCoins(reward.get());
-						database.update(player.get());
+						// database.update(player.get());
 						database.update(this);
 					}
 				}
