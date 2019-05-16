@@ -69,6 +69,7 @@ public class Quest extends ObjectTemplate {
 		duration.set(duration.get() - 1);
 		if(duration.get() <= 0) {
 			player.get().addQuest();
+			player.get().removeQuest(this);
 			database.delete(Quest.class, getId());
 		}
 		database.update(this);

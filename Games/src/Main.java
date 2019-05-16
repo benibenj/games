@@ -139,6 +139,9 @@ public class Main {
 		server.on("GET", "/games/brickbreaker", (Request request) -> {
 			return responder.render("games/brickbreaker.html", request.languages);
 		});
+		server.on("GET", "/games/chickenkiller", (Request request) -> {
+			return responder.render("games/chickenkiller.html", request.languages);
+		});
 		server.on("GET", "/scoreboard", (Request request) -> {
 			return responder.render("scoreboard.html", request.languages);
 		});
@@ -171,6 +174,19 @@ public class Main {
 					}
 					json.append("]");
 					variables.put("json", json.toString());
+					return responder.render("quests.html", request.languages, variables);
+				}
+			}
+			return responder.redirect("/signin");
+		});
+		
+		server.on("GET", "/casino", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					HashMap <String, Object> variables = new HashMap <String, Object> ();
+					variables.put("quests", player.getQuestInfos());
 					return responder.render("quests.html", request.languages, variables);
 				}
 			}

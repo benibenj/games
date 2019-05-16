@@ -151,7 +151,11 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			while(in.hasNext()) {
 				all.add(new Quest(this, in.next(), in.next(), in.nextInt(), in.nextInt(), in.nextInt(), in.nextInt()));
 			}
-			quests.add(all.get(RANDOM.nextInt(all.size())));
+			Quest newQuest = null;
+			do {
+				newQuest = all.get(RANDOM.nextInt(all.size()));
+			} while(quests.contains(newQuest));
+			quests.add(newQuest);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -171,5 +175,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public int getCoins() {
 		return coins.get();
+	}
+
+	public void removeQuest(Quest quest) {
+		quests.remove(quest);
 	}
 }

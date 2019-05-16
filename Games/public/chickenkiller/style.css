@@ -1,0 +1,15 @@
+html, body{
+    background-color: #dfdfff;
+}
+
+h1{
+    text-align: center;
+}
+
+#game{
+    margin: auto;
+    width: 100%;
+    max-width: 640px;
+    padding-bottom: 100%;
+    background-color: #bfbfef;
+}
