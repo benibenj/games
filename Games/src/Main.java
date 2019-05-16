@@ -71,16 +71,17 @@ public class Main {
 		
 		// Import PreciseIntervalJob from webserver repository
 		new PreciseIntervalJob(() -> {
+			// Update fame for all games listed here
 			String[] games = {"minesweeper", "flappybird", "brickbreaker"};
 
 			for(String game : games) {
-				LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+				LinkedList <ObjectTemplate> scoreObjectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
 					Score score = (Score) objectTemplate;
 					return score.getGame().equals(game);
 				});
 
 				ArrayList <Score> scores = new ArrayList <Score> ();
-				for(ObjectTemplate objectTemplate : objectTemplates) {
+				for(ObjectTemplate objectTemplate : scoreObjectTemplates) {
 					scores.add((Score) objectTemplate);
 				}
 				
@@ -90,6 +91,13 @@ public class Main {
 				for(int i = 0; i < Math.min(REWARD_SIZE, scores.size()); i++) {
 					scores.get(i).getPlayer().addFame(REWARD_SIZE - i);
 					database.update(scores.get(i));
+				}
+				
+				// Update quests
+				LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
+				for(ObjectTemplate objectTemplate : questObjectTemplates) {
+					Quest quest = (Quest) objectTemplate;
+					quest.updateDuration();
 				}
 			}
 		}, 60000);
@@ -104,19 +112,28 @@ public class Main {
 			return responder.render("index.html");
 		});
 		server.on("GET", "/games/minesweeper", (Request request) -> {
-			return responder.render("games/minesweeper.html");
+			return responder.render("games/minesweeper.html", request.languages);
 		});
 		server.on("GET", "/games/flappybird", (Request request) -> {
-			return responder.render("games/flappybird.html");
+			return responder.render("games/flappybird.html", request.languages);
 		});
 		server.on("GET", "/games/brickbreaker", (Request request) -> {
-			return responder.render("games/brickbreaker.html");
+			return responder.render("games/brickbreaker.html", request.languages);
 		});
 		server.on("GET", "/scoreboard", (Request request) -> {
-			return responder.render("scoreboard.html");
+			return responder.render("scoreboard.html", request.languages);
 		});
 		server.on("GET", "/quests", (Request request) -> {
-			return responder.render("quests.html");
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					HashMap <String, Object> variables = new HashMap <String, Object> ();
+					variables.put("quests", player.getQuestInfos());
+					return responder.render("quests.html", request.languages, variables);
+				}
+			}
+			return responder.redirect("/signin");
 		});
 		
 		// Scoreboard paths
