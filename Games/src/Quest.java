@@ -28,7 +28,7 @@ public class Quest extends ObjectTemplate {
 		this.score = new IntegerTemplate("score");
 		this.score.set(score);
 		this.name = new StringTemplate("name");
-		this.name.set(game);
+		this.name.set(name);
 		this.game = new StringTemplate("game");
 		this.game.set(game);
 		this.reward = new IntegerTemplate("reward");
