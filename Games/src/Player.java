@@ -37,9 +37,6 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		banned = new BooleanTemplate("banned");
 		banned.set(false);
 		quests = new ListTemplate <Quest> ("quests", Quest::new);
-		for(int i = 0; i < QUEST_AMOUNT; i++) {
-			addQuest();
-		}
 		coins = new IntegerTemplate("coins");
 		coins.set(10);
 		setIdentifier(this.username);
@@ -154,8 +151,10 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			Quest newQuest = null;
 			do {
 				newQuest = all.get(RANDOM.nextInt(all.size()));
+				newQuest.setDatabase(database);
 			} while(quests.contains(newQuest));
 			quests.add(newQuest);
+			System.out.println("add"+quests.size()+" "+quests+" "+newQuest.getId());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -178,6 +177,12 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	}
 
 	public void removeQuest(Quest quest) {
-		quests.remove(quest);
+		for(int i = quests.size() - 1; i >= 0; i--) {
+			if(quest.equals(quests.get(i))) {
+				quests.remove(i);
+				System.out.println("remove"+quests.size() + quest.getId());
+				return;
+			}
+		}
 	}
 }

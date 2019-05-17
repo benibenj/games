@@ -68,11 +68,22 @@ public class Quest extends ObjectTemplate {
 	public void updateDuration() {
 		duration.set(duration.get() - 1);
 		if(duration.get() <= 0) {
-			player.get().addQuest();
+			System.out.println(player.get());
 			player.get().removeQuest(this);
+			player.get().addQuest();
 			database.delete(Quest.class, getId());
 		}
 		database.update(this);
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		return (other instanceof Quest) && ((Quest) other).name.get().equals(name.get());
+	}
+	
+	@Override
+	public String toString() {
+		return name.get();
 	}
 
 }
