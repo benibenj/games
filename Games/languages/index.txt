@@ -76,3 +76,12 @@ times-the-score
 in-the-game
 completed
 time-remaining
+quest-flappybird-1
+quest-flappybird-2
+quest-flappybird-3
+quest-brickbreaker-1
+quest-brickbreaker-2
+quest-brickbreaker-3
+quest-minesweeper-1
+quest-minesweeper-2
+quest-minesweeper-3

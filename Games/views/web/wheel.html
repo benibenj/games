@@ -1,0 +1,78 @@
+{{include "top.html"}}
+<!-- CSS and JavaScript Files -->
+<link rel="stylesheet" type="text/css" href="/css/wheel.css">
+
+
+<main>
+	<h1>Wheel of Fortune</h1>
+	<img src="/img/wheel.png" id="wheel">
+	<button onclick="request()" id="btn">Spin The Wheel! 10 <img src="/img/coin.png"></button>
+	<div class="item" id="item">
+		<h3>You got:</h3>
+	</div>
+
+	<div class="hidden" id="hidden" onclick="hide()"></div>
+</main>
+
+{{include "bottom.html"}}
+
+<script>
+	var wheel = document.getElementById('wheel');
+	var btn = document.getElementById('btn');
+	var container = document.getElementById('item');
+	var hidden = document.getElementById('hidden');
+	var shifts;
+	var wait
+
+	function request(){
+		wheel.setAttribute("style","transform:rotate(0deg)");
+
+		var item = "15-coin";
+		let deg;
+
+		switch(item){
+			case "500-fame": deg = 45; break;
+			case "800-fame": deg = 165; break;
+			case "1000-fame": deg = 285; break;
+			case "2x-fame": deg = 225; break;
+			case "3x-fame": deg = 345; break;
+			case "5-coin": deg = 75; break;
+			case "10-coin": deg = 315; break;
+			case "15-coin": deg = 195; break;
+			case "nothing": deg = 15; break;
+			default:
+		}
+
+		wait = 30;
+		let turns = 5;
+		shifts = 24 * turns + deg/15;
+		spin(shifts);
+
+	}
+
+	function spin(times){
+		btn.style.display = "none";
+		setTimeout(function(){
+			let amount = ((shifts+1-times)*15)%360;
+			wheel.setAttribute("style","transform:rotate("+amount+"deg)")
+			if(times != 1){
+				spin(times-1);
+			}else{
+				showitem();
+			}
+		},wait);
+	}
+
+	function showitem(){
+		setTimeout(function(){
+			hidden.style.display = "block";
+			container.style.display = "block";
+		},1000);
+	}
+
+	function hide(){
+		hidden.style.display = "none";
+		container.style.display = "none";
+		btn.style.display = "block";
+	}
+</script>

@@ -34,6 +34,19 @@
 			default:
 		}
 
+		switch(titleText){
+			case "quest-flappybird-1": titleText = "Flippy de Flap Flap"; break;
+			case "quest-flappybird-2": titleText = "Up Up and Away"; break;
+			case "quest-flappybird-3": titleText = "Flappy Hero"; break;
+			case "quest-brickbreaker-1": titleText = "Breaking them Bricks"; break;
+			case "quest-brickbreaker-2": titleText = "No Build only Break"; break;
+			case "quest-brickbreaker-3": titleText = "Breakthrough"; break;
+			case "quest-minesweeper-1": titleText = "Booooom"; break;
+			case "quest-minesweeper-2": titleText = "Catch them all"; break;
+			case "quest-minesweeper-3": titleText = "Flag them up"; break;
+			default:
+		}
+
 		// Text versions
 		let contentText = "{{print translate "reach"}} " + amount + " {{print translate "times-the-score"}} " + score + " {{print translate "in-the-game"}} " + gameText;
 		let rewardText = "{{print translate "reward"}}: " + rewardPoints + " {{print translate "coins"}}";
