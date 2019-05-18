@@ -86,3 +86,7 @@ quest-minesweeper-1
 quest-minesweeper-2
 quest-minesweeper-3
 wheel
+not-enough-coins
+booster-info
+you-got
+nothing
