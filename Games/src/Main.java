@@ -78,7 +78,7 @@ public class Main {
 			// Update fame for all games listed here
 			System.out.println("Updating Fame");
 			
-			String[] games = {"minesweeper", "flappybird", "brickbreaker"};
+			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller"};
 
 			for(String game : games) {
 				LinkedList <ObjectTemplate> scoreObjectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
