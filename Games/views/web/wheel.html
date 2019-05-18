@@ -27,11 +27,11 @@
 	function request(){
 		getspin(function(info){
 			if (!info.success) {
-				console.log('there was an error');
+				console.log('not enough coins');
 				return;
 			}
 			if (info.result === -1) {
-				console.log('not enough coins');
+				console.log('there was an error');
 			}
 			else{
 
@@ -57,7 +57,7 @@
 				}
 
 				wait = 30;
-				let turns = 5;
+				let turns = 8;
 				shifts = 24 * turns + deg/15;
 				spin(shifts);
 			}

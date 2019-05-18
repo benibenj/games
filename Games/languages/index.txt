@@ -85,3 +85,4 @@ quest-brickbreaker-3
 quest-minesweeper-1
 quest-minesweeper-2
 quest-minesweeper-3
+wheel
