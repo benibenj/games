@@ -77,7 +77,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			for(ObjectTemplate questObjectTemplate : questObjectTemplates) {
 				quests.add((Quest) questObjectTemplate);
 			}
-			
+
 			for(Quest quest : quests) {
 				quest.updateProgress(value, game);
 				// database.update(this);
@@ -208,7 +208,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		return coins.get();
 	}
 	
-	public int rotateWheel() {
+	public int spinWheel() {
 		if(getCoins() < WHEEL_COST) {
 			return -1;
 		} else {

@@ -58,8 +58,8 @@ public class Quest extends ObjectTemplate {
 						completed.set(true);
 						player.get().addCoins(reward.get());
 						// database.update(player.get());
-						database.update(this);
 					}
+					database.update(this);
 				}
 			}
 		}

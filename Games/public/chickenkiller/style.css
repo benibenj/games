@@ -4,12 +4,67 @@ html, body{
 
 h1{
     text-align: center;
+    font-size: 32px;
+    padding: 16px;
 }
 
 #game{
+    position: relative;
     margin: auto;
     width: 100%;
-    max-width: 640px;
-    padding-bottom: 100%;
-    background-color: #bfbfef;
+    max-width: 512px;
+}
+
+#game *{
+    position: absolute;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#background{
+    width: 100%;
+}
+
+#foreground{
+    width: 100%;
+}
+
+#chicken-0{
+    bottom: -256px;
+    left: 0px;
+}
+
+#chicken-1{
+    bottom: -256px;
+    left: 25%;
+}
+
+#chicken-2{
+    bottom: -256px;
+    left: 256px;
+}
+
+#chicken-3{
+    bottom: -256px;
+    left: 384px;
+}
+
+#chicken-4{
+    bottom: -384px;
+    left: 0px;
+}
+
+#chicken-5{
+    bottom: -384px;
+    left: 128px;
+}
+
+#chicken-6{
+    bottom: -384px;
+    left: 256px;
+}
+
+#chicken-7{
+    bottom: -384px;
+    left: 384px;
 }

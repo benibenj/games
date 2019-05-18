@@ -204,7 +204,7 @@ public class Main {
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
 					HashMap <String, Object> variables = new HashMap <String, Object> ();
 					variables.put("allow", player.getCoins() >= Player.WHEEL_COST);
-					return responder.render("quests.html", request.languages, variables);
+					return responder.render("wheel.html", request.languages, variables);
 				}
 			}
 			return responder.redirect("/signin");
@@ -227,13 +227,13 @@ public class Main {
 		 *   8: +20 coins
 		 *   9-12: Nothing won :(
 		 */
-		server.on("GET", "/wheel/rotate", (Request request) -> {
+		server.on("GET", "/wheel/spin", (Request request) -> {
 			User user = (User) request.session.load();
 			if(user != null) {
 				Player player = null;
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
-					int result = player.rotateWheel();
-					responder.text("{success: " + (result != -1) + ", result: " + result + "}");
+					int result = player.spinWheel();
+					return responder.text("{success: " + (result != -1) + ", result: " + result + "}");
 				}
 			}
 			return responder.text("error");
