@@ -233,7 +233,7 @@ public class Main {
 				Player player = null;
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
 					int result = player.spinWheel();
-					return responder.text("{success: " + (result != -1) + ", result: " + result + "}");
+					return responder.text("{\"success\": " + (result != -1) + ", \"result\": " + result + "}");
 				}
 			}
 			return responder.text("error");

@@ -4,6 +4,7 @@ html, body{
 
 h1{
     text-align: center;
+    font-family: cursive;
     font-size: 32px;
     padding: 16px;
 }
@@ -21,50 +22,53 @@ h1{
     image-rendering: crisp-edges;
 }
 
-#background{
+#background, #foreground{
     width: 100%;
 }
 
-#foreground{
-    width: 100%;
+.chicken, .gnome{
+    width: 25%;
+    transform-origin: bottom left;
+    transform: rotateX(90deg);
+    transition: transform 500ms;
 }
 
-#chicken-0{
-    bottom: -256px;
-    left: 0px;
+.chicken.active, .gnome.active{
+    transform: rotateX(0deg);
 }
 
-#chicken-1{
-    bottom: -256px;
+#chicken-0, #chicken-4, #gnome-0, #gnome-4{
+    left: 0%;
+}
+
+#chicken-1, #chicken-5, #gnome-1, #gnome-5{
     left: 25%;
 }
 
-#chicken-2{
+#chicken-2, #chicken-6, #gnome-2, #gnome-6{
+    left: 50%;
+}
+
+#chicken-3, #chicken-7, #gnome-3, #gnome-7{
+    left: 75%;
+}
+
+#chicken-0, #chicken-1, #chicken-2, #chicken-3, #gnome-0, #gnome-1, #gnome-2, #gnome-3{
     bottom: -256px;
-    left: 256px;
 }
 
-#chicken-3{
-    bottom: -256px;
-    left: 384px;
-}
-
-#chicken-4{
+#chicken-4, #chicken-5, #chicken-6, #chicken-7, #gnome-4, #gnome-5, #gnome-6, #gnome-7{
     bottom: -384px;
-    left: 0px;
 }
 
-#chicken-5{
-    bottom: -384px;
-    left: 128px;
-}
+@media only screen and (max-width: 512px){
 
-#chicken-6{
-    bottom: -384px;
-    left: 256px;
-}
+    #chicken-0, #chicken-1, #chicken-2, #chicken-3, #gnome-0, #gnome-1, #gnome-2, #gnome-3{
+        bottom: -50vw;
+    }
 
-#chicken-7{
-    bottom: -384px;
-    left: 384px;
-}
+    #chicken-4, #chicken-5, #chicken-6, #chicken-7, #gnome-4, #gnome-5, #gnome-6, #gnome-7{
+        bottom: -75vw;
+    }
+
+  }
