@@ -89,6 +89,10 @@ main .container .content[id="brickbreaker"]{
 	background-color: #000;
 }
 
+main .container .content[id="chickenkiller"]{
+	background-color: #fff;
+}
+
 main .container .content h2{
 	font-size: 20px;
 	font-family: 'railway', sans-serif;
@@ -99,6 +103,11 @@ main .container .content h2[id="brickbreaker"]{
 	color: #fff;
 }
 
+main .placer{
+	width: 300px;
+	height: 0px;
+	margin: 0 20px;
+}
 
 @media (max-width: 700px){
 	main .container{
