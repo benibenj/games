@@ -15,8 +15,8 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public static final String NAME = "players";
 	
+	public static final int WHEEL_COST = 10;
 	public static final File QUEST_FILE = new File("files/quests.txt");
-	public static final int QUEST_AMOUNT = 5;
 	public static final Random RANDOM = new Random();
 	
 	private IdentifiableStringTemplate username;
@@ -24,6 +24,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	private IntegerTemplate suspicion;
 	private BooleanTemplate banned;
 	private IntegerTemplate coins;
+	private IntegerTemplate booster;
+	private BooleanTemplate boosted;
+	private IntegerTemplate famePerMinute;
 	
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
@@ -36,6 +39,12 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		banned.set(false);
 		coins = new IntegerTemplate("coins");
 		coins.set(10);
+		booster = new IntegerTemplate("booster");
+		booster.set(0);
+		boosted = new BooleanTemplate("boosted");
+		boosted.set(false);
+		famePerMinute = new IntegerTemplate("fame-per-minute");
+		famePerMinute.set(0);
 		setIdentifier(this.username);
 	}
 	
@@ -107,6 +116,10 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public void addFame(int addend) {
 		fame.set(fame.get() + addend);
 	}
+	
+	public void addBooster(int addend) {
+		booster.set(booster.get() + addend);
+	}
 
 	@Override
 	public int compareTo(Player otherPlayer) {
@@ -151,7 +164,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		return output;
 	}
 	
-	public void addQuest() {
+	public void addQuest(int duration) {
 		ArrayList <Quest> all = new ArrayList <Quest> ();
 		Scanner in;
 		try {
@@ -172,7 +185,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			do {
 				newQuest = all.get(RANDOM.nextInt(all.size()));
 				newQuest.setDatabase(database);
-			} while(quests.contains(newQuest));
+			} while(quests.contains(newQuest) || newQuest.getDuration() != duration);
 			database.update(newQuest);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -193,6 +206,62 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public int getCoins() {
 		return coins.get();
+	}
+	
+	public int rotateWheel() {
+		if(getCoins() < WHEEL_COST) {
+			return -1;
+		} else {
+			removeCoins(WHEEL_COST);
+			int result = RANDOM.nextInt(12);
+			/*
+			switch(result) {
+			case 0:
+				addFame(500);
+			case 1:
+				addFame(1000);
+			case 2:
+				addFame(2000);
+			case 3:
+				addBooster(60);
+			case 4:
+				addBooster(180);
+			case 5:
+				addBooster(1440);
+			case 6:
+				addCoins(5);
+			case 7:
+				addCoins(10);
+			case 8:
+				addCoins(20);
+			}
+			*/
+			database.update(this);
+			return result;
+		}
+	}
+
+	public boolean isBoosted() {
+		return boosted.get();
+	}
+	
+	public void toggleBooster() {
+		boosted.set(!boosted.get());
+	}
+
+	public boolean canBoost() {
+		if(booster.get() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public void setFamePerMinute(int reward) {
+		famePerMinute.set(reward);
+	}
+	
+	public int getFamePerMinute() {
+		return famePerMinute.get();
 	}
 	
 }

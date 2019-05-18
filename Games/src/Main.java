@@ -46,8 +46,8 @@ public class Main {
 			(User user) -> {
 				Player player = new Player(user.getUsername());
 				player.setDatabase(database);
-				for(int i = 0; i < Player.QUEST_AMOUNT; i++) {
-					player.addQuest();
+				for(int i = 0; i < 5; i++) {
+					player.addQuest(1440);
 				}
 				database.save(player);
 			}, 
@@ -93,9 +93,15 @@ public class Main {
 				
 				Collections.sort(scores);
 				
-				
 				for(int i = 0; i < Math.min(REWARD_SIZE, scores.size()); i++) {
-					scores.get(i).getPlayer().addFame(REWARD_SIZE - i);
+					int reward = (REWARD_SIZE - i);
+					Player player = scores.get(i).getPlayer();
+					if(player.isBoosted() && player.canBoost()) {
+						player.addBooster(-1);
+						reward *= 2;
+					}
+					player.setFamePerMinute(reward);
+					scores.get(i).getPlayer().addFame(reward);
 					database.update(scores.get(i));
 				}
 				
@@ -121,10 +127,17 @@ public class Main {
 			User user = (User) request.session.load();
 			if(user == null) {
 				predefined.put("coins", null);
+				predefined.put("boost-enabled", null);
+				predefined.put("boost-active", null);
+				predefined.put("fame-per-minute", null);
 			} else {
 				Player player = (Player) database.load(Player.class, user.getUsername());
 				predefined.put("coins", player.getCoins());
+				predefined.put("boost-enabled", player.isBoosted());
+				predefined.put("boost-active", player.isBoosted() && player.canBoost());
+				predefined.put("fame-per-minute", player.getFamePerMinute());
 			}
+			predefined.put("players-online", server.activeCount());
 			return responder.next();
 		});
 		
@@ -183,17 +196,59 @@ public class Main {
 			return responder.redirect("/signin");
 		});
 		
-		server.on("GET", "/casino", (Request request) -> {
+		
+		server.on("GET", "/wheel", (Request request) -> {
 			User user = (User) request.session.load();
 			if(user != null) {
 				Player player = null;
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
 					HashMap <String, Object> variables = new HashMap <String, Object> ();
-					variables.put("quests", player.getQuestInfos());
+					variables.put("allow", player.getCoins() >= Player.WHEEL_COST);
 					return responder.render("quests.html", request.languages, variables);
 				}
 			}
 			return responder.redirect("/signin");
+		});
+		
+		/*
+		 * ==================================================
+		 * Returns a JSON object with the following contents:
+		 * ==================================================
+		 * success: true if user has enough coins, false otherwise
+		 * result: -1 if not successful, number from 0-12 otherwise
+		 *   0: +500 fame
+		 *   1: +1000 fame
+		 *   2: +2000 fame
+		 *   3: +60 min 2x booster
+		 *   4: +180 min 2x booster
+		 *   5: +1440 min 2x booster
+		 *   6: +5 coins
+		 *   7: +10 coins
+		 *   8: +20 coins
+		 *   9-12: Nothing won :(
+		 */
+		server.on("GET", "/wheel/rotate", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					int result = player.rotateWheel();
+					responder.text("{success: " + (result != -1) + ", result: " + result + "}");
+				}
+			}
+			return responder.text("error");
+		});
+		
+		server.on("GET", "/profile/boost", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					player.toggleBooster();
+					database.update(player);
+				}
+			}
+			return responder.redirect("/profile");
 		});
 		
 		// Scoreboard paths

@@ -69,7 +69,7 @@ public class Quest extends ObjectTemplate {
 		duration.set(duration.get() - 1);
 		if(duration.get() <= 0) {
 			database.deleteId(Quest.class, getId());
-			player.get().addQuest();
+			player.get().addQuest(duration.get());
 		} else {
 			database.update(this);
 		}
@@ -79,6 +79,7 @@ public class Quest extends ObjectTemplate {
 	public boolean equals(Object other) {
 		return (other instanceof Quest) && ((Quest) other).name.get().equals(name.get()) && ((Quest) other).player.get().equals(player.get());
 	}
+	
 	/*
 	@Override
 	public String toString() {
@@ -88,5 +89,9 @@ public class Quest extends ObjectTemplate {
 
 	public Player getPlayer() {
 		return player.get();
+	}
+
+	public int getDuration() {
+		return duration.get();
 	}
 }
