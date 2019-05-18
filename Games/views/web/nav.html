@@ -6,17 +6,17 @@
 	<!-- Pushes down links -->
 	<div class="nothingbox"></div>
 	<!-- links -->
-	<a class="nav-links" href="/"><h2>{{print translate "home"}}</h2></a>
+	<a class="nav-links" href="/"><h2 class="button">{{print translate "home"}}</h2></a>
 	<div class="line"></div>
-	<a class="nav-links" href="/games/minesweeper"><h2>Minesweeper</h2></a>
-	<a class="nav-links" href="/games/flappybird"><h2>Flappy Bird</h2></a>
-	<a class="nav-links" href="/games/brickbreaker"><h2>Brick Breaker</h2></a>
+	<a class="nav-links" href="/games/minesweeper"><h2 class="button">Minesweeper</h2></a>
+	<a class="nav-links" href="/games/flappybird"><h2 class="button">Flappy Bird</h2></a>
+	<a class="nav-links" href="/games/brickbreaker"><h2 class="button">Brick Breaker</h2></a>
 	<div class="line"></div>
-	<a class="nav-links" href="/scoreboard"><h2>{{print translate "scoreboard"}}</h2></a>
+	<a class="nav-links" href="/scoreboard"><h2 class="button">{{print translate "scoreboard"}}</h2></a>
 	{{
 		if not equals get "username" variables null
-			print "<a class=\"nav-links\" href=\"/quests\"><h2>Quests</h2></a>"
-			print "<a class=\"nav-links\" href=\"/wheel\"><h2>"
+			print "<a class=\"nav-links\" href=\"/quests\"><h2 class=\"button\">Quests</h2></a>"
+			print "<a class=\"nav-links\" href=\"/wheel\"><h2 class=\"button\">"
 			print translate "wheel"
 			print "</h2></a>"
 		end
@@ -24,18 +24,18 @@
 	<div class="line"></div>
 	{{
 		if equals get "username" variables null
-			print "<a class=\"nav-links\" href=\"/signin\"><h2>"
+			print "<a class=\"nav-links\" href=\"/signin\"><h2 class=\"button\">"
 			print translate "login"
 			print "</h2></a>"
-			print "<a class=\"nav-links\" href=\"/signup\"><h2>"
+			print "<a class=\"nav-links\" href=\"/signup\"><h2 class=\"button\">"
 			print translate "signup"
 			print "</h2></a>"
 		end
 		if not equals get "username" variables null
-			print "<a class=\"nav-links\" href=\"/profile\"><h2>"
+			print "<a class=\"nav-links\" href=\"/profile\"><h2 class=\"button\">"
 			print translate "profile"
 			print "</h2></a>"
-			print "<h2><img src=\"/img/coin.png\">"
+			print "<h2 class=\"button\"><img src=\"/img/coin.png\">"
 			print " "
 			print get "coins" variables
 			print "</h2>"

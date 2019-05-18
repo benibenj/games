@@ -5,6 +5,7 @@
 <h1>Chickenkiller</h1>
 <div id="game">
     <img src="/chickenkiller/background.png" id="background"></img>
+    <img src="/chickenkiller/foreground.png" id="foreground"></img>
     <img src="/chickenkiller/chicken.png" class="chicken" id="chicken-0"></img>
     <img src="/chickenkiller/chicken.png" class="chicken" id="chicken-1"></img>
     <img src="/chickenkiller/chicken.png" class="chicken" id="chicken-2"></img>
@@ -21,6 +22,21 @@
     <img src="/chickenkiller/gnome.png" class="gnome" id="gnome-5"></img>
     <img src="/chickenkiller/gnome.png" class="gnome" id="gnome-6"></img>
     <img src="/chickenkiller/gnome.png" class="gnome" id="gnome-7"></img>
-    <img src="/chickenkiller/foreground.png" id="foreground"></img>
+    <div id="start">
+            <h2>Howdy</h2>
+            <p>This game is very simple. Kill the chickens, don't kill the gnomes. Got it?</p>
+            <button class="start">Let's Go!</button>
+        </div>
+    <div id="gameover">
+        <h2>Game Over</h2>
+        <p>Whoa, this wasn't very impressive, your score was only <span class="score"></span>. You should try again.</p>
+        <button class="start">Restart!</button>
+    </div>
+    <div id="overlay">
+        <p>
+            Score: <span class="score"></span><br/>
+            <span class="health"></span>
+        </p>
+    </div>
 </div>
 {{include "bottom.html"}}

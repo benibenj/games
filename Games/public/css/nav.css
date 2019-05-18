@@ -45,14 +45,16 @@ nav a.nav-links{
 	text-decoration: none;
 }
 
-nav h2{
+nav h2.button{
 	color: var(--light);
 	font-family: arial;
-	font-size: 1.4em;
+    font-size: 1.4em;
+    padding: 0;
 	padding-left: 15%;
 	margin: 0;
 	line-height: 40px;
-	word-break: break-all;
+    word-break: break-all;
+    text-align: left;
 }
 
 nav img{

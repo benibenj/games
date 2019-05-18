@@ -178,14 +178,14 @@ public class Main {
 							first = false;
 						}
 						json.append("{");
-						json.append("name: \"" + quest.get("name") + "\", ");
-						json.append("game: \"" + quest.get("game") + "\", ");
-						json.append("times: " + quest.get("times") + ", ");
-						json.append("score: " + quest.get("score") + ", ");
-						json.append("reward: " + quest.get("reward") + ", ");
-						json.append("duration: " + quest.get("duration") + ", ");
-						json.append("completed: " + quest.get("completed") + ", ");
-						json.append("progress: " + Math.floor(new Float((Integer) quest.get("progress")) / new Float((Integer) quest.get("times")) * 100));
+						json.append("\"name\": \"" + quest.get("name") + "\", ");
+						json.append("\"game\": \"" + quest.get("game") + "\", ");
+						json.append("\"times\": " + quest.get("times") + ", ");
+						json.append("\"score\": " + quest.get("score") + ", ");
+						json.append("\"reward\": " + quest.get("reward") + ", ");
+						json.append("\"duration\": " + quest.get("duration") + ", ");
+						json.append("\"completed\": " + quest.get("completed") + ", ");
+						json.append("\"progress\": " + Math.floor(new Float((Integer) quest.get("progress")) / new Float((Integer) quest.get("times")) * 100));
 						json.append("}");
 					}
 					json.append("]");

@@ -1,12 +1,19 @@
 html, body{
-    background-color: #dfdfff;
+    background-color: white;
+}
+
+h1, h2{
+    text-align: center;
+    font-family: cursive;
+    padding: 16px;
 }
 
 h1{
-    text-align: center;
-    font-family: cursive;
     font-size: 32px;
-    padding: 16px;
+}
+
+h2{
+    font-size: 24px;
 }
 
 #game{
@@ -16,7 +23,48 @@ h1{
     max-width: 512px;
 }
 
-#game *{
+#overlay{
+    width: 100%;
+}
+
+#start, #gameover{
+    box-sizing: border-box;
+    width: 256px;
+    height: 192px;
+    margin-left: calc(calc(100% - 256px) / 2);
+    margin-top: calc(calc(100% - 192px) / 2);
+    padding: 16px;
+    background-color: white;
+    border-radius: 16px;
+    border: 2px solid black;
+}
+
+#gameover{
+    display: none;
+}
+
+p{
+    text-align: center;
+}
+
+button{
+    display: block;
+    margin: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 8px;
+    outline: none;
+    background-color: lightgray;
+    border-radius: 16px;
+    border: 2px solid black;
+    transition: transform 200ms;
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+#game > *{
     position: absolute;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
@@ -30,7 +78,7 @@ h1{
     width: 25%;
     transform-origin: bottom left;
     transform: rotateX(90deg);
-    transition: transform 500ms;
+    transition: transform 200ms;
 }
 
 .chicken.active, .gnome.active{
@@ -69,6 +117,10 @@ h1{
 
     #chicken-4, #chicken-5, #chicken-6, #chicken-7, #gnome-4, #gnome-5, #gnome-6, #gnome-7{
         bottom: -75vw;
+    }
+
+    #start, #gameover{
+        margin-top: calc(calc(100vw - 192px) / 2);
     }
 
   }
