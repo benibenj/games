@@ -9,7 +9,6 @@ import java.util.Scanner;
 import database.templates.BooleanTemplate;
 import database.templates.IdentifiableStringTemplate;
 import database.templates.IntegerTemplate;
-import database.templates.ListTemplate;
 import database.templates.ObjectTemplate;
 
 public class Player extends ObjectTemplate implements Comparable <Player> {
@@ -24,7 +23,6 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	private IntegerTemplate fame;
 	private IntegerTemplate suspicion;
 	private BooleanTemplate banned;
-	private ListTemplate <Quest> quests;
 	private IntegerTemplate coins;
 	
 	public Player(String username) {
@@ -36,7 +34,6 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		suspicion.set(0);
 		banned = new BooleanTemplate("banned");
 		banned.set(false);
-		quests = new ListTemplate <Quest> ("quests", Quest::new);
 		coins = new IntegerTemplate("coins");
 		coins.set(10);
 		setIdentifier(this.username);
@@ -64,10 +61,18 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public Score addScore(int value, String game) {
 		if(!banned.get()) {
 			
+			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+				return ((Quest) objectTemplate).getPlayer().equals(this);
+			});
+			LinkedList <Quest> quests = new LinkedList <Quest> ();
+			for(ObjectTemplate questObjectTemplate : questObjectTemplates) {
+				quests.add((Quest) questObjectTemplate);
+			}
+			
 			for(Quest quest : quests) {
 				quest.updateProgress(value, game);
+				// database.update(this);
 			}
-			database.save(this);
 			
 			Score newScore = new Score(this, value, game);
 			database.save(newScore);
@@ -134,9 +139,15 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public LinkedList <HashMap <String, Object>> getQuestInfos() {
 		LinkedList <HashMap <String, Object>> output = new LinkedList <HashMap <String, Object>> ();
-		for(Quest quest : quests) {
-			output.add(quest.getInfo());
+		
+		LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+			return ((Quest) objectTemplate).getPlayer().equals(this);
+		});
+		
+		for(ObjectTemplate questObjectTemplate : questObjectTemplates) {
+			output.add(((Quest) questObjectTemplate).getInfo());
 		}
+		
 		return output;
 	}
 	
@@ -148,13 +159,21 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			while(in.hasNext()) {
 				all.add(new Quest(this, in.next(), in.next(), in.nextInt(), in.nextInt(), in.nextInt(), in.nextInt()));
 			}
+			
+			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+				return ((Quest) objectTemplate).getPlayer().equals(this);
+			});
+			LinkedList <Quest> quests = new LinkedList <Quest> ();
+			for(ObjectTemplate questObjectTemplate : questObjectTemplates) {
+				quests.add((Quest) questObjectTemplate);
+			}
+			
 			Quest newQuest = null;
 			do {
 				newQuest = all.get(RANDOM.nextInt(all.size()));
 				newQuest.setDatabase(database);
 			} while(quests.contains(newQuest));
-			quests.add(newQuest);
-			System.out.println("add"+quests.size()+" "+quests+" "+newQuest.getId());
+			database.update(newQuest);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -175,14 +194,5 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public int getCoins() {
 		return coins.get();
 	}
-
-	public void removeQuest(Quest quest) {
-		for(int i = quests.size() - 1; i >= 0; i--) {
-			if(quest.equals(quests.get(i))) {
-				quests.remove(i);
-				System.out.println("remove"+quests.size() + quest.getId());
-				return;
-			}
-		}
-	}
+	
 }

@@ -46,7 +46,7 @@ public class Main {
 			(User user) -> {
 				Player player = new Player(user.getUsername());
 				player.setDatabase(database);
-				for(int i = 0; i < player.QUEST_AMOUNT; i++) {
+				for(int i = 0; i < Player.QUEST_AMOUNT; i++) {
 					player.addQuest();
 				}
 				database.save(player);
