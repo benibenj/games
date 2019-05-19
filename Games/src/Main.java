@@ -127,14 +127,16 @@ public class Main {
 			User user = (User) request.session.load();
 			if(user == null) {
 				predefined.put("coins", null);
-				predefined.put("boost-enabled", null);
-				predefined.put("boost-active", null);
+				predefined.put("booster-enabled", null);
+				predefined.put("booster-active", null);
+				predefined.put("booster-time", null);
 				predefined.put("fame-per-minute", null);
 			} else {
 				Player player = (Player) database.load(Player.class, user.getUsername());
 				predefined.put("coins", player.getCoins());
-				predefined.put("boost-enabled", player.isBoosted());
-				predefined.put("boost-active", player.isBoosted() && player.canBoost());
+				predefined.put("booster-enabled", player.isBoosted());
+				predefined.put("booster-active", player.isBoosted() && player.canBoost());
+				predefined.put("booster-time", player.getBoosterTime());
 				predefined.put("fame-per-minute", player.getFamePerMinute());
 			}
 			predefined.put("players-online", server.activeCount());

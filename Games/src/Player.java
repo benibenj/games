@@ -263,5 +263,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public int getFamePerMinute() {
 		return famePerMinute.get();
 	}
+
+	public Object getBoosterTime() {
+		return booster.get();
+	}
 	
 }
