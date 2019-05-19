@@ -6,6 +6,7 @@
 	<button id="1">Minesweeper</button>
 	<button id="2">Flappybird</button>
 	<button id="3">Brick Breaker</button>
+	<button id="4">Chicken Killer</button>
 </div>
 
 <main>
@@ -59,6 +60,13 @@
 		loadGameScoreboard("brickbreaker");
 	});
 
+	document.getElementById("4").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Chicken Killer";
+		document.getElementById("text").innerHTML = "";
+		changeBackgroundColor("4");
+		loadGameScoreboard("chickenkiller");
+	});
+
 	// change backgroundcolor
 	function changeBackgroundColor(id){
 		// remove the current color
@@ -66,6 +74,7 @@
 		document.getElementById("1").style.backgroundColor = "";
 		document.getElementById("2").style.backgroundColor = "";
 		document.getElementById("3").style.backgroundColor = "";
+		document.getElementById("4").style.backgroundColor = "";
 		// add new color
 		document.getElementById(id).style.backgroundColor = "#F3B54A";
 	}

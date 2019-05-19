@@ -6,9 +6,13 @@
 <main>
 	<h1>Wheel of Fortune</h1>
 	<img src="/img/wheel.png" id="wheel">
+	<div class="error-message" id="error">{{print translate "error"}}</div>
+	<div class="error-message" id="no-coins">{{print translate "not-enough-coins"}}</div>
 	<button onclick="request()" id="btn">Spin The Wheel! 10 <img src="/img/coin.png"></button>
 	<div class="item" id="item">
-		<h3>You got:</h3>
+		<h3>{{print translate "you-got"}}</h3>
+		<div class="reward" id="reward"></div>
+		<div class="information" id="information">{{print translate "booster-info"}}</div>
 	</div>
 
 	<div class="hidden" id="hidden" onclick="hide()"></div>
@@ -28,10 +32,12 @@
 		getspin(function(info){
 			if (!info.success) {
 				console.log('not enough coins');
+				document.getElementById('no-coins').style.display = "block";
 				return;
 			}
 			if (info.result === -1) {
 				console.log('there was an error');
+				document.getElementById('error').style.display = "block";
 			}
 			else{
 
@@ -39,20 +45,50 @@
 
 				var item = "15-coin";
 				let deg;
+				let win = document.getElementById('reward');
+				let information = document.getElementById('information');
+				information.style.display = "none";
 
 				switch(info.result){
-					case 0: deg = 45; break;
-					case 1: deg = 285; break;
-					case 2: deg = 165; break;
-					case 3: deg = 225; break;
-					case 4: deg = 345; break;
-					case 5: deg = 105; break;
-					case 6: deg = 75; break;
-					case 7: deg = 315; break;
-					case 8: deg = 195; break;
-					case 9: deg = 15; break;
-					case 10: deg = 135; break;
-					case 11: deg = 255; break;
+					case 0: deg = 45; 
+							win.innerHTML = "+500 Fame";
+					break;
+					case 1: deg = 285; 
+							win.innerHTML = "+1000 Fame";
+					break;
+					case 2: deg = 165; 
+							win.innerHTML = "+2000 Fame";
+					break;
+					case 3: deg = 225; 
+							win.innerHTML = "2x Booster - 1h";
+							information.style.display = "block";
+					break;
+					case 4: deg = 345; 
+							win.innerHTML = "2x Booster - 3h";
+							information.style.display = "block";
+					break;
+					case 5: deg = 105; 
+							win.innerHTML = "2x Booster - 24h";
+							information.style.display = "block";
+					break;
+					case 6: deg = 75; 
+							win.innerHTML = "+5 {{print translate "coins"}}";
+					break;
+					case 7: deg = 315; 
+							win.innerHTML = "+10 {{print translate "coins"}}";
+					break;
+					case 8: deg = 195; 
+							win.innerHTML = "+20 {{print translate "coins"}}";
+					break;
+					case 9: deg = 15; 
+							win.innerHTML = "{{print translate "nothing"}}";
+					break;
+					case 10: deg = 135; 
+							win.innerHTML = "{{print translate "nothing"}}";
+					break;
+					case 11: deg = 255; 
+							win.innerHTML = "{{print translate "nothing"}}";
+					break;
 					default:
 				}
 

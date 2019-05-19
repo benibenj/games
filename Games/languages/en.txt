@@ -86,3 +86,7 @@ Booooom
 Catch them all
 Flag them up
 Wheel of Fortune
+You don't have enough coins
+Navigate to your profile to activate the Booster
+You received:
+Nothing

@@ -86,3 +86,7 @@ Booooom
 Catch them all
 Flag them up
 Glücksrad
+Sie besitzen nicht genügend Münzen
+Begebe dich zu deinem Profil um den Booster zu aktivieren
+Sie erhielten:
+Nichts
