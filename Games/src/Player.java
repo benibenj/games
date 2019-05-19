@@ -214,7 +214,6 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		} else {
 			removeCoins(WHEEL_COST);
 			int result = RANDOM.nextInt(12);
-			/*
 			switch(result) {
 			case 0:
 				addFame(500);
@@ -235,7 +234,6 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			case 8:
 				addCoins(20);
 			}
-			*/
 			database.update(this);
 			return result;
 		}
