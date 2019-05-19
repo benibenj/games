@@ -2,6 +2,26 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 
 <h1>We Serve Games!</h1>
+<p>
+    {{
+        print get "players-online" variables
+        print " "
+        print translate "players-online"
+    }}
+</p>
+<p>
+    {{
+        print get "fame-per-minute" variables
+        print " "
+        print translate "fame-per-minute"
+        if get "booster-active" variables
+            print " ("
+            print translate "booster-active"
+            print ")"
+        end
+    }}
+</p>
+
 
 <main>
 	<div class="container"  id="container" onclick="location.href='/games/minesweeper';">
