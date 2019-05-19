@@ -38,19 +38,23 @@ window.addEventListener("load", function() {
     }
 
     Field.prototype.killedChicken = function(self) {
-        self.mode = 0;
-        self.update();
-        self.counter = 0;
-        score++;
+        if(self.mode === 1) {
+            self.mode = 0;
+            self.update();
+            self.counter = 0;
+            score++;
+        }
     }
 
     Field.prototype.killedGnome = function(self) {
-        self.mode = 0;
-        self.update();
-        self.counter = 0;
-        health--;
-        if(health === 0) {
-            end();
+        if(self.mode === 2) {
+            self.mode = 0;
+            self.update();
+            self.counter = 0;
+            health--;
+            if(health === 0) {
+                end();
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import java.util.Scanner;
 import database.templates.BooleanTemplate;
 import database.templates.IdentifiableStringTemplate;
 import database.templates.IntegerTemplate;
+import database.templates.ListTemplate;
 import database.templates.ObjectTemplate;
 
 public class Player extends ObjectTemplate implements Comparable <Player> {
@@ -27,6 +28,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	private IntegerTemplate booster;
 	private BooleanTemplate boosted;
 	private IntegerTemplate famePerMinute;
+	private ListTemplate <IntegerTemplate> ranks;
 	
 	public Player(String username) {
 		this.username = new IdentifiableStringTemplate("username");
@@ -45,6 +47,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		boosted.set(false);
 		famePerMinute = new IntegerTemplate("fame-per-minute");
 		famePerMinute.set(0);
+		ranks = new ListTemplate <IntegerTemplate> ("ranks", IntegerTemplate::new);
 		setIdentifier(this.username);
 	}
 	
@@ -127,7 +130,19 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	}
 	
 	public String json() {
-		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": \"" + banned.get() + "\"}";
+		StringBuilder builder = new StringBuilder();
+		builder.append("[");
+		boolean first = true;
+		for(IntegerTemplate rank : ranks) {
+			if(!first) {
+				builder.append(", ");
+			} else {
+				first = false;
+			}
+			builder.append(rank.get().toString());
+		}
+		builder.append("]");
+		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": \"" + banned.get() + "\", \"rankings\": " + builder.toString() + "}";
 	}
 	
 	public void addSuspicion() {
@@ -264,6 +279,12 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 
 	public Object getBoosterTime() {
 		return booster.get();
+	}
+	
+	public void addRanking(int rank) {
+		IntegerTemplate template = new IntegerTemplate();
+		template.set(rank);
+		ranks.add(template);
 	}
 	
 }
