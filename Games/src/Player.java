@@ -232,22 +232,31 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			switch(result) {
 			case 0:
 				addFame(500);
+				break;
 			case 1:
 				addFame(1000);
+				break;
 			case 2:
 				addFame(2000);
+				break;
 			case 3:
 				addBooster(60);
+				break;
 			case 4:
 				addBooster(180);
+				break;
 			case 5:
 				addBooster(1440);
+				break;
 			case 6:
 				addCoins(5);
+				break;
 			case 7:
 				addCoins(10);
+				break;
 			case 8:
 				addCoins(20);
+				break;
 			}
 			database.update(this);
 			return result;

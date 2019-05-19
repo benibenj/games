@@ -90,3 +90,11 @@ You don't have enough coins
 Navigate to your profile to activate the Booster
 You received:
 Nothing
+Enable Booster
+Disable Booster
+Booster
+Remaining time 
+minutes
+Players Online
+Fame per Minute
+Booster active

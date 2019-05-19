@@ -42,6 +42,26 @@ public class Main {
 		sessionManager = new DatabaseSessionManager <User> (database, MAX_SESSION_AGE, User::new);
 		server = new Server(PORT, new File("public"), responder, sessionManager);
 		
+		server.on("ALL", ".*", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user == null) {
+				predefined.put("coins", null);
+				predefined.put("booster-enabled", null);
+				predefined.put("booster-active", null);
+				predefined.put("booster-time", null);
+				predefined.put("fame-per-minute", null);
+			} else {
+				Player player = (Player) database.load(Player.class, user.getUsername());
+				predefined.put("coins", player.getCoins());
+				predefined.put("booster-enabled", player.isBoosted());
+				predefined.put("booster-active", player.isBoosted() && player.canBoost());
+				predefined.put("booster-time", player.getBoosterTime());
+				predefined.put("fame-per-minute", player.getFamePerMinute());
+			}
+			predefined.put("players-online", server.activeCount());
+			return responder.next();
+		});
+		
 		new UserManager(server, responder, database, mailer, predefined, 
 			(User user) -> {
 				Player player = new Player(user.getUsername());
@@ -122,26 +142,6 @@ public class Main {
 	}
 	
 	private static void initializeRoutes(Server server, RenderResponder responder, Database database) {
-		
-		server.on("ALL", ".*", (Request request) -> {
-			User user = (User) request.session.load();
-			if(user == null) {
-				predefined.put("coins", null);
-				predefined.put("booster-enabled", null);
-				predefined.put("booster-active", null);
-				predefined.put("booster-time", null);
-				predefined.put("fame-per-minute", null);
-			} else {
-				Player player = (Player) database.load(Player.class, user.getUsername());
-				predefined.put("coins", player.getCoins());
-				predefined.put("booster-enabled", player.isBoosted());
-				predefined.put("booster-active", player.isBoosted() && player.canBoost());
-				predefined.put("booster-time", player.getBoosterTime());
-				predefined.put("fame-per-minute", player.getFamePerMinute());
-			}
-			predefined.put("players-online", server.activeCount());
-			return responder.next();
-		});
 		
 		
 		// Game paths 

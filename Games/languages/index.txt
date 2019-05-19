@@ -90,3 +90,11 @@ not-enough-coins
 booster-info
 you-got
 nothing
+enable-booster
+disable-booster
+booster
+booster-remaining-time
+minutes
+players-online
+fame-per-minute
+booster-active

@@ -26,6 +26,24 @@
                     end
                 }}
             </h3>
+            <h2>{{print translate "booster"}}</h2>
+            <h3>
+                {{
+                    print translate "booster-remaining-time"
+                    print ": "
+                    print get "booster-time" variables
+                    print " "
+                    print translate "minutes"
+                }}
+            </h3>
+            <a href="/profile/boost"><button>{{
+                if get "booster-enabled" variables
+                    print translate "disable-booster"
+                end
+                if not get "booster-enabled" variables
+                    print translate "enable-booster"
+                end 
+            }}</button></a>
         </div>
     </main>
 {{include "bottom.html"}}

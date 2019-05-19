@@ -90,3 +90,11 @@ Sie besitzen nicht genügend Münzen
 Begebe dich zu deinem Profil um den Booster zu aktivieren
 Sie erhielten:
 Nichts
+Booster aktivieren
+Booster deaktivieren
+Booster
+Verbleibende Zeit
+Minuten
+Spieler online
+Fame pro Minute
+Booster aktiv
