@@ -2,26 +2,8 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 
 <h1>We Serve Games!</h1>
-<p>
-    {{
-        print get "players-online" variables
-        print " "
-        print translate "players-online"
-    }}
-</p>
-<p>
-    {{
-        print get "fame-per-minute" variables
-        print " "
-        print translate "fame-per-minute"
-        if get "booster-active" variables
-            print " ("
-            print translate "booster-active"
-            print ")"
-        end
-    }}
-</p>
-
+<h3 id="users-online"></h3>
+<h3 id="fame-points"></h3>
 
 <main>
 	<div class="container"  id="container" onclick="location.href='/games/minesweeper';">
@@ -67,4 +49,30 @@
 
 {{include "bottom.html"}}
 <script type="text/javascript" src="/js/mouseeffect.js"></script>
+<script>
+	if (false) {
+		if ({{print get "players-online" variables}} !== 1) {
+			document.getElementById("users-online").innerHTML =
+			'{{
+	        	print get "players-online" variables
+	        	print " "
+	        	print translate "players-online"
+	    	}}'
+		}
+
+		if ({{print get "fame-per-minute" variables}} !== 0) {
+			document.getElementById("fame-points").innerHTML = 
+			'{{
+		        print get "fame-per-minute" variables
+		        print " "
+		        print translate "fame-per-minute"
+		        if get "booster-active" variables
+		            print " ("
+		            print translate "booster-active"
+		            print ")"
+		        end
+		    }}'
+		}
+	}
+</script>
 
