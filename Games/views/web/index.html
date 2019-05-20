@@ -50,7 +50,7 @@
 {{include "bottom.html"}}
 <script type="text/javascript" src="/js/mouseeffect.js"></script>
 <script>
-	if (false) {
+	if ("{{print get "username" variables}}" !== null) {
 		if ({{print get "players-online" variables}} !== 1) {
 			document.getElementById("users-online").innerHTML =
 			'{{
