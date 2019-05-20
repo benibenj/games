@@ -92,7 +92,7 @@
 					default:
 				}
 
-				wait = 30;
+				wait = 10;
 				let turns = 8;
 				shifts = 24 * turns + deg/15;
 				spin(shifts);
@@ -109,6 +109,13 @@
 				spin(times-1);
 			}else{
 				showitem();
+			}
+			//Slowing the wheel down
+			if (times <= shifts/3) {
+				wait += 2;
+				if (times <= 15) {
+					wait += 6;
+				}
 			}
 		},wait);
 	}
