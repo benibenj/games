@@ -295,5 +295,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		template.set(rank);
 		ranks.add(template);
 	}
+
+	public void addFamePerMinute(int addedReward) {
+		famePerMinute.set(famePerMinute.get() + addedReward);
+	}
 	
 }

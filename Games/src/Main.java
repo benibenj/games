@@ -66,10 +66,11 @@ public class Main {
 			(User user) -> {
 				Player player = new Player(user.getUsername());
 				player.setDatabase(database);
+				/*
 				for(int i = 0; i < 5; i++) {
 					player.addQuest(1440);
 				}
-				player.addQuest(10080);
+				player.addQuest(10080);*/
 				database.save(player);
 			}, 
 			(User user) -> {
@@ -99,6 +100,24 @@ public class Main {
 			// Update fame for all games listed here
 			System.out.println("Updating Fame");
 			
+			LinkedList <ObjectTemplate> playerObjectTemplates = database.loadAll(Player.class);
+			for(ObjectTemplate object : playerObjectTemplates) {
+				Player player = ((Player) object);
+				
+				player.setFamePerMinute(0);
+				
+				LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+					return ((Quest) objectTemplate).getPlayer().equals(player);
+				});
+				
+				if(questObjectTemplates.size() == 0) {
+					for(int i = 0; i < 5; i++) {
+						player.addQuest(1440);
+					}
+					player.addQuest(10080);
+				}
+			}
+			
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller"};
 
 			for(String game : games) {
@@ -115,20 +134,21 @@ public class Main {
 				Collections.sort(scores);
 				
 				for(int i = 0; i < Math.min(REWARD_SIZE, scores.size()); i++) {
-					int reward = (REWARD_SIZE - i);
+					int addedReward = (REWARD_SIZE - i);
 					Player player = scores.get(i).getPlayer();
 					if(player.isBoosted() && player.canBoost()) {
 						player.addBooster(-1);
-						reward *= 2;
+						addedReward *= 2;
 					}
-					player.setFamePerMinute(reward);
-					scores.get(i).getPlayer().addFame(reward);
+					player.addFamePerMinute(addedReward);
+					scores.get(i).getPlayer().addFame(addedReward);
 					database.update(scores.get(i));
 				}
 				
 			}
 			
 			// Update quests
+			
 			
 			System.out.println("Updating Quests");
 			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
