@@ -119,6 +119,8 @@ public class Main {
 					}
 					player.addQuest(10080);
 				}
+				
+				database.update(player);
 			}
 			
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller"};
