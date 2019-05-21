@@ -60,7 +60,6 @@ if (!win && !gameover) {
 				}
 				else{
 					grid[i][j].flagit();
-					checkIfFinished();
 				}
 				if (!start) {
 					starttime = new Date().getTime();
@@ -69,6 +68,8 @@ if (!win && !gameover) {
 			}
 		}
 	}
+
+	checkIfFinished();
 
 	// Check Miner spot
 	if (canvasSize*1.05 < mouseX && canvasSize*1.05 + w > mouseX &&
