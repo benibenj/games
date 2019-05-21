@@ -57,10 +57,16 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 
 	public void delete() {
 		final Player self = this;
+		
 		database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
 			Score score = (Score) objectTemplate;
 			return score.getPlayer().equals(self);
 		});
+		
+		database.deleteAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+			return ((Quest) objectTemplate).getPlayer().equals(self);
+		});
+		
 		database.delete(Player.class, username.get());
 	}
 	
