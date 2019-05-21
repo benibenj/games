@@ -105,6 +105,9 @@ public class Main {
 				Player player = ((Player) object);
 				
 				player.setFamePerMinute(0);
+				if(player.isBoosted() && player.canBoost()) {
+					player.addBooster(-1);
+				}
 				
 				LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
 					return ((Quest) objectTemplate).getPlayer().equals(player);
@@ -137,7 +140,6 @@ public class Main {
 					int addedReward = (REWARD_SIZE - i);
 					Player player = scores.get(i).getPlayer();
 					if(player.isBoosted() && player.canBoost()) {
-						player.addBooster(-1);
 						addedReward *= 2;
 					}
 					player.addFamePerMinute(addedReward);
