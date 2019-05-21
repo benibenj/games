@@ -2,8 +2,31 @@
 <link rel="stylesheet" type="text/css" href="/css/index.css">
 
 <h1>We Serve Games!</h1>
-<h3 id="users-online"></h3>
-<h3 id="fame-points"></h3>
+<h3 id="users-online">
+	{{
+		if not equals get "players-online" variables 1
+			print get "players-online" variables
+			print " "
+			print translate "players-online"
+		end
+	}}
+</h3>
+<h3 id="fame-points">
+	{{
+		if not equals get "username" variables null
+			if not equals get "fame-per-minute" variables 0
+				print get "fame-per-minute" variables
+				print " "
+				print translate "fame-per-minute"
+				if get "booster-active" variables
+					print " ("
+					print translate "booster-active"
+					print ")"
+				end
+			end
+		end
+	}}
+</h3>
 
 <main>
 	<div class="container"  id="container" onclick="location.href='/games/minesweeper';">
@@ -32,7 +55,7 @@
 	</div>
 	<div class="container" id="container" onclick="location.href='/games/chickenkiller';">
 		<div class="pic">
-			<img src="/chickenkiller/chickenkiller.png">
+			<img src="/chickenkiller/img/chickenkiller.png">
 		</div>
 		<div class="content" id="chickenkiller">
 			<h2>Chicken Killer</h2>
@@ -49,30 +72,5 @@
 
 {{include "bottom.html"}}
 <script type="text/javascript" src="/js/mouseeffect.js"></script>
-<script>
-	if ("{{print get "username" variables}}" !== null) {
-		if ({{print get "players-online" variables}} !== 1) {
-			document.getElementById("users-online").innerHTML =
-			'{{
-	        	print get "players-online" variables
-	        	print " "
-	        	print translate "players-online"
-	    	}}'
-		}
 
-		if ({{print get "fame-per-minute" variables}} !== 0) {
-			document.getElementById("fame-points").innerHTML = 
-			'{{
-		        print get "fame-per-minute" variables
-		        print " "
-		        print translate "fame-per-minute"
-		        if get "booster-active" variables
-		            print " ("
-		            print translate "booster-active"
-		            print ")"
-		        end
-		    }}'
-		}
-	}
-</script>
 
