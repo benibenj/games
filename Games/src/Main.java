@@ -69,6 +69,7 @@ public class Main {
 				for(int i = 0; i < 5; i++) {
 					player.addQuest(1440);
 				}
+				player.addQuest(10080);
 				database.save(player);
 			}, 
 			(User user) -> {
