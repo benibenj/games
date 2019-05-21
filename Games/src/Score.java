@@ -10,6 +10,7 @@ public class Score extends ObjectTemplate implements Comparable <Score> {
 	private StringTemplate game;
 	private ObjectTemplateReference <Player> player;
 	private IntegerTemplate score;
+	private IntegerTemplate season;
 	
 	public Score(Player player, int score, String game) {
 		this.game = new StringTemplate("game", 1, 64);
@@ -18,6 +19,8 @@ public class Score extends ObjectTemplate implements Comparable <Score> {
 		this.player.set(player);
 		this.score = new IntegerTemplate("score", 0, Integer.MAX_VALUE);
 		this.score.set(score);
+		this.season = new IntegerTemplate("season");
+		this.season.set(0);
 	}
 	
 	public Score() {
