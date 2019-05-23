@@ -66,11 +66,12 @@ public class Main {
 			(User user) -> {
 				Player player = new Player(user.getUsername());
 				player.setDatabase(database);
-				/*
+				
 				for(int i = 0; i < 5; i++) {
 					player.addQuest(1440);
 				}
-				player.addQuest(10080);*/
+				player.addQuest(4320);
+				
 				database.save(player);
 			}, 
 			(User user) -> {
@@ -117,7 +118,7 @@ public class Main {
 					for(int i = 0; i < 5; i++) {
 						player.addQuest(1440);
 					}
-					player.addQuest(10080);
+					player.addQuest(4320);
 				}
 				
 				database.update(player);
