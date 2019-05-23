@@ -42,6 +42,14 @@ public class Main {
 		sessionManager = new DatabaseSessionManager <User> (database, MAX_SESSION_AGE, User::new);
 		server = new Server(PORT, new File("public"), responder, sessionManager);
 		
+		if(database.loadAll(Season.class).size() <= 0) {
+			// Initialize Season Update
+			Season first = new Season(0);
+			first.setDatabase(database);
+			first.end();
+			database.save(first);
+		}
+		
 		server.on("ALL", ".*", (Request request) -> {
 			User user = (User) request.session.load();
 			if(user == null) {
@@ -59,6 +67,10 @@ public class Main {
 				predefined.put("fame-per-minute", player.getFamePerMinute());
 			}
 			predefined.put("players-online", server.activeCount());
+			int total = database.loadAll(Season.class).size();
+			Season season = (Season) database.load(Season.class, "" + (total - 1));
+			predefined.put("current-season", total);
+			predefined.put("season-duration", season.getDuration());
 			return responder.next();
 		});
 		
@@ -66,6 +78,8 @@ public class Main {
 			(User user) -> {
 				Player player = new Player(user.getUsername());
 				player.setDatabase(database);
+				
+				player.addMissedRanks();
 				
 				for(int i = 0; i < 5; i++) {
 					player.addQuest(1440);
@@ -125,11 +139,12 @@ public class Main {
 			}
 			
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller"};
+			final int currentSeason = database.loadAll(Season.class).size() - 1;
 
 			for(String game : games) {
 				LinkedList <ObjectTemplate> scoreObjectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
 					Score score = (Score) objectTemplate;
-					return score.getGame().equals(game);
+					return score.getGame().equals(game) && score.getSeason() == currentSeason;
 				});
 
 				ArrayList <Score> scores = new ArrayList <Score> ();
@@ -153,8 +168,6 @@ public class Main {
 			}
 			
 			// Update quests
-			
-			
 			System.out.println("Updating Quests");
 			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
 			for(ObjectTemplate objectTemplate : questObjectTemplates) {
@@ -162,6 +175,14 @@ public class Main {
 				quest.updateDuration();
 			}
 			
+			
+			// Update Season
+			System.out.println("Updating Seasons");
+			LinkedList <ObjectTemplate> seasonObjectTemplates = database.loadAll(Season.class);
+			for(ObjectTemplate objectTemplate : seasonObjectTemplates) {
+				Season season = (Season) objectTemplate;
+				season.update();
+			}
 			
 		}, 60000);
 		
@@ -173,7 +194,7 @@ public class Main {
 		
 		// Game paths 
 		server.on("GET", "/", (Request request) -> {
-			return responder.render("index.html");
+			return responder.render("index.html", request.languages);
 		});
 		server.on("GET", "/games/minesweeper", (Request request) -> {
 			return responder.render("games/minesweeper.html", request.languages);
@@ -280,12 +301,17 @@ public class Main {
 			return responder.redirect("/profile");
 		});
 		
+		// Season paths
+		server.on("GET", "/seasons/info", (Request request) -> {
+			int total = database.loadAll(Season.class).size();
+			Season season = (Season) database.load(Season.class, "" + (total - 1));
+			return responder.text("{\"duration\": " + season.getDuration() + ", \"current\": " + total+"}");
+		});
+		
 		// Scoreboard paths
-		server.on("GET", "/scoreboard/players", (Request request) -> {
+		server.on("GET", "/scoreboard/ptargetlayers", (Request request) -> {
 			StringBuilder stringBuilder = new StringBuilder();
-			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class, (ObjectTemplate objectTemplate) -> {
-				return true;
-			});
+			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class);
 			
 			ArrayList <Player> players = new ArrayList <Player> ();
 			for(ObjectTemplate objectTemplate : objectTemplates) {
@@ -308,10 +334,12 @@ public class Main {
 		});
 		server.on("GET", "/scoreboard/games", (Request request) -> {
 			final String game = request.parameters.get("game");
+			final int season = (request.parameters.get("season") != null) ? Integer.parseInt(request.parameters.get("season")) : -1;
+			
 			StringBuilder stringBuilder = new StringBuilder();
 			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
 				Score score = (Score) objectTemplate;
-				return score.getGame().equals(game);
+				return score.getGame().equals(game) && (season == -1 || season == score.getSeason());
 			});
 
 			ArrayList <Score> scores = new ArrayList <Score> ();

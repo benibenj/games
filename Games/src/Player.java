@@ -92,13 +92,15 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 				// database.update(this);
 			}
 			
-			Score newScore = new Score(this, value, game);
+			int currentSeason = database.loadAll(Season.class).size() - 1;
+			
+			Score newScore = new Score(this, value, game, currentSeason);
 			database.save(newScore);
 			
 			final Player self = this;
 			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
 				Score score = (Score) objectTemplate;
-				return score.getPlayer().equals(self) && score.getGame().equals(game);
+				return score.getPlayer().equals(self) && score.getGame().equals(game) && score.getSeason() == currentSeason;
 			});
 			Score bestScore = null;
 			for(ObjectTemplate objectTemplate : objectTemplates) {
@@ -110,7 +112,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			final Score finalBestScore = bestScore;
 			database.deleteAll(Score.class, (ObjectTemplate objectTemplate) -> {
 				Score score = (Score) objectTemplate;
-				return !score.equals(finalBestScore) && score.getPlayer().equals(self) && score.getGame().equals(game);
+				return !score.equals(finalBestScore) && score.getPlayer().equals(self) && score.getGame().equals(game) && score.getSeason() == currentSeason;
 			});
 			
 			return (Score) database.loadAll(Score.class).get(0);
@@ -296,7 +298,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		return booster.get();
 	}
 	
-	public void addRanking(int rank) {
+	public void addRank(int rank) {
 		IntegerTemplate template = new IntegerTemplate();
 		template.set(rank);
 		ranks.add(template);
@@ -305,5 +307,19 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public void addFamePerMinute(int addedReward) {
 		famePerMinute.set(famePerMinute.get() + addedReward);
 	}
+
+	public void addMissedRanks() {
+		int missed = database.loadAll(Season.class).size() - 1;
+		for(int i = 0; i < missed; i++) {
+			IntegerTemplate filler = new IntegerTemplate();
+			filler.set(-1);
+			ranks.add(filler);
+		}
+	}
+
+	public void resetFame() {
+		fame.set(0);
+	}
+
 	
 }
