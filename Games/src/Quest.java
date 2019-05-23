@@ -19,6 +19,7 @@ public class Quest extends ObjectTemplate {
 	private IntegerTemplate progress;
 	private IntegerTemplate duration;
 	private BooleanTemplate completed;
+	private IntegerTemplate initialDuration;
 	
 	public Quest(Player player, String name, String game, int times, int score, int reward, int duration) {
 		this.player = new ObjectTemplateReference <Player> ("player", Player::new);
@@ -39,6 +40,8 @@ public class Quest extends ObjectTemplate {
 		this.duration.set(duration);
 		this.completed = new BooleanTemplate("completed");
 		this.completed.set(false);
+		this.initialDuration = new IntegerTemplate("initial");
+		this.initialDuration.set(duration);
 	}
 	
 	public Quest() {
@@ -68,10 +71,8 @@ public class Quest extends ObjectTemplate {
 	public void updateDuration() {
 		duration.set(duration.get() - 1);
 		if(duration.get() <= 0) {
-			System.out.println("Start d");
 			System.out.println(database.deleteId(Quest.class, getId()));
-			System.out.println("End d");
-			player.get().addQuest(duration.get());
+			player.get().addQuest(initialDuration.get());
 		} else {
 			database.update(this);
 		}

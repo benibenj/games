@@ -161,7 +161,6 @@ public class Main {
 				quest.updateDuration();
 			}
 			
-			System.out.println("end q");
 			
 		}, 60000);
 		
