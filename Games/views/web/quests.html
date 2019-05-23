@@ -61,16 +61,16 @@
 
 		if (completed) {
 			var progressText = "{{print translate "completed"}}";
-			var timeLeftText = "";
 		}
 		else{
 			var progressText = progressPercent + "%";
-			if (hour === 0) {
-				var timeLeftText = "{{print translate "time-remaining"}}: " + min + "min";
-			}
-			else{
-				var timeLeftText = "{{print translate "time-remaining"}}: " + hour + "h " + min + "min";
-			}
+		}
+
+		if (hour === 0) {
+			var timeLeftText = "{{print translate "time-remaining"}}: " + min + "min";
+		}
+		else{
+			var timeLeftText = "{{print translate "time-remaining"}}: " + hour + "h " + min + "min";
 		}
 
 		// Quest DOM Html Elements 
