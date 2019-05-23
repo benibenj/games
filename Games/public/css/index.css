@@ -21,6 +21,79 @@ h3{
 	color: var(--dark);
 }
 
+.season{
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.season .container-current{
+	position: relative;
+	width: 50px;
+	height: 70px;
+	margin: 20px 40px;
+}
+
+.season .container-current .current-season{
+	position: absolute;
+	left: 0;
+	top: 0px;
+	margin-left: -12px;
+	font-size: 21px;
+	line-height: 24px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	color: var(--dark);
+}
+
+.season .container-current .num{
+	position: absolute;
+	left: 0;
+	top: 25px;
+	width: 50px;
+	height: 50px;
+	border-radius: 90px;
+	background-color: #313333;
+}
+
+.season .container-current .num h3{
+	font-size: 24px;
+	line-height: 24px;
+	color: var(--dark);
+	line-height: 50px;
+	vertical-align: middle;
+	color: #cccccc;
+}
+
+.season .container-next{
+	position: relative;
+	width: 280px;
+	height: 100px;
+	margin: 20px 20px 20px 60px;
+}
+
+.season .container-next .next-season{
+	position: absolute;
+	left: 0;
+	top: 0px;
+	margin-left: -3px;
+	font-size: 21px;
+	line-height: 24px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	color: var(--dark);
+}
+
+.season .container-next .clock{
+	zoom: 0.5;
+	-moz-transform: scale(0.5);
+	position: absolute;
+	left: 0;
+	top: 40px;
+}
+
 main{
 	width: 80%;
 	margin: 20px 10%;
