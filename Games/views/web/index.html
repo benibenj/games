@@ -1,5 +1,9 @@
 {{include "top.html"}}
 <link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="/css/flipclock.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/js/flipclock.js"></script>
 
 <h1>We Serve Games!</h1>
 <h3 id="users-online">
@@ -27,26 +31,36 @@
 		end
 	}}
 </h3>
-<h3 id="current-season">
-	{{
-		print translate "season"
-		print " "
-		print get "current-season" variables
-	}}
-</h3>
-<h3 id="season-duration">
-	{{print translate "next-season-in"}}<br/>
-	<span id="season-duration-day"></span> {{print translate "days"}} <span id="season-duration-hour"></span> {{print translate "hours"}} <span id="season-duration-minute"></span> {{print translate "minutes"}}
-</h3>
-<script>
-	window.addEventListener("load", function() {
-		var minutes = {{print get "season-duration" variables}};
-		document.getElementById("season-duration-day").innerHTML = Math.floor(minutes/60/24);
-		document.getElementById("season-duration-hour").innerHTML = Math.floor(minutes/60)%24;
-		document.getElementById("season-duration-minute").innerHTML = Math.floor(minutes)%60;
+
+<div class="season">
+	<div class="container-current">
+		<!-- Current Season -->
+		<div class="current-season">
+			{{print translate "season"}}
+		</div>
+		<div class="num">
+			<h3>{{print get "current-season" variables}}</h3>
+		</div>
+	</div>
+
+	<div class="container-next">
+		<!-- Next Season Clock -->
+		<div class="next-season">
+			{{print translate "next-season-in"}}
+		</div>
+		<div class="clock"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var clock = $('.clock').FlipClock({{print get "season-duration" variables}}*60, {
+		clockFace: 'DailyCounter',
+		countdown: true,
+		showSeconds: false
 	});
 </script>
 
+<!-- Main Content -->
 <main>
 	<div class="container"  id="container" onclick="location.href='/games/minesweeper';">
 		<div class="pic">

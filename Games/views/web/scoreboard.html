@@ -141,8 +141,8 @@
 	function loadGameScoreboard(game){
 		// get container
 		var container = document.getElementById("table");
-
-		loadGameRanking(game, function(scores){
+		// {print get "current-season"}
+		loadGameRanking(game, -1, function(scores){
 			var table = document.createElement("table");
 
 			var tr = document.createElement("tr");
@@ -201,8 +201,8 @@
 	    });
 	}
 
-    function loadGameRanking(game, action) {
-	    getAjax("/scoreboard/games?game=" + game, function(text){
+    function loadGameRanking(game, season, action) {
+	    getAjax("/scoreboard/games?game=" + game + "&season=" + season, function(text){
 	        action(JSON.parse(text));
 	    });
 	}
