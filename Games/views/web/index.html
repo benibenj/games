@@ -27,6 +27,25 @@
 		end
 	}}
 </h3>
+<h3 id="current-season">
+	{{
+		print translate "season"
+		print " "
+		print get "current-season" variables
+	}}
+</h3>
+<h3 id="season-duration">
+	{{print translate "next-season-in"}}<br/>
+	<span id="season-duration-day"></span> {{print translate "days"}} <span id="season-duration-hour"></span> {{print translate "hours"}} <span id="season-duration-minute"></span> {{print translate "minutes"}}
+</h3>
+<script>
+	window.addEventListener("load", function() {
+		var minutes = {{print get "season-duration" variables}};
+		document.getElementById("season-duration-day").innerHTML = Math.floor(minutes/60/24);
+		document.getElementById("season-duration-hour").innerHTML = Math.floor(minutes/60)%24;
+		document.getElementById("season-duration-minute").innerHTML = Math.floor(minutes)%60;
+	});
+</script>
 
 <main>
 	<div class="container"  id="container" onclick="location.href='/games/minesweeper';">

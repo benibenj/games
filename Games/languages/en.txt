@@ -98,3 +98,8 @@ minutes
 Players Online
 Fame per Minute
 Booster active
+Days
+Hours
+Minutes
+Season
+The next season starts in

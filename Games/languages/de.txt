@@ -98,3 +98,8 @@ Minuten
 Spieler online
 Fame pro Minute
 Booster aktiv
+Tagen
+Stunden
+Minuten
+Season
+Die nächste Season startet in

@@ -98,3 +98,8 @@ minutes
 players-online
 fame-per-minute
 booster-active
+days
+hours
+minutes
+season
+next-season-in
