@@ -37,19 +37,20 @@ public class Season extends ObjectTemplate {
 	}
 	
 	public void update(Mailer mailer) {
+		duration.set(duration.get() - 1);
 		if(duration.get() <= 0) {
 			if(!ended.get()) {
 				ended.set(true);
 				
 				LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class);
-				
+
 				ArrayList <Player> players = new ArrayList <Player> ();
 				for(ObjectTemplate objectTemplate : objectTemplates) {
 					players.add((Player) objectTemplate);
 				}
 				
 				Collections.sort(players);
-				
+
 				for(int i = 0; i < players.size(); i++) {
 					Player player = players.get(i);
 					ranking.add(player);
@@ -79,8 +80,8 @@ public class Season extends ObjectTemplate {
 					User user = (User) database.load(User.class, player.getUsername());
 					HashMap <String, Object> variables = new HashMap <String, Object> ();
 					variables.put("username", user.getUsername());
-					variables.put("current-season", season.get());
-					variables.put("next-season", season.get() + 1);
+					variables.put("current-season", season.get() + 1);
+					variables.put("next-season", season.get() + 2);
 					variables.put("rank", i + 1);
 					variables.put("reward", reward);
 					mailer.send(user.getMail(), "{{print translate \"new-season-email-title\"}}", "season.html", user.getLanguages(), variables);
@@ -88,12 +89,10 @@ public class Season extends ObjectTemplate {
 					player.resetFame();
 					database.update(player);
 				}
-				
+
 				Season next = new Season(season.get() + 1);
 				database.save(next);
 			}
-		} else {
-			duration.set(duration.get() - 1);
 		}
 		database.update(this);
 	}
