@@ -1,12 +1,19 @@
 {{include "top.html"}}
 <link rel="stylesheet" type="text/css" href="/css/scoreboard.css">
 
-<div class="list">
-	<button id="0">Hall of fame</button>
-	<button id="1">Minesweeper</button>
-	<button id="2">Flappybird</button>
-	<button id="3">Brick Breaker</button>
-	<button id="4">Chicken Killer</button>
+<div class="pick">
+	<div class="list">
+		<button id="0">Hall of fame</button>
+		<button id="1">Minesweeper</button>
+		<button id="2">Flappybird</button>
+		<button id="3">Brick Breaker</button>
+		<button id="4">Chicken Killer</button>
+	</div>
+
+	<div class="list">
+		<button id="s1">Current Season</button>
+		<button id="s2">All Time</button>
+	</div>
 </div>
 
 <main>
@@ -22,16 +29,21 @@
 	
 </main>
 	
+
+
 </body>
 </html>
 
 <script>
+	var season = 0;
+	var game = "";
 
 	document.getElementById("0").style.backgroundColor = "#F3B54A";
+	document.getElementById("s1").style.backgroundColor = "#F3B54A";
 	document.getElementById("text").innerHTML = "{{print translate "hallOfFame"}}";
 	hallOfFame();
 
-	// Event Listeners
+	// Event Listeners, Games
 	document.getElementById("0").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Hall of Fame";
 		document.getElementById("text").innerHTML = "{{print translate "hallOfFame"}}";
@@ -43,28 +55,45 @@
 		document.getElementById("title").innerHTML = "Minesweeper";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("1");
-		loadGameScoreboard("minesweeper");
+		game = "minesweeper";
+		loadGameScoreboard(game, season);
 	});
 
 	document.getElementById("2").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Flappybird";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("2");
-		loadGameScoreboard("flappybird");
+		game = "flappybird";
+		loadGameScoreboard(game, season);
 	});
 
 	document.getElementById("3").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Brick Breaker";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("3");
-		loadGameScoreboard("brickbreaker");
+		game = "brickbreaker";
+		loadGameScoreboard(game, season);
 	});
 
 	document.getElementById("4").addEventListener("click", function(){
 		document.getElementById("title").innerHTML = "Chicken Killer";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("4");
-		loadGameScoreboard("chickenkiller");
+		game = "chickenkiller";
+		loadGameScoreboard(game, season);
+	});
+
+	// Event Listeners, Season id's
+	document.getElementById("s1").addEventListener("click", function(){
+		changeBackgroundColorS("s1");
+		season = {{print get "current-season" variables}}-1;
+		loadGameScoreboard(game, season);
+	});
+
+	document.getElementById("s2").addEventListener("click", function(){
+		changeBackgroundColorS("s2");
+		season = -1;
+		loadGameScoreboard(game, season);
 	});
 
 	// change backgroundcolor
@@ -79,6 +108,13 @@
 		document.getElementById(id).style.backgroundColor = "#F3B54A";
 	}
 
+	function changeBackgroundColorS(id){
+		// remove the current color
+		document.getElementById("s1").style.backgroundColor = "";
+		document.getElementById("s2").style.backgroundColor = "";
+		// add new color
+		document.getElementById(id).style.backgroundColor = "#F3B54A";
+	}
 
 
 	// Tables
@@ -138,11 +174,11 @@
 		});
 	}
 
-	function loadGameScoreboard(game){
+	function loadGameScoreboard(game, currentSeason){
 		// get container
 		var container = document.getElementById("table");
 		// {print get "current-season"}
-		loadGameRanking(game, -1, function(scores){
+		loadGameRanking(game, currentSeason, function(scores){
 			var table = document.createElement("table");
 
 			var tr = document.createElement("tr");
