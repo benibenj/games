@@ -46,7 +46,7 @@ public class Main {
 			// Initialize Season Update
 			Season first = new Season(0);
 			first.setDatabase(database);
-			first.end();
+			first.end(mailer);
 			database.save(first);
 		}
 		
@@ -181,7 +181,7 @@ public class Main {
 			LinkedList <ObjectTemplate> seasonObjectTemplates = database.loadAll(Season.class);
 			for(ObjectTemplate objectTemplate : seasonObjectTemplates) {
 				Season season = (Season) objectTemplate;
-				season.update();
+				season.update(mailer);
 			}
 			
 		}, 60000);

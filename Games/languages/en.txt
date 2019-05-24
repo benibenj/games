@@ -103,3 +103,8 @@ Hours
 Minutes
 Season
 The next season starts in
+The next season is here!
+Season {{print get "next-season" variables}} is finally here! Season {{print get "current-season" variables}} has ended, you made it to {{print get "rank" variables}} and were rewarded with {{print get "reward" variables}} coins.
+Click <a href="{{print get "url" variables}}">here</a> to play.<br/>Click <a href="{{print get "url" variables}}/profile">here</a> to disable these notifications.
+Notifications
+Your account is activated.
