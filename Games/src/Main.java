@@ -208,6 +208,9 @@ public class Main {
 		server.on("GET", "/games/chickenkiller", (Request request) -> {
 			return responder.render("games/chickenkiller.html", request.languages);
 		});
+		server.on("GET", "/games/runner", (Request request) -> {
+			return responder.render("games/runner.html", request.languages);
+		});
 		server.on("GET", "/scoreboard", (Request request) -> {
 			return responder.render("scoreboard.html", request.languages);
 		});

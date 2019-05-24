@@ -10,7 +10,7 @@
 		<button id="4">Chicken Killer</button>
 	</div>
 
-	<div class="list">
+	<div class="list" id="season">
 		<button id="s1">Current Season</button>
 		<button id="s2">All Time</button>
 	</div>
@@ -41,6 +41,7 @@
 	document.getElementById("0").style.backgroundColor = "#F3B54A";
 	document.getElementById("s1").style.backgroundColor = "#F3B54A";
 	document.getElementById("text").innerHTML = "{{print translate "hallOfFame"}}";
+	document.getElementById("season").style.display = "none";
 	hallOfFame();
 
 	// Event Listeners, Games
@@ -48,6 +49,7 @@
 		document.getElementById("title").innerHTML = "Hall of Fame";
 		document.getElementById("text").innerHTML = "{{print translate "hallOfFame"}}";
 		changeBackgroundColor("0");
+		document.getElementById("season").style.display = "none";
 		hallOfFame();
 	});
 
@@ -55,6 +57,7 @@
 		document.getElementById("title").innerHTML = "Minesweeper";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("1");
+		document.getElementById("season").style.display = "block";
 		game = "minesweeper";
 		loadGameScoreboard(game, season);
 	});
@@ -63,6 +66,7 @@
 		document.getElementById("title").innerHTML = "Flappybird";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("2");
+		document.getElementById("season").style.display = "block";
 		game = "flappybird";
 		loadGameScoreboard(game, season);
 	});
@@ -71,6 +75,7 @@
 		document.getElementById("title").innerHTML = "Brick Breaker";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("3");
+		document.getElementById("season").style.display = "block";
 		game = "brickbreaker";
 		loadGameScoreboard(game, season);
 	});
@@ -79,6 +84,7 @@
 		document.getElementById("title").innerHTML = "Chicken Killer";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("4");
+		document.getElementById("season").style.display = "block";
 		game = "chickenkiller";
 		loadGameScoreboard(game, season);
 	});

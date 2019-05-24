@@ -1,0 +1,28 @@
+body{
+	background-color: #116611;
+	text-align: center;
+}
+
+body nav{
+	text-align: left;
+}
+
+canvas{
+	margin-top: 0.5em;
+	background-color: black;
+}
+
+.title{
+	width: 100%;
+	line-height: 2em;
+	font-size: 2.5em;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bolder;
+	color: #fff;
+}
+
+@media (max-width: 662px){
+	canvas{
+		margin-left: 0px;
+	}
+}
