@@ -309,7 +309,7 @@ public class Main {
 		});
 		
 		// Scoreboard paths
-		server.on("GET", "/scoreboard/ptargetlayers", (Request request) -> {
+		server.on("GET", "/scoreboard/players", (Request request) -> {
 			StringBuilder stringBuilder = new StringBuilder();
 			LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class);
 			
