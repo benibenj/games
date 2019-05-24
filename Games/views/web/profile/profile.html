@@ -3,19 +3,6 @@
 
     <main>
         {{include "profile/profile-buttons.html"}}
-        <!--
-        <div class="change">
-            <h2>Notifications</h2>
-            <a class="button" href="/profile/notifications"><button>{{
-                if get "notifications" variables
-                    print translate "disable-notifications"
-                end
-                if not get "notifications" variables
-                    print translate "enable-notifications"
-                end 
-            }}</button></a>
-        </div>
-        -->
 
         <div class="change">
             <h2>{{print translate "hello"}} {{print htmlencode get "username" variables}}!</h2>
@@ -24,8 +11,22 @@
                     if not get "activated" variables
                         print translate "account-not-activated"
                     end
+                    if get "activated" variables
+                        print translate "account-activated"
+                    end
                 }}
             </h3>
+            <h2>{{print translate "notifications"}}</h2>
+            <a class="button" href="/profile/notifications"><button>{{
+                if get "notifications" variables
+                    print translate "disable-notifications"
+                end
+                if not get "notifications" variables
+                    print translate "enable-notifications"
+                end 
+            }}</button></a>
+      
+           
             <h2>{{print translate "booster"}}</h2>
             <h3>
                 {{

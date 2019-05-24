@@ -103,3 +103,8 @@ hours
 minutes
 season
 next-season-in
+new-season-email-title
+new-season-email-profile
+new-season-email-todo
+notifications
+account-activated
