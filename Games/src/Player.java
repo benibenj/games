@@ -150,7 +150,32 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			builder.append(rank.get().toString());
 		}
 		builder.append("]");
-		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": \"" + banned.get() + "\", \"rankings\": " + builder.toString() + "}";
+		
+		int firstMedals = 0;
+		int secondMedals = 0;
+		int thirdMedals = 0;
+		int participatedMedals = 0;
+		for(IntegerTemplate rank : ranks) {
+			int intRank = rank.get();
+			if(intRank >= 0) {
+				switch(intRank) {
+				case 0:
+					firstMedals++;
+					break;
+				case 1:
+					secondMedals++;
+					break;
+				case 2:
+					thirdMedals++;
+					break;
+				default:
+					participatedMedals++;
+					break;
+				}
+			}
+		}
+		
+		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": \"" + banned.get() + "\", \"rankings\": " + builder.toString() + ", \"medals\": {\"first\": " + firstMedals + ", \"second\": " + secondMedals + ", \"third\": " + thirdMedals + " \"participated:\" "+ participatedMedals +"}}";
 	}
 	
 	public void addSuspicion() {
