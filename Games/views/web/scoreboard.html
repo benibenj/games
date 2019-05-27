@@ -167,7 +167,32 @@
 				tr.appendChild(tb0);
 				// Table body for Username
 				var tb1 = document.createElement("td");
+
+				// Medals
+				var medals = "";
+				if(fames[i].medals.first > 0){
+					medals += fames[i].medals.first + "🥇 "
+				}
+				if(fames[i].medals.second > 0){
+					medals += fames[i].medals.second + "🥈 "
+				}
+				if(fames[i].medals.third > 0){
+					medals += fames[i].medals.third + "🥉 "
+				}
+				if(fames[i].medals.participated > 0){
+					medals += fames[i].medals.participated + "🎖️ "
+				}
+				if(medals.length > 0){
+					medals = medals.substring(0, medals.length - 1);
+				}
+
+				var span = document.createElement("span");
+				span.classList.add("medals");
+				span.innerHTML = medals;
+
+
 				tb1.appendChild(document.createTextNode(fames[i].username));
+				tb1.appendChild(span);
 				tr.appendChild(tb1);
 				// Table body for Fame
 				var tb2 = document.createElement("td");

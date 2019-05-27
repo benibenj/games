@@ -130,6 +130,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public void addBooster(int addend) {
 		booster.set(booster.get() + addend);
+		if(booster.get() <= 0) {
+			boosted.set(true);
+		}
 	}
 
 	@Override
@@ -161,12 +164,15 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 				switch(intRank) {
 				case 0:
 					firstMedals++;
+					participatedMedals++;
 					break;
 				case 1:
 					secondMedals++;
+					participatedMedals++;
 					break;
 				case 2:
 					thirdMedals++;
+					participatedMedals++;
 					break;
 				default:
 					participatedMedals++;
@@ -175,7 +181,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 			}
 		}
 		
-		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": \"" + banned.get() + "\", \"rankings\": " + builder.toString() + ", \"medals\": {\"first\": " + firstMedals + ", \"second\": " + secondMedals + ", \"third\": " + thirdMedals + " \"participated:\" "+ participatedMedals +"}}";
+		return "{\"username\": \"" + getUsername() + "\", \"fame\": \"" + fame.get() + "\", \"banned\": " + banned.get() + ", \"rankings\": " + builder.toString() + ", \"medals\": {\"first\": " + firstMedals + ", \"second\": " + secondMedals + ", \"third\": " + thirdMedals + ", \"participated\": "+ participatedMedals +"}}";
 	}
 	
 	public void addSuspicion() {
@@ -302,6 +308,9 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	
 	public void toggleBooster() {
 		boosted.set(!boosted.get());
+		if(booster.get() <= 0) {
+			boosted.set(false);
+		}
 	}
 
 	public boolean canBoost() {
