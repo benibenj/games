@@ -131,7 +131,7 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 	public void addBooster(int addend) {
 		booster.set(booster.get() + addend);
 		if(booster.get() <= 0) {
-			boosted.set(true);
+			boosted.set(false);
 		}
 	}
 
