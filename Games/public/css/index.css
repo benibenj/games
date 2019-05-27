@@ -89,6 +89,7 @@ h3{
 .season .container-next .clock{
 	zoom: 0.5;
 	-moz-transform: scale(0.5);
+	-moz-transform-origin: 0 0;
 	position: absolute;
 	left: 5px;
 	top: 40px;

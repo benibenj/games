@@ -1,0 +1,21 @@
+{{include "top.html"}}
+    <link rel="stylesheet" type="text/css" href="/css/profile.css">
+
+    <main>
+        {{include "profile/profile-buttons.html"}}
+
+        <div class="change">
+            <h2>{{print translate "notifications"}}</h2>
+            <a class="button" href="/profile/notifications"><button>{{
+                if get "notifications" variables
+                    print translate "disable-notifications"
+                end
+                if not get "notifications" variables
+                    print translate "enable-notifications"
+                end 
+            }}</button></a>
+      
+            
+        </div>
+    </main>
+{{include "bottom.html"}}

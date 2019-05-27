@@ -1,21 +1,21 @@
 function Player(){
-	this.size = 60;
+	this.size = 120;
 	this.h = this.size;
-	this.w = 30;
+	this.w = 60;
 	this.ylimit = height-30-this.size;
 	this.x = 40;
 	this.y = this.ylimit;
 
 	// gravity stuff
-	this.gravity = 0.8;
-	this.lift = -30;
+	this.gravity = 1.5;
+	this.lift = -50;
 	this.velocity = 0;
 
 	// sliding stuff
 	this.slideStart = 0;
 	this.sliding = false;
-	this.slideDuration = 1000;
-	this.slidingSize = 30;
+	this.slideDuration = 600;
+	this.slidingSize = 60;
 
 	this.update = function(){
 		if (!this.sliding) {
@@ -44,8 +44,17 @@ function Player(){
 	}
 
 	this.show = function(){
-		fill(255);
-		rect(this.x, this.y, this.w, this.h);
+		if (!this.sliding) {
+			if (frameCount % 30 >= 15) {
+				image(imgplayer, this.x, this.y, this.w, this.h);
+			}
+			else{
+				image(imgplayer2, this.x, this.y, this.w, this.h);
+			}
+		}
+		else{
+			image(imgcar, this.x, this.y, this.w+40, this.h);
+		}
 	}
 
 	this.jump = function(){

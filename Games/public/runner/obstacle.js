@@ -1,9 +1,34 @@
-function Obstacle(){
+function Obstacle(type){
+	switch(type){
+		case 0:
+			this.y = height-30-player.size;
+			this.w = 50;
+			this.h = 50;
+			this.img = imgship;
+		break;
+		case 1:
+			this.y = height-30-player.size;
+			this.w = 40;
+			this.h = player.size;
+			this.img = imgobj;
+		break;
+		case 2:
+			this.y = height-50-player.size;
+			this.w = 50;
+			this.h = 50;
+			this.img = imgship;
+		break;
+		case 3:
+			this.y = height-30-player.size;
+			this.w = 40;
+			this.h = player.size;
+			this.img = imgobj;
+		break;
+		default:
+	}
+	
+	this.speed = speed;
 	this.x = width;
-	this.y = height-30-player.size;
-	this.w = 20;
-	this.h = 20;
-	this.speed = 5;
 
 	this.update = function(){
 		this.x -= this.speed;
@@ -11,7 +36,7 @@ function Obstacle(){
 
 	this.show = function(){
 		fill(255);
-		rect(this.x, this.y, this.w, this.h);
+		image(this.img, this.x, this.y, this.w, this.h);
 	}
 
 	this.collision = function(){

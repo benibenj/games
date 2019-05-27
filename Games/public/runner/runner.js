@@ -1,9 +1,11 @@
 var player;
 var obstacles;
-let speed = 40;
+let speed;
 let gameover;
 let started;
 let score;
+let framespawntime;
+let haveincreased;
 function setup(){
 	if(screen.width >= 600){
 		createCanvas(600, 600);
@@ -16,11 +18,14 @@ function setup(){
 	gameover = false;
 	started = false;
 	score = 0;
+	speed = 8;
+	framespawntime = 100;
+	haveincreased = true;
 }
 
 function draw(){
 	if (!gameover) {
-		background(0);
+		background(255);
 		// update obstacles
 		for (var i = obstacles.length-1; i >= 0; i--) {
 			obstacles[i].update();
@@ -38,8 +43,19 @@ function draw(){
 		player.update();
 		player.show();
 
-		if (frameCount % 100 == 0) {
-			obstacles.push(new Obstacle());
+		// increase speed every x obstacles
+		if (score % 6 == 0 && !haveincreased && score > 0) {
+			speed++;
+			framespawntime--;
+			haveincreased = true;
+		}
+		else if (score % 6 != 0 && haveincreased) {
+			haveincreased = false;
+		}
+
+		// create new obstacles
+		if (frameCount % framespawntime == 0) {
+			obstacles.push(new Obstacle(Math.round(Math.random()*3)));
 		}
 
 		drawScore();
@@ -79,6 +95,14 @@ function mousePressed(){
 
 function gameOver(){
 	gameover = true;
+}
+
+function preload(){
+  	imgcar = loadImage('/runner/img/car.svg');
+  	imgobj = loadImage('/runner/img/object.svg');
+  	imgplayer = loadImage('/runner/img/player.svg');
+  	imgplayer2 = loadImage('/runner/img/player21.svg');
+  	imgship = loadImage('/runner/img/ship.svg');
 }
 
 function drawScore(){
