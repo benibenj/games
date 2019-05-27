@@ -21,7 +21,7 @@ nav{
 
 nav .container-links{
 	height: 90%;
-	overflow-y:scroll;
+	overflow-y: auto;
 }
 
 nav .controllnav{
