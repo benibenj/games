@@ -114,3 +114,4 @@ Last Winner
 Enter to have the chance to win at least 
 Buy Tickets
 You have bought
+Time until the lottery draw

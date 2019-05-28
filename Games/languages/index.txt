@@ -114,3 +114,4 @@ last-winner
 enter
 buy-ticket
 have-bought
+time-draw

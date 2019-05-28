@@ -8,26 +8,32 @@
 
 <main>
 	<h1>{{print translate "lottery"}}</h1>
+
+	<h3>{{print translate "time-draw"}}</h3>
 	<div class="timer">
 		<div class="clock"></div>
 	</div>
 
-	<h2>{{
-		print translate "enter"
-		print get "total-lots" variables 
-		print " " 
+	<h2>{{print translate "enter"}}
+		<span class="bold">
+			{{print get "total-lots" variables}}
+		</span>
+		{{print " " 
 		print translate "coins"
 	}}</h2>
 
-	<form>
-		<input type="number" id="input-num" name="num-tickets" placeholder="Amount of Tickets" value="1" onchange="amount();">
-		<button>{{print translate "buy-ticket"}}! <span id="button-num">1</span> <img src="/img/coin.png"></button>
-	</form>
+	<img src="/img/lottery.png">
 
-	<h2>{{
-		print translate "have-bought"
-		print get "my-lots" variables
-	}} tickets</h2>
+	<div class="placer">
+		<form>
+			<input type="number" id="input-num" name="num-tickets" placeholder="Amount of Tickets" value="1" onchange="amount();">
+			<button>{{print translate "buy-ticket"}}! <span id="button-num">1</span> <img src="/img/coin.png"></button>
+		</form>
+	</div>
+
+	<h2>{{print translate "have-bought"}}
+		<span class="bold">{{print get "my-lots" variables}}</span>
+	 	tickets</h2>
 	<h2>{{
 		if not equals get "last-winner" variables null
 			print translate "last-winner"
