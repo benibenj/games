@@ -112,6 +112,14 @@ public class Main {
 		
 		// Import PreciseIntervalJob from webserver repository
 		new PreciseIntervalJob(() -> {
+			
+			// Set fame per minute, update later
+			LinkedList <ObjectTemplate> playerObjectTemplates = database.loadAll(Player.class);
+			for(ObjectTemplate object : playerObjectTemplates) {
+				Player player = ((Player) object);
+				
+				player.setFamePerMinute(0);
+			}
 
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller", "runner"};
 	
@@ -143,7 +151,6 @@ public class Main {
 				
 				
 				// Remove 1 minute worth of booster
-				LinkedList <ObjectTemplate> playerObjectTemplates = database.loadAll(Player.class);
 				for(ObjectTemplate object : playerObjectTemplates) {
 					Player player = ((Player) object);
 					
