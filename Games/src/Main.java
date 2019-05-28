@@ -119,6 +119,7 @@ public class Main {
 				Player player = ((Player) object);
 				
 				player.setFamePerMinute(0);
+				database.update(player);
 			}
 
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller", "runner"};
@@ -148,31 +149,31 @@ public class Main {
 					scores.get(i).getPlayer().addFame(addedReward);
 					database.update(scores.get(i));
 				}
+
+			}
+			
+
+			// Remove 1 minute worth of booster
+			for(ObjectTemplate object : playerObjectTemplates) {
+				Player player = ((Player) object);
 				
-				
-				// Remove 1 minute worth of booster
-				for(ObjectTemplate object : playerObjectTemplates) {
-					Player player = ((Player) object);
-					
-					if(player.isBoosted() && player.canBoost()) {
-						player.addBooster(-1);
-					}
-					
-					// Add quests to account if not there
-					LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
-						return ((Quest) objectTemplate).getPlayer().equals(player);
-					});
-					
-					if(questObjectTemplates.size() == 0) {
-						for(int i = 0; i < 5; i++) {
-							player.addQuest(1440);
-						}
-						player.addQuest(4320);
-					}
-					
-					database.update(player);
+				if(player.isBoosted() && player.canBoost()) {
+					player.addBooster(-1);
 				}
 				
+				// Add quests to account if not there
+				LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+					return ((Quest) objectTemplate).getPlayer().equals(player);
+				});
+				
+				if(questObjectTemplates.size() == 0) {
+					for(int i = 0; i < 5; i++) {
+						player.addQuest(1440);
+					}
+					player.addQuest(4320);
+				}
+				
+				database.update(player);
 			}
 			
 			// Update quests
