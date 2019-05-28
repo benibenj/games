@@ -154,7 +154,6 @@ public class Main {
 				for(ObjectTemplate object : playerObjectTemplates) {
 					Player player = ((Player) object);
 					
-					player.setFamePerMinute(0);
 					if(player.isBoosted() && player.canBoost()) {
 						player.addBooster(-1);
 					}
