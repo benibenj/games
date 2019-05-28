@@ -177,6 +177,12 @@
 				// Table body for Username
 				var tb1 = document.createElement("td");
 
+				tb1.appendChild(document.createTextNode(fames[i].username));
+
+
+				var span = document.createElement("span");
+				span.classList.add("medals");
+
 				// Medals
 				var medals = "";
 				if(fames[i].medals.first > 0){
@@ -193,15 +199,12 @@
 				}
 				if(medals.length > 0){
 					medals = medals.substring(0, medals.length - 1);
+					span.innerHTML = medals;
+					tb1.appendChild(span);
+
 				}
 
-				var span = document.createElement("span");
-				span.classList.add("medals");
-				span.innerHTML = medals;
 
-
-				tb1.appendChild(document.createTextNode(fames[i].username));
-				tb1.appendChild(span);
 				tr.appendChild(tb1);
 				// Table body for Fame
 				var tb2 = document.createElement("td");
