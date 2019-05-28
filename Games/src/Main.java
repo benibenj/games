@@ -138,7 +138,7 @@ public class Main {
 				database.update(player);
 			}
 			
-			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller"};
+			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller", "runner"};
 			final int currentSeason = database.loadAll(Season.class).size() - 1;
 
 			for(String game : games) {

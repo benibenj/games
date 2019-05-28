@@ -11,7 +11,7 @@ h1{
 	font-size: 50px;
 	font-family: 'Railway', sans-serif;
 	color: var(--dark);
-	text-shadow: 2px 3px rgb(0,0,0,0.2);
+	text-shadow: 2px 3px rgba(0,0,0,0.2);
 }
 
 h3{
@@ -69,16 +69,14 @@ h3{
 
 .season .container-next{
 	position: relative;
-	width: 295px;
+	width: 350px;
 	height: 100px;
-	margin: 20px 20px 20px 60px;
+	margin: 20px 20px 20px 30px;
+	display: block;
 }
 
 .season .container-next .next-season{
-	position: absolute;
-	left: 0;
-	top: 0px;
-	margin-left: -3px;
+	text-align: center;
 	font-size: 21px;
 	line-height: 24px;
 	font-family: 'Raleway', sans-serif;
@@ -87,12 +85,11 @@ h3{
 }
 
 .season .container-next .clock{
-	zoom: 0.5;
-	-moz-transform: scale(0.5);
-	-moz-transform-origin: 0 0;
+	transform-origin: 0 0;
+	transform: scale(0.45);
 	position: absolute;
-	left: 5px;
-	top: 40px;
+	left: 25px;
+	top: 15px;
 }
 
 main{
@@ -111,7 +108,7 @@ main .container{
 	position: relative;
 	cursor: pointer;
 	border-radius: 5px;
-	box-shadow: 3px 3px 2px 2px rgb(0,0,0,0.2);
+	box-shadow: 3px 3px 2px 2px rgba(0,0,0,0.2);
 	transition: 0.5s ease-in-out;
 }
 
@@ -150,12 +147,12 @@ main .container:hover, main .container:hover .pic{
 }
 
 main .container:hover{
-	box-shadow: 3px 0px 2px 2px rgb(0,0,0,0.2);
+	box-shadow: 3px 0px 2px 2px rgba(0,0,0,0.2);
 }
 
 main .container:hover .content{
 	transform: translateY(49px); 
-	box-shadow: 3px 4px 2px 2px rgb(0,0,0,0.2);
+	box-shadow: 3px 4px 2px 2px rgba(0,0,0,0.2);
 }
 
 main .container .content[id="minesweeper"]{
@@ -174,6 +171,10 @@ main .container .content[id="chickenkiller"]{
 	background-color: #107740;
 }
 
+main .container .content[id="runner"]{
+	background-color: #000;
+}
+
 main .container .content h2{
 	font-size: 20px;
 	font-family: 'railway', sans-serif;
@@ -184,11 +185,24 @@ main .container .content h2[id="brickbreaker"]{
 	color: #fff;
 }
 
+main .container .content h2[id="runner"]{
+	color: #fff;
+}
+
 main .placer{
 	width: 300px;
 	height: 0px;
 	margin: 0 20px;
 }
+
+
+.js-cursor-container{
+    height:0px;
+    overflow:visible;
+    pointer-events:none;
+    background:none !important;
+}
+
 
 @media (max-width: 700px){
 	main .container{
@@ -198,15 +212,12 @@ main .placer{
 	main .container .content{
 		width: 200px
 	}
+
+	.season .container-next .clock{
+		left: calc(50% - 150px);
+	}
 }
 
 @media (max-width: 500px){
 	
-}
-
-.js-cursor-container{
-    height:0px;
-    overflow:visible;
-    pointer-events:none;
-    background:none !important;
 }

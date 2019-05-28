@@ -99,6 +99,7 @@ hr {
 
 input, select {
     vertical-align:middle;
+    border-radius: 0;
 }
 
 

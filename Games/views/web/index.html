@@ -55,8 +55,7 @@
 <script type="text/javascript">
 	var clock = $('.clock').FlipClock(({{print get "season-duration" variables}}+1)*60, {
 		clockFace: 'DailyCounter',
-		countdown: true,
-		showSeconds: false
+		countdown: true
     });
     // Reloads the page
     setTimeout(function(){
@@ -103,7 +102,7 @@
 			<img src="/runner/img/runner.png">
 		</div>
 		<div class="content" id="runner">
-			<h2>Runner</h2>
+			<h2 id="runner">Runner</h2>
 		</div>
 	</div>
 	

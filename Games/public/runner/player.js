@@ -1,14 +1,14 @@
 function Player(){
-	this.size = 120;
+	this.size = 160;
 	this.h = this.size;
-	this.w = 60;
-	this.ylimit = height-30-this.size;
+	this.w = 80;
+	this.ylimit = height-80-this.size;
 	this.x = 40;
 	this.y = this.ylimit;
 
 	// gravity stuff
 	this.gravity = 1.5;
-	this.lift = -50;
+	this.lift = -55;
 	this.velocity = 0;
 
 	// sliding stuff
@@ -45,7 +45,7 @@ function Player(){
 
 	this.show = function(){
 		if (!this.sliding) {
-			if (frameCount % 30 >= 15) {
+			if (frameCount % 20 >= 10) {
 				image(imgplayer, this.x, this.y, this.w, this.h);
 			}
 			else{

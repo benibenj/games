@@ -3,7 +3,7 @@ body{
 }
 
 nav{
-	width: 18%;
+	width: 270px;
 	height: 100%;
 	position: fixed;
 	top: 0;
@@ -11,7 +11,7 @@ nav{
 	background-color: var(--dark);
 	z-index: 100;
 	transform: translate(-100%);
-	box-shadow: 2px 0 2px 2px rgb(0,0,0,0.1);
+	box-shadow: 2px 0 2px 2px rgba(0,0,0,0.1);
 }
 
 ::-webkit-scrollbar {
@@ -34,7 +34,7 @@ nav .controllnav{
 	border-radius: 0 10px 10px 0;
 	text-align: center;
 	cursor: pointer;
-	box-shadow: 1px 2px 2px 1px rgb(0,0,0,0.2);
+	box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.2);
 }
 
 nav .controllnav img{
@@ -58,7 +58,7 @@ nav a.nav-links{
 nav h2.button{
 	color: var(--light);
 	font-family: arial;
-    font-size: 1.4em;
+    font-size: 22px;
     padding: 0;
 	padding-left: 15%;
 	margin: 0;
@@ -80,9 +80,9 @@ nav .line{
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 600px) {
 	nav{
-		width: 50%;
+		width: 60%;
 		box-shadow: none;
 	}
 }
