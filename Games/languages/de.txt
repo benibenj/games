@@ -110,3 +110,7 @@ Klicke <a href="{{print get "url" variables}}">hier</a> um jetzt zu spielen.<br/
 Benachrichtigungen
 Dein Account ist aktiviert.
 Lotterie
+Letzter Gewinner
+Nimm teil für die chance auf 
+Tickets kaufen
+Sie besitzen 

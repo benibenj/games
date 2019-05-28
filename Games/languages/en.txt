@@ -110,3 +110,7 @@ Click <a href="{{print get "url" variables}}">here</a> to play.<br/>Click <a hre
 Notifications
 Your account is activated.
 Lottery
+Last Winner
+Enter to have the chance to win at least 
+Buy Tickets
+You have bought

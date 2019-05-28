@@ -2,16 +2,39 @@
 <!-- CSS and JavaScript Files -->
 <link rel="stylesheet" type="text/css" href="/css/lottery.css">
 <link rel="stylesheet" type="text/css" href="/css/flipclock.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/js/flipclock.js"></script>
 
 
 <main>
 	<h1>{{print translate "lottery"}}</h1>
-	
-	<div class="clock"></div>
-	
+	<div class="timer">
+		<div class="clock"></div>
+	</div>
 
-	<h2>Enter to have the chance to win at least 35 Coins</h2>
-	<button>Buy a Ticket! 1 <img src="/img/coin.png"></button>
+	<h2>{{
+		print translate "enter"
+		print get "total-lots" variables 
+		print " " 
+		print translate "coins"
+	}}</h2>
+
+	<form>
+		<input type="number" id="input-num" name="num-tickets" placeholder="Amount of Tickets" value="1" onchange="amount();">
+		<button>{{print translate "buy-ticket"}}! <span id="button-num">1</span> <img src="/img/coin.png"></button>
+	</form>
+
+	<h2>{{
+		print translate "have-bought"
+		print get "my-lots" variables
+	}} tickets</h2>
+	<h2>{{
+		if not equals get "last-winner" variables null
+			print translate "last-winner"
+			print ": " 
+			print get "last-winner" variables
+		end
+	}}</h2>
 </main>
 
 <script type="text/javascript">
@@ -23,6 +46,17 @@
     setTimeout(function(){
         location.reload(); 
     }, ({{print get "season-duration" variables}}+1)*60*100);
+
+    function amount(){
+    	let val = document.getElementById("input-num").value;
+    	if (val <= 0) {
+    		document.getElementById("input-num").value = 1;
+    		document.getElementById("button-num").innerHTML = 1;
+    	}
+    	else{
+    		document.getElementById("button-num").innerHTML = val;
+    	}
+    }
 </script>
 
 {{include "bottom.html"}}
