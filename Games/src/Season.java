@@ -2,11 +2,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Random;
 
 import database.templates.BooleanTemplate;
 import database.templates.IntegerTemplate;
 import database.templates.ListTemplate;
 import database.templates.ObjectTemplate;
+import database.templates.ObjectTemplateReference;
 import mailer.Mailer;
 import user.User;
 
@@ -14,12 +16,16 @@ public class Season extends ObjectTemplate {
 	
 	public static final String NAME = "seasons";
 	
+	public static final Random RANDOM = new Random();
 	public static final int SEASON_DURATION = 10080;
 	
 	private IntegerTemplate season;
 	private IntegerTemplate duration;
 	private BooleanTemplate ended;
 	private ListTemplate <Player> ranking;
+	private ListTemplate <Player> lots;
+	private IntegerTemplate reward;
+	private ObjectTemplateReference <Player> winner;
 	
 	public Season(int number) {
 		this.season = new IntegerTemplate("season");
@@ -29,6 +35,10 @@ public class Season extends ObjectTemplate {
 		this.ended = new BooleanTemplate("ended");
 		this.ended.set(false);
 		this.ranking = new ListTemplate <Player> ("ranking", Player::new);
+		this.lots = new ListTemplate <Player> ("lots", Player::new);
+		this.reward = new IntegerTemplate("reward");
+		this.reward.set(0);
+		this.winner = new ObjectTemplateReference <Player> ("winner", Player::new);
 		setIdentifier(this.season);
 	}
 	
@@ -42,6 +52,14 @@ public class Season extends ObjectTemplate {
 			if(!ended.get()) {
 				ended.set(true);
 				
+				// Lottery
+				int winnerIndex = RANDOM.nextInt(lots.size());
+				Player winner = lots.get(winnerIndex);
+				this.winner.set(winner);
+				winner.addCoins(reward.get());
+				database.update(this);
+				
+				// Rewards
 				LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class);
 
 				ArrayList <Player> players = new ArrayList <Player> ();
@@ -108,6 +126,34 @@ public class Season extends ObjectTemplate {
 
 	public int getDuration() {
 		return duration.get();
+	}
+	
+	public boolean buyLot(Player player) {
+		if(player.removeCoins(1)) {
+			lots.add(player);
+			reward.set(reward.get() + 1);
+			database.update(this);
+			return true;
+		}
+		return false;
+	}
+	
+	public int getTotalLots() {
+		return lots.size();
+	}
+	
+	public int getMyLots(Player player) {
+		int counter = 0;
+		for(Player lot : lots) {
+			if(lot.equals(player)) {
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
+	public Player getWinner() {
+		return winner.get();
 	}
 	
 }

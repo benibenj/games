@@ -305,7 +305,16 @@ public class Main {
 				Player player = null;
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
 					HashMap <String, Object> variables = new HashMap <String, Object> ();
-					
+					int total = database.loadAll(Season.class).size();
+					Season season = (Season) database.load(Season.class, "" + (total - 1));
+					variables.put("total-lots", season.getTotalLots());
+					variables.put("my-lots", season.getMyLots(player));
+					if(total > 1) {
+						Season lastSeason = (Season) database.load(Season.class, "" + (total - 2));
+						variables.put("last-winner", lastSeason.getWinner());
+					} else {
+						variables.put("last-winner", null);
+					}
 					return responder.render("lottery.html", request.languages, variables);
 				}
 			}
