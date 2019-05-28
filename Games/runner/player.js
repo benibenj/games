@@ -53,7 +53,7 @@ function Player(){
 			}
 		}
 		else{
-			image(imgcar, this.x, this.y, this.w+40, this.h);
+			image(imgcar, this.x, this.y, this.w+40*scaler, this.h);
 		}
 	}
 
