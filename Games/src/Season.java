@@ -128,10 +128,12 @@ public class Season extends ObjectTemplate {
 		return duration.get();
 	}
 	
-	public boolean buyLot(Player player) {
-		if(player.removeCoins(1)) {
-			lots.add(player);
-			reward.set(reward.get() + 1);
+	public boolean buyLots(Player player, int amount) {
+		if(player.removeCoins(amount)) {
+			for(int i = 0; i < amount; i++) {
+				lots.add(player);
+			}
+			reward.set(reward.get() + amount);
 			database.update(this);
 			return true;
 		}

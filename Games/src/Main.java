@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 import database.Database;
 import database.templates.ObjectTemplate;
+import database.validator.Validator;
 import jobs.PreciseIntervalJob;
 import mailer.Mailer;
 import manager.DatabaseSessionManager;
@@ -305,6 +306,7 @@ public class Main {
 				Player player = null;
 				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
 					HashMap <String, Object> variables = new HashMap <String, Object> ();
+					addMessagesFlashToVariables(request, "errors", variables);
 					int total = database.loadAll(Season.class).size();
 					Season season = (Season) database.load(Season.class, "" + (total - 1));
 					variables.put("total-lots", season.getTotalLots());
@@ -316,6 +318,24 @@ public class Main {
 						variables.put("last-winner", null);
 					}
 					return responder.render("lottery.html", request.languages, variables);
+				}
+			}
+			return responder.redirect("/signin");
+		});
+		
+		server.on("GET", "/lottery/buy", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					int total = database.loadAll(Season.class).size();
+					Season season = (Season) database.load(Season.class, "" + (total - 1));
+					Validator validator = new Validator("errors");
+					if(!season.buyLots(player, Integer.parseInt(request.parameters.get("amount")))) {
+						validator.addMessage("amount", "too large");
+					}
+					request.session.addFlash(validator);
+					return responder.redirect("/lottery");
 				}
 			}
 			return responder.redirect("/signin");
@@ -440,5 +460,12 @@ public class Main {
 			}
 			return responder.text("invalid");
 		});
+	}
+	
+	private static void addMessagesFlashToVariables(Request request, String name, HashMap <String, Object> variables) {
+		Validator validator = (Validator) request.session.getFlash(name);
+		if(validator != null) {
+			validator.addToVariables(variables);
+		}
 	}
 }
