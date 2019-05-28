@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
@@ -224,7 +225,33 @@ public class Player extends ObjectTemplate implements Comparable <Player> {
 		try {
 			in = new Scanner(QUEST_FILE);
 			while(in.hasNext()) {
-				all.add(new Quest(this, in.next(), in.next(), in.nextInt(), in.nextInt(), in.nextInt(), in.nextInt()));
+				String name = in.next();
+				String game = in.next();
+				int times = in.nextInt();
+				int score = in.nextInt();
+				int reward = in.nextInt();
+				int questDuration = in.nextInt();
+				
+				if(score == -1) {
+					
+					LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Score.class, (ObjectTemplate objectTemplate) -> {
+						Score scoreObject = (Score) objectTemplate;
+						return scoreObject.getGame().equals(game);
+					});
+
+					ArrayList <Score> scores = new ArrayList <Score> ();
+					for(ObjectTemplate objectTemplate : objectTemplates) {
+						scores.add((Score) objectTemplate);
+					}
+					
+					if(scores.size() > 0) {
+						Collections.sort(scores);
+						score = scores.get(0).getScore();
+					} else {
+						score = 0;
+					}
+				}
+				all.add(new Quest(this, name, game, times, score, reward, questDuration));
 			}
 			
 			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
