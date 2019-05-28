@@ -73,6 +73,7 @@ Reward
 Coins
 Reach
 times the score
+time the score
 in the game
 completed
 Time remaining

@@ -32,6 +32,7 @@
 			case "brickbreaker": gameText = "Brick Breaker"; break;
 			case "minesweeper": gameText = "Minesweeper"; break;
 			case "chickenkiller": gameText = "Chicken Killer"; break;
+			case "runner": gameText = "Runner"; break;
 			default:
 		}
 
@@ -52,11 +53,23 @@
 			case "quest-chickenkiller-2": titleText = "Peck Peck"; break;
 			case "quest-chickenkiller-3": titleText = "Kentucky Fried Chicken"; break;
 			case "quest-chickenkiller-4": titleText = "Chicken Killer God"; break;
+			case "quest-runner-1": titleText = "Run or Die"; break;
+			case "quest-runner-2": titleText = "Jump and Run"; break;
+			case "quest-runner-3": titleText = "Run Master"; break;
+			case "quest-runner-4": titleText = "Runner God"; break;
 			default:
 		}
 
 		// Text versions
-		let contentText = "{{print translate "reach"}} " + amount + " {{print translate "times-the-score"}} " + score + " {{print translate "in-the-game"}} " + gameText;
+		let contentText;
+		if (amount === 0) {
+			contentText = "{{print translate "reach"}} " + amount + " {{print translate "time-the-score"}} " + score + " {{print translate "in-the-game"}} " + gameText;
+		}
+		else{
+			contentText = "{{print translate "reach"}} " + amount + " {{print translate "times-the-score"}} " + score + " {{print translate "in-the-game"}} " + gameText;
+		}
+		
+
 		let rewardText = "{{print translate "reward"}}: " + rewardPoints + " {{print translate "coins"}}";
 
 		if (completed) {

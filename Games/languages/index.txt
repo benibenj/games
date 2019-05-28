@@ -73,6 +73,7 @@ reward
 coins
 reach
 times-the-score
+time-the-score
 in-the-game
 completed
 time-remaining
