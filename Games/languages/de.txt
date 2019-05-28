@@ -109,3 +109,4 @@ Season {{print get "next-season" variables}} ist endlich hier! Season {{print ge
 Klicke <a href="{{print get "url" variables}}">hier</a> um jetzt zu spielen.<br/>Klicke <a href="{{print get "url" variables}}/profile">hier</a> um diese Benachrichtigungen zu deaktivieren.
 Benachrichtigungen
 Dein Account ist aktiviert.
+Lotterie

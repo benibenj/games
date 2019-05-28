@@ -109,3 +109,4 @@ new-season-email-profile
 new-season-email-todo
 notifications
 account-activated
+lottery

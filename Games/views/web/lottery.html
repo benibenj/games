@@ -1,0 +1,28 @@
+{{include "top.html"}}
+<!-- CSS and JavaScript Files -->
+<link rel="stylesheet" type="text/css" href="/css/lottery.css">
+<link rel="stylesheet" type="text/css" href="/css/flipclock.css">
+
+
+<main>
+	<h1>{{print translate "lottery"}}</h1>
+	
+	<div class="clock"></div>
+	
+
+	<h2>Enter to have the chance to win at least 35 Coins</h2>
+	<button>Buy a Ticket! 1 <img src="/img/coin.png"></button>
+</main>
+
+<script type="text/javascript">
+	var clock = $('.clock').FlipClock(({{print get "season-duration" variables}}+1)*60, {
+		clockFace: 'DailyCounter',
+		countdown: true
+    });
+    // Reloads the page
+    setTimeout(function(){
+        location.reload(); 
+    }, ({{print get "season-duration" variables}}+1)*60*100);
+</script>
+
+{{include "bottom.html"}}

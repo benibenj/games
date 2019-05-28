@@ -299,6 +299,19 @@ public class Main {
 			return responder.text("error");
 		});
 		
+		server.on("GET", "/lottery", (Request request) -> {
+			User user = (User) request.session.load();
+			if(user != null) {
+				Player player = null;
+				if((player = (Player) database.load(Player.class, user.getUsername())) != null) {
+					HashMap <String, Object> variables = new HashMap <String, Object> ();
+					
+					return responder.render("lottery.html", request.languages, variables);
+				}
+			}
+			return responder.redirect("/signin");
+		});
+		
 		server.on("GET", "/profile/boost", (Request request) -> {
 			User user = (User) request.session.load();
 			if(user != null) {
