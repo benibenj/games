@@ -6,6 +6,13 @@ let started;
 let score;
 let framespawntime;
 let haveincreased;
+if (screen.width <= 600) {
+	var scaler = screen.width/600;
+}
+else{
+	var scaler = 1;
+}
+
 function setup(){
 	if(screen.width >= 600){
 		createCanvas(600, 600);
