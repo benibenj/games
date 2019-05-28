@@ -118,6 +118,14 @@ main .text h2{
 	cursor: pointer;
 }
 
+.medals{
+	padding: 4px;
+	margin-left: 4px;
+	border: 2px solid black;
+	background-color: white;
+	border-radius: 4px;
+}
+
 @media (max-width: 800px){
 
 	body{

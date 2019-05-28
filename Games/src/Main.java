@@ -112,33 +112,9 @@ public class Main {
 		
 		// Import PreciseIntervalJob from webserver repository
 		new PreciseIntervalJob(() -> {
-			// Update fame for all games listed here
-			System.out.println("Updating Fame");
-			
-			LinkedList <ObjectTemplate> playerObjectTemplates = database.loadAll(Player.class);
-			for(ObjectTemplate object : playerObjectTemplates) {
-				Player player = ((Player) object);
-				
-				player.setFamePerMinute(0);
-				if(player.isBoosted() && player.canBoost()) {
-					player.addBooster(-1);
-				}
-				
-				LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
-					return ((Quest) objectTemplate).getPlayer().equals(player);
-				});
-				
-				if(questObjectTemplates.size() == 0) {
-					for(int i = 0; i < 5; i++) {
-						player.addQuest(1440);
-					}
-					player.addQuest(4320);
-				}
-				
-				database.update(player);
-			}
-			
+
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller", "runner"};
+	
 			final int currentSeason = database.loadAll(Season.class).size() - 1;
 
 			for(String game : games) {
@@ -165,10 +141,35 @@ public class Main {
 					database.update(scores.get(i));
 				}
 				
+				
+				// Remove 1 minute worth of booster
+				LinkedList <ObjectTemplate> playerObjectTemplates = database.loadAll(Player.class);
+				for(ObjectTemplate object : playerObjectTemplates) {
+					Player player = ((Player) object);
+					
+					player.setFamePerMinute(0);
+					if(player.isBoosted() && player.canBoost()) {
+						player.addBooster(-1);
+					}
+					
+					// Add quests to account if not there
+					LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class, (ObjectTemplate objectTemplate) -> {
+						return ((Quest) objectTemplate).getPlayer().equals(player);
+					});
+					
+					if(questObjectTemplates.size() == 0) {
+						for(int i = 0; i < 5; i++) {
+							player.addQuest(1440);
+						}
+						player.addQuest(4320);
+					}
+					
+					database.update(player);
+				}
+				
 			}
 			
 			// Update quests
-			System.out.println("Updating Quests");
 			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
 			for(ObjectTemplate objectTemplate : questObjectTemplates) {
 				Quest quest = (Quest) objectTemplate;
@@ -177,7 +178,6 @@ public class Main {
 			
 			
 			// Update Season
-			System.out.println("Updating Seasons");
 			LinkedList <ObjectTemplate> seasonObjectTemplates = database.loadAll(Season.class);
 			for(ObjectTemplate objectTemplate : seasonObjectTemplates) {
 				Season season = (Season) objectTemplate;
