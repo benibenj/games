@@ -8,6 +8,7 @@
 		<button id="2">Flappybird</button>
 		<button id="3">Brick Breaker</button>
 		<button id="4">Chicken Killer</button>
+		<button id="5">Runner</button>
 	</div>
 
 	<div class="list" id="season">
@@ -37,6 +38,7 @@
 <script>
 	var season = 0;
 	var game = "";
+	var numGames = 5;
 
 	document.getElementById("0").style.backgroundColor = "#F3B54A";
 	document.getElementById("s1").style.backgroundColor = "#F3B54A";
@@ -89,6 +91,15 @@
 		loadGameScoreboard(game, season);
 	});
 
+	document.getElementById("5").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Runner";
+		document.getElementById("text").innerHTML = "";
+		changeBackgroundColor("5");
+		document.getElementById("season").style.display = "block";
+		game = "runner";
+		loadGameScoreboard(game, season);
+	});
+
 	// Event Listeners, Season id's
 	document.getElementById("s1").addEventListener("click", function(){
 		changeBackgroundColorS("s1");
@@ -105,11 +116,9 @@
 	// change backgroundcolor
 	function changeBackgroundColor(id){
 		// remove the current color
-		document.getElementById("0").style.backgroundColor = "";
-		document.getElementById("1").style.backgroundColor = "";
-		document.getElementById("2").style.backgroundColor = "";
-		document.getElementById("3").style.backgroundColor = "";
-		document.getElementById("4").style.backgroundColor = "";
+		for (var i = 0; i <= numGames; i++) {
+			document.getElementById(i).style.backgroundColor = "";
+		}
 		// add new color
 		document.getElementById(id).style.backgroundColor = "#F3B54A";
 	}
