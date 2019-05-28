@@ -69,7 +69,7 @@ Rangliste
 Registrieren
 Einloggen
 Profil
-Behlonung
+Belohnung
 Münzen
 Erreiche
 Mal den Score
@@ -88,7 +88,7 @@ Catch them all
 Flag them up
 Glücksrad
 Sie besitzen nicht genügend Münzen
-Begib dich zu deinem Profil um den Booster zu aktivieren
+Begib dich zu deinem Profil, um den Booster zu aktivieren
 Sie erhielten:
 Nichts
 Booster aktivieren
