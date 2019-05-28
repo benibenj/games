@@ -1,21 +1,21 @@
 function Player(){
-	this.size = 160;
+	this.size = 160*scaler;
 	this.h = this.size;
-	this.w = 80;
-	this.ylimit = height-80-this.size;
-	this.x = 40;
+	this.w = 80*scaler;
+	this.ylimit = height-80*scaler-this.size;
+	this.x = 40*scaler;
 	this.y = this.ylimit;
 
 	// gravity stuff
-	this.gravity = 1.5;
-	this.lift = -55;
+	this.gravity = 1.5*scaler;
+	this.lift = -55*scaler;
 	this.velocity = 0;
 
 	// sliding stuff
 	this.slideStart = 0;
 	this.sliding = false;
 	this.slideDuration = 600;
-	this.slidingSize = 60;
+	this.slidingSize = 60*scaler;
 
 	this.update = function(){
 		if (!this.sliding) {
@@ -53,7 +53,7 @@ function Player(){
 			}
 		}
 		else{
-			image(imgcar, this.x, this.y, this.w+40, this.h);
+			image(imgcar, this.x, this.y, this.w+40*scaler, this.h);
 		}
 	}
 

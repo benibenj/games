@@ -5,7 +5,7 @@
 	<div class="list">
 		<button id="0">Hall of fame</button>
 		<button id="1">Minesweeper</button>
-		<button id="2">Flappybird</button>
+		<button id="2">Flappy Bird</button>
 		<button id="3">Brick Breaker</button>
 		<button id="4">Chicken Killer</button>
 		<button id="5">Runner</button>
@@ -36,7 +36,7 @@
 </html>
 
 <script>
-	var season = 0;
+	var season = {{print get "current-season" variables}}-1;
 	var game = "";
 	var numGames = 5;
 
@@ -65,7 +65,7 @@
 	});
 
 	document.getElementById("2").addEventListener("click", function(){
-		document.getElementById("title").innerHTML = "Flappybird";
+		document.getElementById("title").innerHTML = "Flappy Bird";
 		document.getElementById("text").innerHTML = "";
 		changeBackgroundColor("2");
 		document.getElementById("season").style.display = "block";

@@ -1,32 +1,32 @@
 function Obstacle(type){
 	switch(type){
 		case 0:
-			this.y = height-80-player.size;
-			this.w = 97.5;
-			this.h = 65;
+			this.y = height-80*scaler-player.size;
+			this.w = 97.5*scaler;
+			this.h = 65*scaler;
 			this.img = imgship;
 		break;
 		case 1:
-			this.y = height-80-player.size;
-			this.w = 52;
+			this.y = height-80*scaler-player.size;
+			this.w = 52*scaler;
 			this.h = player.size;
 			this.img = imgobj;
 		break;
 		case 2:
-			this.y = height-100-player.size;
-			this.w = 97.5;
-			this.h = 65;
+			this.y = height-100*scaler-player.size;
+			this.w = 97.5*scaler;
+			this.h = 65*scaler;
 			this.img = imgship;
 		break;
 		case 3:
-			this.y = height-160-player.size;
-			this.w = 73;
-			this.h = 109;
+			this.y = height-160*scaler-player.size;
+			this.w = 73*scaler;
+			this.h = 109*scaler;
 			this.img = imgshuttle;
 		break;
 		case 4:
-			this.y = height-80-player.size;
-			this.w = 52;
+			this.y = height-80*scaler-player.size;
+			this.w = 52*scaler;
 			this.h = player.size;
 			this.img = imgobj;
 		break;
