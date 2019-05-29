@@ -155,17 +155,16 @@ public class Season extends ObjectTemplate {
 	
 	public boolean buyLots(Player player, int amount) {
 		if(player.removeCoins(amount)) {
-			for(int i = 0; i < amount; i++) {
-				if(lots.contains(player)) {
-					IntegerTemplate toAdd = new IntegerTemplate();
-					toAdd.set(this.amount.get(lots.indexOf(player)).get() + amount);
-					this.amount.set(lots.indexOf(player), toAdd);
-				} else {
-					lots.add(player);
-					IntegerTemplate toAdd = new IntegerTemplate();
-					toAdd.set(0);
-					this.amount.add(toAdd);
-				}
+			if(lots.contains(player)) {
+				IntegerTemplate toAdd = new IntegerTemplate();
+				toAdd.set(this.amount.get(lots.indexOf(player)).get() + amount);
+				System.out.println(toAdd.get());
+				this.amount.set(lots.indexOf(player), toAdd);
+			} else {
+				lots.add(player);
+				IntegerTemplate toAdd = new IntegerTemplate();
+				toAdd.set(0);
+				this.amount.add(toAdd);
 			}
 			reward.set(reward.get() + amount);
 			database.update(this);
@@ -175,7 +174,12 @@ public class Season extends ObjectTemplate {
 	}
 	
 	public int getTotalLots() {
-		return lots.size();
+		int sum = 0;
+		for(IntegerTemplate it : amount) {
+			int amount = it.get();
+			sum += amount;
+		}
+		return sum;
 	}
 	
 	public int getMyLots(Player player) {

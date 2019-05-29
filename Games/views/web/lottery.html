@@ -43,7 +43,7 @@
 			change();
 			function change(){
 				let val = document.getElementById("input-num").value;
-				if (val <= 0) {
+				if (val < 0) {
 					document.getElementById("input-num").value = 1;
 					document.getElementById("button-num").innerHTML = 1;
 				}
