@@ -26,6 +26,7 @@ public class Season extends ObjectTemplate {
 	private ListTemplate <Player> lots;
 	private IntegerTemplate reward;
 	private ObjectTemplateReference <Player> winner;
+	private ListTemplate <IntegerTemplate> amount;
 	
 	public Season(int number) {
 		this.season = new IntegerTemplate("season");
@@ -36,6 +37,7 @@ public class Season extends ObjectTemplate {
 		this.ended.set(false);
 		this.ranking = new ListTemplate <Player> ("ranking", Player::new);
 		this.lots = new ListTemplate <Player> ("lots", Player::new);
+		this.amount = new ListTemplate <IntegerTemplate> ("amount", IntegerTemplate::new);
 		this.reward = new IntegerTemplate("reward");
 		this.reward.set(0);
 		this.winner = new ObjectTemplateReference <Player> ("winner", Player::new);
@@ -55,11 +57,32 @@ public class Season extends ObjectTemplate {
 				ended.set(true);
 				
 				// Lottery
-				int winnerIndex = RANDOM.nextInt(lots.size());
-				Player winner = lots.get(winnerIndex);
-				this.winner.set(winner);
-				winner.addCoins(reward.get());
-				database.update(this);
+				if(lots.size() > 0) {
+					int sum = 0;
+					for(IntegerTemplate it : amount) {
+						int amount = it.get();
+						sum += amount;
+					}
+					
+					int winnerIndex = RANDOM.nextInt(sum);
+					Player winner = null;
+					
+					sum = 0;
+					int i = 0;
+					
+					for(IntegerTemplate it : amount) {
+						int amount = it.get();
+						sum += amount;
+						if(winnerIndex < sum) {
+							winner = lots.get(i);
+						}
+						i++;
+					}
+					
+					this.winner.set(winner);
+					winner.addCoins(reward.get());
+					database.update(this);
+				}
 				
 				// Rewards
 				LinkedList <ObjectTemplate> objectTemplates = database.loadAll(Player.class);
@@ -133,7 +156,16 @@ public class Season extends ObjectTemplate {
 	public boolean buyLots(Player player, int amount) {
 		if(player.removeCoins(amount)) {
 			for(int i = 0; i < amount; i++) {
-				lots.add(player);
+				if(lots.contains(player)) {
+					IntegerTemplate toAdd = new IntegerTemplate();
+					toAdd.set(this.amount.get(lots.indexOf(player)).get() + amount);
+					this.amount.set(lots.indexOf(player), toAdd);
+				} else {
+					lots.add(player);
+					IntegerTemplate toAdd = new IntegerTemplate();
+					toAdd.set(0);
+					this.amount.add(toAdd);
+				}
 			}
 			reward.set(reward.get() + amount);
 			database.update(this);
@@ -147,13 +179,10 @@ public class Season extends ObjectTemplate {
 	}
 	
 	public int getMyLots(Player player) {
-		int counter = 0;
-		for(Player lot : lots) {
-			if(lot.equals(player)) {
-				counter++;
-			}
+		if(lots.contains(player)) {
+			return this.amount.get(lots.indexOf(player)).get();
 		}
-		return counter;
+		return 0;
 	}
 	
 	public Player getWinner() {

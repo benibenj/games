@@ -335,7 +335,11 @@ public class Main {
 					int total = database.loadAll(Season.class).size();
 					Season season = (Season) database.load(Season.class, "" + (total - 1));
 					Validator validator = new Validator("errors");
-					if(!season.buyLots(player, Integer.parseInt(request.parameters.get("amount")))) {
+					try {
+						if(!season.buyLots(player, Integer.parseInt(request.parameters.get("amount")))) {
+							validator.addMessage("amount", "too-large");
+						}
+					} catch (Exception e) {
 						validator.addMessage("amount", "too-large");
 					}
 					request.session.addFlash(validator);
