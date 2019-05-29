@@ -65,13 +65,6 @@
 	</div>
 
 	<h2>{{print translate "have-bought"}} <span class="bold">{{print get "my-lots" variables}}</span> tickets</h2>
-	<h2>{{
-		if not equals get "last-winner" variables null
-			print translate "last-winner"
-			print ": " 
-			print get "last-winner" variables
-		end
-	}}</h2>
 
 </main>
 
