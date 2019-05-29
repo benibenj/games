@@ -313,7 +313,11 @@ public class Main {
 					variables.put("my-lots", season.getMyLots(player));
 					if(total > 1) {
 						Season lastSeason = (Season) database.load(Season.class, "" + (total - 2));
-						variables.put("last-winner", lastSeason.getWinner().getUsername());
+						if(lastSeason.getWinner() != null) {
+							variables.put("last-winner", lastSeason.getWinner().getUsername());
+						} else {
+							variables.put("last-winner", null);
+						}
 					} else {
 						variables.put("last-winner", null);
 					}
