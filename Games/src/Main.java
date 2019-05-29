@@ -313,7 +313,7 @@ public class Main {
 					variables.put("my-lots", season.getMyLots(player));
 					if(total > 1) {
 						Season lastSeason = (Season) database.load(Season.class, "" + (total - 2));
-						variables.put("last-winner", lastSeason.getWinner());
+						variables.put("last-winner", lastSeason.getWinner().getUsername());
 					} else {
 						variables.put("last-winner", null);
 					}
@@ -323,7 +323,7 @@ public class Main {
 			return responder.redirect("/signin");
 		});
 		
-		server.on("GET", "/lottery/buy", (Request request) -> {
+		server.on("POST", "/lottery", (Request request) -> {
 			User user = (User) request.session.load();
 			if(user != null) {
 				Player player = null;
@@ -332,7 +332,7 @@ public class Main {
 					Season season = (Season) database.load(Season.class, "" + (total - 1));
 					Validator validator = new Validator("errors");
 					if(!season.buyLots(player, Integer.parseInt(request.parameters.get("amount")))) {
-						validator.addMessage("amount", "too large");
+						validator.addMessage("amount", "too-large");
 					}
 					request.session.addFlash(validator);
 					return responder.redirect("/lottery");

@@ -47,7 +47,9 @@ public class Season extends ObjectTemplate {
 	}
 	
 	public void update(Mailer mailer) {
-		duration.set(duration.get() - 1);
+		if(duration.get() > 0) {
+			duration.set(duration.get() - 1);
+		}
 		if(duration.get() <= 0) {
 			if(!ended.get()) {
 				ended.set(true);

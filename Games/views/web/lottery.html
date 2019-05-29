@@ -24,16 +24,33 @@
 
 	<img src="/img/lottery.png">
 
+	<script type="text/javascript">
+		window.addEventListener("load", function() {
+			change();
+			function change(){
+				let val = document.getElementById("input-num").value;
+				if (val <= 0) {
+					document.getElementById("input-num").value = 1;
+					document.getElementById("button-num").innerHTML = 1;
+				}
+				else{
+					document.getElementById("button-num").innerHTML = val;
+				}
+			}
+			document.getElementById("input-num").addEventListener("keyup", change);
+			document.getElementById("input-num").addEventListener("change", change);
+		});
+	</script>
+
 	<div class="placer">
-		<form>
-			<input type="number" id="input-num" name="num-tickets" placeholder="Amount of Tickets" value="1" onchange="amount();">
+		{{include "messages.html"}}
+		<form method="POST">
+			<input type="number" id="input-num" name="amount" placeholder="Amount of Tickets" value="1" min="1">
 			<button>{{print translate "buy-ticket"}}! <span id="button-num">1</span> <img src="/img/coin.png"></button>
 		</form>
 	</div>
 
-	<h2>{{print translate "have-bought"}}
-		<span class="bold">{{print get "my-lots" variables}}</span>
-	 	tickets</h2>
+	<h2>{{print translate "have-bought"}} <span class="bold">{{print get "my-lots" variables}}</span> tickets</h2>
 	<h2>{{
 		if not equals get "last-winner" variables null
 			print translate "last-winner"
@@ -44,25 +61,14 @@
 </main>
 
 <script type="text/javascript">
-	var clock = $('.clock').FlipClock(({{print get "season-duration" variables}}+1)*60, {
+	var clock = $('.clock').FlipClock(({{print get "season-duration" variables}})*60, {
 		clockFace: 'DailyCounter',
 		countdown: true
     });
     // Reloads the page
     setTimeout(function(){
         location.reload(); 
-    }, ({{print get "season-duration" variables}}+1)*60*100);
-
-    function amount(){
-    	let val = document.getElementById("input-num").value;
-    	if (val <= 0) {
-    		document.getElementById("input-num").value = 1;
-    		document.getElementById("button-num").innerHTML = 1;
-    	}
-    	else{
-    		document.getElementById("button-num").innerHTML = val;
-    	}
-    }
+    }, ({{print get "season-duration" variables}})*60*100);
 </script>
 
 {{include "bottom.html"}}

@@ -111,7 +111,9 @@ Benachrichtigungen
 Dein Account ist aktiviert.
 Lotterie
 Letzter Gewinner
-Nimm teil für die chance auf 
+Nimm teil für die Chance auf 
 Tickets kaufen
 Sie besitzen 
 Zeit bis zur Ziehung
+Anzahl
+zu gross

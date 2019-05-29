@@ -115,3 +115,5 @@ enter
 buy-ticket
 have-bought
 time-draw
+amount
+too-large

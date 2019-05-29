@@ -53,14 +53,14 @@
 </div>
 
 <script type="text/javascript">
-	var clock = $('.clock').FlipClock(({{print get "season-duration" variables}}+1)*60, {
+	var clock = $('.clock').FlipClock(({{print get "season-duration" variables}})*60, {
 		clockFace: 'DailyCounter',
 		countdown: true
     });
     // Reloads the page
     setTimeout(function(){
         location.reload(); 
-    }, ({{print get "season-duration" variables}}+1)*60*100);
+    }, ({{print get "season-duration" variables}})*60*100);
 </script>
 
 <!-- Main Content -->
