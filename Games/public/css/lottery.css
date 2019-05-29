@@ -25,15 +25,15 @@ h2{
 	font-size: 23px;
 	font-family: 'Raleway', sans-serif;
 	width: 100%;
-	margin: 0px 0 -5px 0;
+	margin: 0;
 	font-weight: normal;
 }
 
 h3{
-	font-size: 20px;
+	font-size: 23px;
 	font-family: 'Raleway', sans-serif;
 	width: 100%;
-	margin: 10px 0 0 0;
+	margin: 20px 0 0 0;
 	font-weight: normal;
 }
 
@@ -105,8 +105,8 @@ main input {
 
 main .timer{
 	width: 100%;
-	height: 100px;
-	margin-bottom: 20px;
+	height: 60px;
+	margin-bottom: 0px;
 }
 
 main .timer .clock{
@@ -114,6 +114,17 @@ main .timer .clock{
 	transform: scale(0.5);
 	margin-left: calc(50% - 162.5px);
 }
+
+main .last-winner{
+	width: 70%;
+	padding: 20px 10px;
+	margin-bottom: 20px;
+	text-align: center;
+	background-color: tomato;
+	box-shadow: inset 0 0 10px rgba(0,0,0,0.35);
+	box-sizing: border-box;
+}
+
 
 @media (max-width: 800px){
 
@@ -128,6 +139,10 @@ main .timer .clock{
 		box-shadow: none;
 	}
 
+	main .last-winner{
+		width: 100%;
+	}
+
 	form{
 		text-align: center;
 		width: 80%;
@@ -136,7 +151,7 @@ main .timer .clock{
 }
 
 @media (max-width: 400px){
-	img{
+	main img{
 		width: 375px;
 		height: 162.5px;
 	}
