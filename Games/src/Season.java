@@ -164,11 +164,12 @@ public class Season extends ObjectTemplate {
 			} else {
 				lots.add(player);
 				IntegerTemplate toAdd = new IntegerTemplate();
-				toAdd.set(0);
+				toAdd.set(amount);
 				this.amount.add(toAdd);
 			}
 			reward.set(reward.get() + amount);
 			database.update(this);
+			database.update(player);
 			return true;
 		}
 		return false;
