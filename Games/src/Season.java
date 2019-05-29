@@ -75,6 +75,7 @@ public class Season extends ObjectTemplate {
 						sum += amount;
 						if(winnerIndex < sum) {
 							winner = lots.get(i);
+							break;
 						}
 						i++;
 					}
