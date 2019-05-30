@@ -7,6 +7,7 @@ let started;
 let score;
 let framespawntime;
 let haveincreased;
+var clickSlide;
 if (screen.width <= 600) {
 	var scaler = screen.width/600;
 }
@@ -30,6 +31,7 @@ function setup(){
 	speed = 8*scaler;
 	framespawntime = 100;
 	haveincreased = true;
+	clickSlide = false;
 }
 
 function draw(){
@@ -50,16 +52,26 @@ function draw(){
 		}
 
 		// update obstacles
-		for (var i = obstacles.length-1; i >= 0; i--) {
-			obstacles[i].update();
-			if(obstacles[i].collision()){
-				gameOver();
+		if (started) {
+			for (var i = obstacles.length-1; i >= 0; i--) {
+				obstacles[i].update();
+				if(obstacles[i].collision()){
+					gameOver();
+				}
+				obstacles[i].show();
+				if (obstacles[i].offscreen()) {
+					obstacles.splice(i,1);
+					score++;
+				}
 			}
-			obstacles[i].show();
-			if (obstacles[i].offscreen()) {
-				obstacles.splice(i,1);
-				score++;
-			}
+		}
+		
+		if (keyIsDown(DOWN_ARROW)) {
+			started = true;
+			player.sliding = true;
+		}
+		else if(!clickSlide){
+			player.sliding = false;
 		}
 
 		// update player after obstacles for collision reasons
@@ -77,7 +89,7 @@ function draw(){
 		}
 
 		// create new obstacles
-		if (frameCount % framespawntime == 0) {
+		if (frameCount % framespawntime == 0 && started) {
 			obstacles.push(new Obstacle(Math.round(Math.random()*4)));
 		}
 
@@ -93,10 +105,10 @@ function keyPressed(){
 		started = true;
 		player.jump();
 	}
-	else if (keyCode === DOWN_ARROW) {
+	/*else if (keyCode === DOWN_ARROW) {
 		started = true;
 		player.slide();
-	}
+	}*/
 	else if(keyCode === ENTER){
 		if (gameover) {
 			setup();
@@ -120,9 +132,15 @@ function mousePressed(){
 		}
 		else{
 			started = true;
-			player.slide();
+			player.sliding = true;
+			clickSlide = true;
 		}	
 	}
+}
+
+function mouseReleased(){
+	player.sliding = false;
+	clickSlide = false;
 }
 
 function gameOver(){
@@ -445,7 +463,12 @@ function Player(){
 	this.slidingSize = 60*scaler;
 
 	this.update = function(){
-		if (!this.sliding) {
+		if (!this.sliding || this.y < this.ylimit) {
+			if (this.y > this.ylimit) {
+				// Not sliding
+				this.y = this.ylimit;
+				this.h = this.size;
+			}
 			// Jumping or running
 			this.velocity += this.gravity;
 			this.velocity *= 0.9; 						// Air resistence
@@ -457,7 +480,7 @@ function Player(){
 			}
 		}
 		else{ 
-			// Sliding
+			/* Sliding
 			if (this.slideStart + this.slideDuration >= Date.now()) {
 				this.y = this.ylimit + (this.size - this.slidingSize);
 				this.h = this.slidingSize; 
@@ -466,12 +489,16 @@ function Player(){
 				this.y = this.ylimit;
 				this.h = this.size; 
 				this.sliding = false;
-			}
+			}*/
+
+			this.y = this.ylimit + (this.size - this.slidingSize);
+			this.h = this.slidingSize;
+
 		}
 	}
 
 	this.show = function(){
-		if (!this.sliding) {
+		if (!this.sliding || this.y < this.ylimit) {
 			if (frameCount % 20 >= 10) {
 				image(imgplayer, this.x, this.y, this.w, this.h);
 			}
