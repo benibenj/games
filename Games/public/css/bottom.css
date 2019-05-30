@@ -1,0 +1,48 @@
+html{ height:100%; }
+body{ 
+	min-height:120%; 
+	position:relative; 
+}
+
+body::after{ 
+	content:''; 
+	display:block; 
+	height:100px; 
+}
+
+footer{ 
+  	position:absolute; 
+  	bottom:0;
+}
+
+footer{
+	background-color: #333;
+	height: 100px;
+	width: 100%;
+	text-align: left;
+	padding: 30px 10%;
+	box-sizing: border-box;
+}
+
+footer a{
+	color: #333;
+	font-size: 18px;
+	font-family: 'railway', sans-serif;
+	background-color: #ccc;
+	text-decoration: none;
+	padding: 3px;
+	margin: 0 0 0 10px;
+	float: right;
+	cursor: pointer;
+}
+
+footer p{
+	color: #ccc;
+	font-size: 18px;
+	font-family: 'railway', sans-serif;
+	font-style: italic;
+	text-decoration: none;
+	padding: 5px;
+	float: left;
+	line-height: 20px;
+}
