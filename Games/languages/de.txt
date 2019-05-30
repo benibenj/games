@@ -52,7 +52,7 @@ Benachrichtigungen<br>aktivieren
 Benachrichtigungen<br>deaktivieren
 Home
 Hallo
-<h2>Fame Punkte</h2>Fame Punkte erhält der Spieler, indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Für die Punkte erhält er pro Minute jeweils:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkt
+<h2>Fame Punkte</h2>Fame Punkte erhält der Spieler, indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Für die Punkte erhält er pro Minute jeweils:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkt<h2>Seasons</h2>We Serve Games! präsentiert euch das neuste Feature: Seasons! Jede Woche kannst du in packenden Challenges dein Können beweisen und dich brandneuen Quests stellen. Für jede Quest, die du meisterst, erhältst du Münzen für das Glücksrad. Zudem kannst du in jeder Season neue Highscores aufstellen und in der Hall of Fame die Rangliste hochklettern. Am Anfang jeder Season werden die Highscores wieder zurückgesetzt, damit du wieder neu zeigen kannst, was du drauf hast. Die All-Time Records für jedes Spiel sind neu ebenso aufgelistet. Am Ende jeder Season erhalten die besten Spieler dann attraktive Belohnungen. Jeder Teilnehmer erhält eine Medaille, die besten drei zusätzlich noch eine Spezial-Auszeichnung inklusive Münzbonus. Viel Erfol!
 Neues Spiel
 Benutzername
 Rang

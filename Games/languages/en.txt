@@ -52,7 +52,7 @@ Enable<br>Notifications
 Disable<br>Notifications
 Home
 Hello
-<h2>Fame Points</h2><br>Fame points are awarded to the player by placing himself in the top 3 places of the game rankings. He receives the points per minute for each game: <br>1st Place - 3 Fame Points <br>2nd Place - 2 Fame Points <br>3rd Place - 1 Fame Point
+<h2>Fame Points</h2><br>Fame points are awarded to the player by placing himself in the top 3 places of the game rankings. He receives the points per minute for each game: <br>1st Place - 3 Fame Points <br>2nd Place - 2 Fame Points <br>3rd Place - 1 Fame Point <br><h2>Seasons</h2>We Serve Games! is glad to introduce you to its latest feature: Seasons! Each week, you'll be able to prove yourself by facing brand new quests. For each quest you complete, you are rewarded with valuable coins that you can use to spin the wheel of fortune. Further, you'll be able to set new high scores in each season and get yourself a top rank in the Hall of Fame. At the beginning of each season, all scores are reset so that you can show your skills once more. The all-time records are visible for each game as well. At the end of each season, the best players get rewarded with attractive prices. Each player receives a medal and on top, the three best players get a special award including some extra coins. Good gam!
 New Game
 Username
 Rank
