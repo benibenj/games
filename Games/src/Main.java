@@ -468,7 +468,13 @@ public class Main {
 			}
 			return responder.text("invalid");
 		});
+		
+		server.on("GET", "/info", (Request request) -> {
+			return responder.render("info.html", request.languages);
+		});
 	}
+	
+	
 	
 	private static void addMessagesFlashToVariables(Request request, String name, HashMap <String, Object> variables) {
 		Validator validator = (Validator) request.session.getFlash(name);

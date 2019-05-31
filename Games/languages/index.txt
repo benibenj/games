@@ -53,6 +53,8 @@ disable-notifications
 home
 hello
 hallOfFame
+FamePoints
+SeasonsExplane
 new game
 username
 rank
@@ -117,3 +119,10 @@ have-bought
 time-draw
 amount
 too-large
+info-info
+info-games
+info-minesweeper
+info-flappybird
+info-brickbreaker
+info-chickenkiller
+info-runner

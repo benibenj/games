@@ -1,0 +1,99 @@
+{{include "top.html"}}
+<link rel="stylesheet" type="text/css" href="/css/info.css">
+
+<div class="pick">
+	<div class="list">
+		<button id="0">Information</button>
+		<button id="1">Games</button>
+		<button id="2" class="subCat">Minesweeper</button>
+		<button id="3" class="subCat">Flappy Bird</button>
+		<button id="4" class="subCat">Brick Breaker</button>
+		<button id="5" class="subCat">Chicken Killer</button>
+		<button id="6" class="subCat">Runner</button>
+		<button id="7">Hall Of Fame</button>
+		<button id="8">Seasons</button>
+	</div>
+</div>
+
+<main>
+	<h1 id="title">Information</h1>
+	<br>
+	<div class="text" id="text">
+		{{print translate "info-info"}}
+	</div>
+</main>
+	
+{{include "bottom.html"}}
+
+<script>
+	document.getElementById("devs").innerHTML = "Benjamin Simmonds,<br>Fabian Bösiger,<br>Dario Naepfer 2019"
+
+	const numId = 8;
+	document.getElementById("0").style.backgroundColor = "#F3B54A";
+
+	// Event Listeners
+	document.getElementById("0").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Information";
+		document.getElementById("text").innerHTML = "{{print translate "info-info"}}";
+		changeBackgroundColor("0");
+	});
+
+	document.getElementById("1").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Games";
+		document.getElementById("text").innerHTML = "{{print translate "info-games"}}";
+		changeBackgroundColor("1");
+	});
+
+	document.getElementById("2").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Minesweeper";
+		document.getElementById("text").innerHTML = "{{print translate "info-minesweeper"}}";
+		changeBackgroundColor("2");
+	});
+
+	document.getElementById("3").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Flappy Bird";
+		document.getElementById("text").innerHTML = "{{print translate "info-flappybird"}}";
+		changeBackgroundColor("3");
+	});
+
+	document.getElementById("4").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Brick Breaker";
+		document.getElementById("text").innerHTML = "{{print translate "info-brickbreaker"}}";
+		changeBackgroundColor("4");
+	});
+
+	document.getElementById("5").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Chicken Killer";
+		document.getElementById("text").innerHTML = "{{print translate "info-chickenkiller"}}";
+		changeBackgroundColor("5");
+	});
+
+	document.getElementById("6").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Runner";
+		document.getElementById("text").innerHTML = "{{print translate "info-runner"}}";
+		changeBackgroundColor("6");
+	});
+
+	document.getElementById("7").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Hall Of Fame";
+		document.getElementById("text").innerHTML = "{{print translate "FamePoints"}}";
+		changeBackgroundColor("7");
+	});
+
+	document.getElementById("8").addEventListener("click", function(){
+		document.getElementById("title").innerHTML = "Seasons";
+		document.getElementById("text").innerHTML = "{{print translate "SeasonsExplane"}}";
+		changeBackgroundColor("8");
+	});
+
+	// change backgroundcolor
+	function changeBackgroundColor(id){
+		// remove the current color
+		for (var i = 0; i <= numId; i++) {
+			document.getElementById(i).style.backgroundColor = "";
+		}
+		// add new color
+		document.getElementById(id).style.backgroundColor = "#F3B54A";
+	}
+
+</script>

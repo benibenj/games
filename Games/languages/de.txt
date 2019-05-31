@@ -53,6 +53,8 @@ Benachrichtigungen<br>deaktivieren
 Home
 Hallo
 <h2>Fame Punkte</h2>Fame Punkte erhält der Spieler, indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Für die Punkte erhält er pro Minute jeweils:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkt<h2>Seasons</h2>We Serve Games! präsentiert euch das neuste Feature: Seasons! Jede Woche kannst du in packenden Challenges dein Können beweisen und dich brandneuen Quests stellen. Für jede Quest, die du meisterst, erhältst du Münzen für das Glücksrad. Zudem kannst du in jeder Season neue Highscores aufstellen und in der Hall of Fame die Rangliste hochklettern. Am Anfang jeder Season werden die Highscores wieder zurückgesetzt, damit du wieder neu zeigen kannst, was du drauf hast. Die All-Time Records für jedes Spiel sind neu ebenso aufgelistet. Am Ende jeder Season erhalten die besten Spieler dann attraktive Belohnungen. Jeder Teilnehmer erhält eine Medaille, die besten drei zusätzlich noch eine Spezial-Auszeichnung inklusive Münzbonus. Viel Erfol!
+<div class='bold'>Fame Punkte</div>Fame Punkte erhält der Spieler, indem er sich auf den ersten 3 Plätze der Spiel Ranglisten platziert. Für die Punkte erhält er pro Minute jeweils:<br>1.Platz - 3 Fame Punkte<br>2.Platz - 2 Fame Punkte<br>3.Platz - 1 Fame Punkt
+We Serve Games! präsentiert euch das neuste Feature: Seasons! Jede Woche kannst du in packenden Challenges dein Können beweisen und dich brandneuen Quests stellen. Für jede Quest, die du meisterst, erhältst du Münzen für das Glücksrad. Zudem kannst du in jeder Season neue Highscores aufstellen und in der Hall of Fame die Rangliste hochklettern. Am Anfang jeder Season werden die Highscores wieder zurückgesetzt, damit du wieder neu zeigen kannst, was du drauf hast. Die All-Time Records für jedes Spiel sind neu ebenso aufgelistet. Am Ende jeder Season erhalten die besten Spieler dann attraktive Belohnungen. Jeder Teilnehmer erhält eine Medaille, die besten drei zusätzlich noch eine Spezial-Auszeichnung inklusive Münzbonus. Viel Erfol!
 Neues Spiel
 Benutzername
 Rang
@@ -117,3 +119,10 @@ Sie besitzen
 Zeit bis zur Ziehung
 Anzahl
 zu gross
+Hier findet ihr alle Informationen die ihr zur We Serve Games Webseite benötigt. Falls ihr sonstige Fragen besitzt könnt ihr uns bei weservegames@gmail.com erreichen.
+Hier findet ihr die How to's zu den Spielen
+<div class='bold'>How to:</div> Sweep the field and guess where the 17 mines are. Click on fields with no mine beneath it. Wherever you think there is a mine, place a red flag. Switch between flag setting and empty field discovering by clicking on the repective button on the right. The game ends as soon as you either tap onto a mine or you have marked all fields correctly.
+<div class='bold'>How to:</div> Avoid the pipes by pressing the space key continuously. For each pipe that you pass one point is awarded. <div class='bold'>Keys:</div> Space <div class='bold'>Mobile</div> touch
+<div class='bold'>How to:</div> Release the ball by pressing space or the up Arrow. Move your pad in order to rebounce the ball. For each destroyed brick one point is awarded. Avoid bombs and collect power-ups that enlargen (green) or tighen (red) your pad. <div class='bold'>Keys:</div> Left & right arrows, space <div class='bold'>Mobile:</div> press on the left and right side to adjust the position of the pad, touch the screen to start
+<div class='bold'>How to:</div> Kill the chickens by tapping on them. Mind the gnomes! For each chicken you hit one point is awarded. Each mishit will cost you one life. The game ends as soon as you've lost all of your 10 lives. <div class='bold'>Keys:</div> Right click <div class='bold'>Mobile:</div> touch
+<div class='bold'>How to:</div> Avoid the incoming obstacles by jumping or ducking. For each obstacle that you pass one point is awarded. <div class='bold'>Keys:</div> Up & down arrows <div class='bold'>Mobile:</div> touch on upper and lower screen

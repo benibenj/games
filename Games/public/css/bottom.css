@@ -17,7 +17,7 @@ footer{
 
 footer{
 	background-color: #333;
-	height: 100px;
+	min-height: 100px;
 	width: 100%;
 	text-align: left;
 	padding: 30px 10%;
@@ -30,8 +30,8 @@ footer a{
 	font-family: 'railway', sans-serif;
 	background-color: #ccc;
 	text-decoration: none;
-	padding: 3px;
-	margin: 0 0 0 10px;
+	padding: 5px;
+	margin: 10px;
 	float: right;
 	cursor: pointer;
 }
@@ -44,5 +44,11 @@ footer p{
 	text-decoration: none;
 	padding: 5px;
 	float: left;
-	line-height: 20px;
+	line-height: 22px;
+}
+
+@media (max-width: 600px){
+	footer a{
+		float: left;
+	}
 }
