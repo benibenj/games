@@ -2,12 +2,13 @@ html{ height:100%; }
 body{ 
 	min-height:120%; 
 	position:relative; 
+	padding-bottom: 200px;
 }
 
-body::after{ 
-	content:''; 
-	display:block; 
-	height:100px; 
+
+
+.push{
+	height: 400px;
 }
 
 footer{ 
