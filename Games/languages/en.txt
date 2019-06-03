@@ -120,7 +120,7 @@ Time until the lottery draw
 Amount
 too large
 On this page you can find all the information you need for the We Serve Games website. If you have any questions you can reach us at weservegames@gmail.com
-Hier you can find the How to's for the Games
+Here you can find the How to's for the Games
 <div class='bold'>How to:</div> Sweep the field and guess where the 17 mines are. Click on fields with no mine beneath it. Wherever you think there is a mine, place a red flag. Switch between flag setting and empty field discovering by clicking on the repective button on the right. The game ends as soon as you either tap onto a mine or you have marked all fields correctly.
 <div class='bold'>How to:</div> Avoid the pipes by pressing the space key continuously. For each pipe that you pass one point is awarded. Keys: Space Mobile: touch
 <div class='bold'>How to:</div> Release the ball by pressing space. Move your pad in order to rebounce the ball. For each destroyed brick one point is awarded. Avoid bombs and collect power-ups that enlargen (green) or tighen (red) your pad. Keys: Left & right arrows, space Mobile: press on the left and right side to adjust the position of the pad, touch the screen to start
