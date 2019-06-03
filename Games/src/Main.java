@@ -114,6 +114,8 @@ public class Main {
 		// Import PreciseIntervalJob from webserver repository
 		new PreciseIntervalJob(() -> {
 			
+			System.out.println("Resetting Stats");
+			
 			// Set fame per minute, update later
 			LinkedList <ObjectTemplate> playerObjectTemplates = database.loadAll(Player.class);
 			for(ObjectTemplate object : playerObjectTemplates) {
@@ -122,6 +124,8 @@ public class Main {
 				player.setFamePerMinute(0);
 				database.update(player);
 			}
+			
+			System.out.println("Adding Fame");
 
 			String[] games = {"minesweeper", "flappybird", "brickbreaker", "chickenkiller", "runner"};
 	
@@ -153,7 +157,8 @@ public class Main {
 
 			}
 			
-
+			System.out.println("Removing Booster");
+			
 			// Remove 1 minute worth of booster
 			for(ObjectTemplate object : playerObjectTemplates) {
 				Player player = ((Player) object);
@@ -177,6 +182,8 @@ public class Main {
 				database.update(player);
 			}
 			
+			System.out.println("Updating Quests");
+			
 			// Update quests
 			LinkedList <ObjectTemplate> questObjectTemplates = database.loadAll(Quest.class);
 			for(ObjectTemplate objectTemplate : questObjectTemplates) {
@@ -184,6 +191,7 @@ public class Main {
 				quest.updateDuration();
 			}
 			
+			System.out.println("Updating Seasons");
 			
 			// Update Season
 			LinkedList <ObjectTemplate> seasonObjectTemplates = database.loadAll(Season.class);
