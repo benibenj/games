@@ -160,6 +160,7 @@ public class Main {
 			System.out.println("Removing Booster");
 			
 			// Remove 1 minute worth of booster
+			playerObjectTemplates = database.loadAll(Player.class);
 			for(ObjectTemplate object : playerObjectTemplates) {
 				Player player = ((Player) object);
 				
